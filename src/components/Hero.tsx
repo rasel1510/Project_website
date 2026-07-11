@@ -12,7 +12,7 @@ const GH = () => (
 const authors = [
   { name: "Mohammad Rasel Ahmed", affils: ["Elite Research Lab", "NYC USA"] },
   { name: "Dip Kumar Saha", affils: ["Elite Research Lab", "Stamford University Bangladesh"] },
-  { name: "Kishor Morol", affils: ["Elite Research Lab", "Cornell University USA"] },
+  { name: "Md. Kishor Morol", affils: ["Elite Research Lab", "Cornell University USA"] },
 ];
 
 

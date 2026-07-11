@@ -335,8 +335,8 @@ export default function DatasetExplorer() {
 
   // Filtered list based on Search and Tabs
   const filteredImages = sampleImages.filter((img) => {
-    const matchesSearch = img.file.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          img.category.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = img.file.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      img.category.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesTab = activeTab === "All" || img.group === activeTab;
     return matchesSearch && matchesTab;
   });
@@ -376,7 +376,7 @@ export default function DatasetExplorer() {
   return (
     <section id="dataset" style={{ background: "#f8fafc", borderTop: "1px solid #dcfce7", padding: "80px 0" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
-        
+
         {/* Header */}
         <div style={{ textAlign: "center", maxWidth: 700, margin: "0 auto 48px" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 16px", borderRadius: 999, background: "#dcfce7", border: "1px solid #86efac", color: "#15803d", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 16 }}>
@@ -391,7 +391,7 @@ export default function DatasetExplorer() {
         {/* Search and Filters panel */}
         <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 16, padding: "20px", marginBottom: 32, boxShadow: "0 4px 6px -1px rgba(0,0,0,0.02)" }}>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "space-between", alignItems: "center" }}>
-            
+
             {/* Filter Tabs */}
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
               {filterGroups.map((group) => {
@@ -418,43 +418,7 @@ export default function DatasetExplorer() {
               })}
             </div>
 
-            {/* Search Input */}
-            <div style={{ position: "relative", minWidth: "260px", flex: "1", maxWidth: "400px" }}>
-              <div style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)", color: "#94a3b8", display: "flex", alignItems: "center" }}>
-                <Search size={16} />
-              </div>
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search by filename or category..."
-                style={{
-                  width: "100%",
-                  padding: "10px 12px 10px 38px",
-                  borderRadius: "10px",
-                  border: "1px solid #cbd5e1",
-                  fontSize: "13px",
-                  outline: "none",
-                  transition: "border-color 0.2s ease, box-shadow 0.2s ease",
-                }}
-                onFocus={(e) => {
-                  e.target.style.borderColor = "#22c55e";
-                  e.target.style.boxShadow = "0 0 0 3px rgba(34, 197, 94, 0.15)";
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = "#cbd5e1";
-                  e.target.style.boxShadow = "none";
-                }}
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: "#94a3b8", cursor: "pointer", display: "flex", alignItems: "center" }}
-                >
-                  <X size={14} />
-                </button>
-              )}
-            </div>
+
 
           </div>
         </div>
@@ -473,7 +437,7 @@ export default function DatasetExplorer() {
             {filteredImages.map((img, index) => {
               const isHovered = hoveredIndex === index;
               const catStyle = getCategoryStyles(img.group);
-              
+
               return (
                 <div
                   key={img.file}
@@ -567,7 +531,7 @@ export default function DatasetExplorer() {
               <p style={{ fontSize: 12, color: "#16a34a", marginTop: 2 }}>66,608 total artifacts · 1,448 expert images · 15 domains</p>
             </div>
             <div style={{ display: "flex", gap: 10 }}>
-              {[["66,608","Artifacts"],["1,448","Images"],["15","Domains"]].map(([v,l]) => (
+              {[["66,608", "Artifacts"], ["1,448", "Images"], ["15", "Domains"]].map(([v, l]) => (
                 <div key={l} style={{ background: "#fff", border: "1px solid #bbf7d0", borderRadius: 10, padding: "10px 16px", textAlign: "center" }}>
                   <div style={{ fontSize: 18, fontWeight: 900, color: "#15803d" }}>{v}</div>
                   <div style={{ fontSize: 10, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.05em" }}>{l}</div>
@@ -579,7 +543,7 @@ export default function DatasetExplorer() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
               <thead>
                 <tr style={{ background: "#f8fffe", borderBottom: "1px solid #dcfce7" }}>
-                  {["Language / Dialect","Type","Images","Artifacts","Focus"].map(h => (
+                  {["Language / Dialect", "Type", "Images", "Artifacts", "Focus"].map(h => (
                     <th key={h} style={{ padding: "12px 16px", fontWeight: 700, fontSize: 11, textTransform: "uppercase", letterSpacing: "0.06em", color: "#334155", textAlign: h === "Images" || h === "Artifacts" ? "right" : "left" }}>{h}</th>
                   ))}
                 </tr>
@@ -630,7 +594,7 @@ export default function DatasetExplorer() {
             @keyframes modalScale { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
             .lightbox-card { animation: modalScale 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); }
           `}</style>
-          
+
           {/* Lightbox container */}
           <div
             onClick={(e) => e.stopPropagation()}
@@ -759,15 +723,7 @@ export default function DatasetExplorer() {
                     Path: <span style={{ fontFamily: "monospace" }}>/Dataset_images/{sampleImages[lightboxIndex].file}</span>
                   </div>
 
-                  {/* Description */}
-                  <div style={{ borderTop: "1px solid #f1f5f9", paddingTop: "16px", marginBottom: "24px" }}>
-                    <h4 style={{ fontSize: "12px", fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "8px" }}>
-                      Visual Cue Description
-                    </h4>
-                    <p style={{ fontSize: "14px", color: "#475569", lineHeight: 1.6 }}>
-                      {sampleImages[lightboxIndex].desc}
-                    </p>
-                  </div>
+
                 </div>
 
                 {/* Bottom actions: download */}
@@ -809,7 +765,7 @@ export default function DatasetExplorer() {
               <p style={{ fontSize: "12px", color: "#64748b", marginBottom: "16px" }}>
                 Evaluation text assets across standard languages and regional dialects for the selected sample image.
               </p>
-              
+
               <div style={{ overflowX: "auto", background: "#fff", borderRadius: "12px", border: "1px solid #cbd5e1" }}>
                 <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px", textAlign: "left" }}>
                   <thead>
