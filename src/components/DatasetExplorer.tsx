@@ -1,59 +1,28 @@
 "use client";
 import React, { useState } from "react";
-import { ImageIcon, CheckCircle2, Eye, RefreshCw, BarChart2 } from "lucide-react";
+import { Search, X, ChevronLeft, ChevronRight, Download, Maximize2, BarChart2, Filter, ImageIcon } from "lucide-react";
 
-const dialects = [
-  {
-    id: "chittagong", name: "Chittagong (Chatgaya)", physics: "Friction & Elasticity", category: "Traditional Clothing",
-    file: "saree_folds_chittagong.png",
-    qBn: "ঐ ছবির মধ্যে মেয়াডায় যে শাড়ি পইড়গি, এই শাড়ির ভাঁজ আর কুঁচি কোন বলের কারণে ঝুলে থাকে?",
-    optsBn: ["A) ঘর্ষণ বল এবং অভিকর্ষ বল", "B) শুধুমাত্র চৌম্বক বল", "C) সেন্ট্রিফিউগাল বল", "D) রাসায়নিক বিক্রিয়া"],
-    qEn: "Which forces maintain the folds and pleats of the draped saree?",
-    optsEn: ["A) Frictional force and Gravitational force", "B) Magnetic force only", "C) Centrifugal force", "D) Chemical reaction"],
-    ans: 0, expEn: "Friction between fabric layers stabilises pleats while gravity pulls the cloth downward, creating characteristic fold patterns.",
-    expBn: "শাড়ির সুতার মধ্যকার ঘর্ষণ বল কুঁচিকে স্থির রাখে এবং অভিকর্ষ বল শাড়িকে নিচে টানে।",
-  },
-  {
-    id: "noakhali", name: "Noakhali (Noakhailla)", physics: "Specular Reflection", category: "Culinary & Kitchenware",
-    file: "brass_pitcher_noakhali.png",
-    qBn: "কুপি বাতির আলোতে তামা-পিতলের কলসির গায়ে যে চোকচইক্কা দাগ দেখা যায়, হ্যার পিছনের বৈজ্ঞানিক কারণ কি?",
-    optsBn: ["A) আলোর প্রতিসরণ", "B) আলোর নিয়মিত প্রতিফলন", "C) আলোক তড়িৎ ক্রিয়া", "D) আলোর ব্যতিচার"],
-    qEn: "What phenomenon causes the bright highlight on the brass pitcher under lantern light?",
-    optsEn: ["A) Refraction of light", "B) Specular reflection of light", "C) Photoelectric effect", "D) Interference of light"],
-    ans: 1, expEn: "The smooth polished metallic surface causes specular (mirror-like) reflection, concentrating reflected rays into a bright highlight.",
-    expBn: "তামার মসৃণ পালিশ করা তলে আলোর নিয়মিত প্রতিফলন ঘটে, যার ফলে তীব্র আলোক বিন্দু সৃষ্টি হয়।",
-  },
-  {
-    id: "rajshahi", name: "Rajshahi (Varendra)", physics: "Evaporative Cooling", category: "Traditional Crafts",
-    file: "clay_pottery_rajshahi.png",
-    qBn: "মাটির সানকিতে গরম ভাত বাড়লে তা তাড়াতাড়ি ঠান্ডা হয় ক্যালা, মাটির পাত্রের কোন গুণের জন্য?",
-    optsBn: ["A) মাটির অতি সূক্ষ্ম ছিদ্র দিয়ে বাষ্পীভবন", "B) অতি উচ্চ তাপ পরিবাহিতা", "C) বিকিরণ ক্ষমতা শূন্য", "D) রাসায়নিক শোষণ"],
-    qEn: "Why does hot rice cool faster on a traditional porous clay plate?",
-    optsEn: ["A) Evaporative cooling through micro-pores", "B) Very high thermal conductivity", "C) Zero radiative power", "D) Chemical heat absorption"],
-    ans: 0, expEn: "Clay micro-pores allow moisture evaporation, extracting latent heat from the food surface and rapidly cooling it.",
-    expBn: "মাটির ক্ষুদ্রাতিক্ষুদ্র ছিদ্রে জলীয় বাষ্পীভবনের সময় সুপ্ততাপ শোষণ হয়, ফলে খাবার দ্রুত ঠান্ডা হয়।",
-  },
-  {
-    id: "sylheti", name: "Sylheti (Sylhety)", physics: "Archimedes Buoyancy", category: "Rural Transport",
-    file: "bamboo_raft_sylheti.png",
-    qBn: "বাশের ভেলা অততা ভার নিয়ে পানির ওপরে ভাইসা থাকে কিলাকা?",
-    optsBn: ["A) সান্দ্রতা বল", "B) আর্কিমিডিসের প্লবতা নীতি", "C) পৃষ্ঠটান বল", "D) তরলের বাষ্পচাপ"],
-    qEn: "How does a heavy bamboo raft float stably?",
-    optsEn: ["A) Viscous drag", "B) Archimedes' Buoyancy Principle", "C) Surface tension", "D) Fluid vapor pressure"],
-    ans: 1, expEn: "The raft displaces water equal to its weight; Archimedes' principle states the upward buoyant force balances gravity.",
-    expBn: "আর্কিমিডিসের নীতি অনুযায়ী, ভেলা অপসারিত পানির ওজনের সমপরিমাণ ঊর্ধ্বমুখী প্লবতা বল পায়।",
-  },
-  {
-    id: "standard", name: "Standard Bengali (Rarh)", physics: "Tyndall & Rayleigh Scattering", category: "Festival & Optics",
-    file: "puja_smoke_standard.png",
-    qBn: "পূজামণ্ডপে ধূপের ধোঁয়ার মধ্য দিয়ে সূর্যের আলোর রেখা দেখা গেলে কোন বিচ্ছুরণ প্রক্রিয়া ঘটে?",
-    optsBn: ["A) টিন্ডাল প্রভাব ও রেলে বিচ্ছুরণ", "B) আলোর সমবর্তন", "C) আলোর প্রতিসরণ", "D) আলোর অপবর্তন"],
-    qEn: "When sunlight beams are visible through incense smoke, which scattering processes occur?",
-    optsEn: ["A) Tyndall Effect & Rayleigh Scattering", "B) Polarization", "C) Refraction", "D) Diffraction"],
-    ans: 0, expEn: "Colloidal smoke particles scatter the beam (Tyndall effect), with shorter blue wavelengths scattered more strongly (Rayleigh scattering).",
-    expBn: "ধোঁয়ার কণাগুলো আলোর রশ্মিকে দৃশ্যমান করে (টিন্ডাল প্রভাব) এবং নীল আলো বেশি বিচ্ছুরিত হয় (রেলে বিচ্ছুরণ)।",
-  },
+// List of all 16 sample images with their categories and descriptions
+const sampleImages = [
+  { file: "achievements_102.png", category: "Achievements", group: "Culture & Heritage", desc: "Showcasing milestones, honors, and notable achievements in Bangladeshi history and development." },
+  { file: "attire_002.jpg", category: "Attire", group: "Culture & Heritage", desc: "Traditional Bangladeshi attire detailing fine fabric textures and regional clothing styles." },
+  { file: "crafts_115.png", category: "Crafts", group: "Culture & Heritage", desc: "Intricate local craftsmanship, showing hand-made artifacts from rural parts of Bangladesh." },
+  { file: "education_096.png", category: "Education", group: "Culture & Heritage", desc: "Visual cues capturing classroom settings, educational materials, and school life in Bangladesh." },
+  { file: "festival_039.png", category: "Festival", group: "Culture & Heritage", desc: "Vibrant moments from traditional festivals, showing cultural celebrations and community gatherings." },
+  { file: "fishes_031.jpg", category: "Fishes", group: "Nature & Wildlife", desc: "A specimen of local fish species, representative of the rich riverine ecosystem of Bangladesh." },
+  { file: "food_105.png", category: "Food", group: "Food & Sweets", desc: "Traditional Bengali meal preparation, capturing authentic culinary heritage and presentation." },
+  { file: "movements_050.png", category: "Movements", group: "Culture & Heritage", desc: "Cultural dances, actions, and physical movements characteristic of local heritage." },
+  { file: "nature_072.png", category: "Nature", group: "Nature & Wildlife", desc: "The lush green landscapes, rural scenery, and agricultural fields of Bangladesh." },
+  { file: "personality_021.png", category: "Personality", group: "Culture & Heritage", desc: "Portraits and figures representing notable figures or traditional Bangladeshi characters." },
+  { file: "places_022.png", category: "Places", group: "Culture & Heritage", desc: "Historical landmarks, architectural sites, and prominent places of interest across the country." },
+  { file: "river_001.png", category: "River", group: "Nature & Wildlife", desc: "The scenic river networks, boat transports, and delta landscape that define Bangladesh." },
+  { file: "river_028.png", category: "River", group: "Nature & Wildlife", desc: "Visual details of the riverine lifestyle, fishing activities, and water bodies of the delta." },
+  { file: "sports_019.png", category: "Sports", group: "Culture & Heritage", desc: "Traditional sports and games played in the rural and urban parts of Bangladesh." },
+  { file: "sweet_011.png", category: "Sweet", group: "Food & Sweets", desc: "Famous Bangladeshi sweets (Mishti), representing the traditional dessert craftsmanship." },
+  { file: "wildlife_087.jpg", category: "Wildlife", group: "Nature & Wildlife", desc: "Local fauna and wildlife species native to the Sundarbans and tropical forests of Bangladesh." }
 ];
+
+const filterGroups = ["All", "Culture & Heritage", "Nature & Wildlife", "Food & Sweets"];
 
 const statsRows = [
   { name: "Standard Bengali (Rarh)", type: "Native Dialect", artifacts: "5,550" },
@@ -66,108 +35,237 @@ const statsRows = [
 ];
 
 export default function DatasetExplorer() {
-  const [active, setActive] = useState("chittagong");
-  const [showAns, setShowAns] = useState(false);
-  const [showEn, setShowEn] = useState(false);
-  const cur = dialects.find(d => d.id === active)!;
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeTab, setActiveTab] = useState("All");
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  // Filtered list based on Search and Tabs
+  const filteredImages = sampleImages.filter((img) => {
+    const matchesSearch = img.file.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          img.category.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesTab = activeTab === "All" || img.group === activeTab;
+    return matchesSearch && matchesTab;
+  });
+
+  const openLightbox = (index: number) => {
+    // Find the original index of the filtered image in the full list
+    const originalIndex = sampleImages.findIndex(img => img.file === filteredImages[index].file);
+    if (originalIndex !== -1) {
+      setLightboxIndex(originalIndex);
+    }
+  };
+
+  const navigateLightbox = (direction: "prev" | "next") => {
+    if (lightboxIndex === null) return;
+    let newIndex = lightboxIndex;
+    if (direction === "prev") {
+      newIndex = lightboxIndex === 0 ? sampleImages.length - 1 : lightboxIndex - 1;
+    } else {
+      newIndex = lightboxIndex === sampleImages.length - 1 ? 0 : lightboxIndex + 1;
+    }
+    setLightboxIndex(newIndex);
+  };
+
+  // Helper to determine category tag background/text colors
+  const getCategoryStyles = (group: string) => {
+    switch (group) {
+      case "Nature & Wildlife":
+        return { bg: "#f0fdf4", border: "#bbf7d0", color: "#16a34a" };
+      case "Food & Sweets":
+        return { bg: "#fffbeb", border: "#fef3c7", color: "#d97706" };
+      case "Culture & Heritage":
+      default:
+        return { bg: "#eff6ff", border: "#dbeafe", color: "#2563eb" };
+    }
+  };
 
   return (
-    <section id="dataset" style={{ background: "#fff", borderTop: "1px solid #dcfce7", padding: "80px 0" }}>
+    <section id="dataset" style={{ background: "#f8fafc", borderTop: "1px solid #dcfce7", padding: "80px 0" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
-
+        
         {/* Header */}
-        <div style={{ textAlign: "center", maxWidth: 600, margin: "0 auto 48px" }}>
+        <div style={{ textAlign: "center", maxWidth: 700, margin: "0 auto 48px" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 16px", borderRadius: 999, background: "#dcfce7", border: "1px solid #86efac", color: "#15803d", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 16 }}>
-            Interactive Explorer
+            Dataset Samples
           </div>
-          <h2 style={{ fontSize: 32, fontWeight: 800, color: "#14532d", marginBottom: 12 }}>Explore BanglarMukh Samples</h2>
-          <p style={{ fontSize: 15, color: "#475569", lineHeight: 1.7 }}>Browse sample questions across dialects and see how cultural grounding and physics reasoning are evaluated together.</p>
+          <h2 style={{ fontSize: 32, fontWeight: 800, color: "#14532d", marginBottom: 12 }}>Explore BanglarMukh Images</h2>
+          <p style={{ fontSize: 15, color: "#475569", lineHeight: 1.7 }}>
+            Browse sample visual cues traversing 15 culturally grounded domains. These expert-annotated images form the core visual benchmark for testing physics awareness and cultural reasoning in LVLMs.
+          </p>
         </div>
 
-        {/* Explorer */}
-        <div style={{ display: "grid", gap: 24, gridTemplateColumns: "1fr" }} className="explorer-lg">
-          <style>{`@media(min-width:1024px){.explorer-lg{grid-template-columns:260px 1fr}}`}</style>
-
-          {/* Tabs */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#94a3b8", marginBottom: 4 }}>Select Dialect</div>
-            {dialects.map(d => (
-              <button key={d.id} onClick={() => { setActive(d.id); setShowAns(false); }}
-                style={{ textAlign: "left", padding: "12px 16px", borderRadius: 10, cursor: "pointer", border: active === d.id ? "1.5px solid #22c55e" : "1px solid #e2e8f0", background: active === d.id ? "#f0fdf4" : "#fff", color: active === d.id ? "#14532d" : "#334155", fontWeight: active === d.id ? 700 : 500, fontSize: 13, transition: "all 0.15s" }}
-              >
-                <div>{d.name}</div>
-                <div style={{ fontSize: 11, marginTop: 2, color: active === d.id ? "#16a34a" : "#94a3b8" }}>{d.physics}</div>
-              </button>
-            ))}
-          </div>
-
-          {/* Card */}
-          <div style={{ background: "#fff", border: "1px solid #bbf7d0", borderRadius: 16, padding: "28px", boxShadow: "0 2px 12px rgba(22,163,74,0.06)" }}>
-
-            {/* Top row */}
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12, marginBottom: 20, paddingBottom: 16, borderBottom: "1px solid #dcfce7" }}>
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                <span style={{ padding: "4px 12px", borderRadius: 999, background: "#dcfce7", border: "1px solid #86efac", color: "#15803d", fontSize: 11, fontWeight: 700 }}>{cur.category}</span>
-                <span style={{ padding: "4px 12px", borderRadius: 999, background: "#f0fdf4", border: "1px solid #bbf7d0", color: "#16a34a", fontSize: 11, fontWeight: 700 }}>{cur.physics}</span>
-              </div>
-              <button onClick={() => setShowEn(!showEn)} style={{ display: "flex", alignItems: "center", gap: 6, padding: "6px 14px", background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 8, cursor: "pointer", fontSize: 12, fontWeight: 600, color: "#15803d" }}>
-                <RefreshCw size={12} /> {showEn ? "Bengali" : "English"}
-              </button>
+        {/* Search and Filters panel */}
+        <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 16, padding: "20px", marginBottom: 32, boxShadow: "0 4px 6px -1px rgba(0,0,0,0.02)" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "space-between", alignItems: "center" }}>
+            
+            {/* Filter Tabs */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              {filterGroups.map((group) => {
+                const isActive = activeTab === group;
+                return (
+                  <button
+                    key={group}
+                    onClick={() => setActiveTab(group)}
+                    style={{
+                      padding: "8px 16px",
+                      borderRadius: "10px",
+                      fontSize: "13px",
+                      fontWeight: 600,
+                      cursor: "pointer",
+                      transition: "all 0.2s ease",
+                      border: isActive ? "1px solid #22c55e" : "1px solid #e2e8f0",
+                      background: isActive ? "#f0fdf4" : "#fff",
+                      color: isActive ? "#15803d" : "#475569",
+                    }}
+                  >
+                    {group}
+                  </button>
+                );
+              })}
             </div>
 
-            {/* Content */}
-            <div style={{ display: "grid", gap: 24, gridTemplateColumns: "1fr" }} className="sample-inner">
-              <style>{`@media(min-width:640px){.sample-inner{grid-template-columns:1fr 1fr}}`}</style>
-
-              {/* Image placeholder */}
-              <div style={{ minHeight: 200, background: "#f0fdf4", border: "2px dashed #86efac", borderRadius: 12, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10, padding: 20, textAlign: "center" }}>
-                <div style={{ width: 48, height: 48, borderRadius: 10, background: "#dcfce7", border: "1px solid #86efac", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <ImageIcon size={22} color="#15803d" />
-                </div>
-                <div style={{ fontSize: 12, fontWeight: 700, color: "#334155", fontFamily: "monospace" }}>{cur.file}</div>
-                <div style={{ fontSize: 11, color: "#64748b", lineHeight: 1.5 }}>Dataset image placeholder<br /><em style={{ color: "#94a3b8" }}>(add your image here)</em></div>
+            {/* Search Input */}
+            <div style={{ position: "relative", minWidth: "260px", flex: "1", maxWidth: "400px" }}>
+              <div style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)", color: "#94a3b8", display: "flex", alignItems: "center" }}>
+                <Search size={16} />
               </div>
-
-              {/* Q & A */}
-              <div>
-                <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em", color: "#94a3b8", marginBottom: 8 }}>Question</div>
-                <p style={{ fontSize: 15, fontWeight: 700, color: "#0f172a", lineHeight: 1.6, marginBottom: 16 }}>
-                  {showEn ? cur.qEn : cur.qBn}
-                </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                  {(showEn ? cur.optsEn : cur.optsBn).map((opt, i) => (
-                    <div key={i} style={{
-                      padding: "10px 14px", borderRadius: 8, fontSize: 13,
-                      border: showAns ? (i === cur.ans ? "1.5px solid #22c55e" : "1px solid #e2e8f0") : "1px solid #e2e8f0",
-                      background: showAns ? (i === cur.ans ? "#dcfce7" : "#fafafa") : "#fafafa",
-                      color: showAns ? (i === cur.ans ? "#14532d" : "#94a3b8") : "#334155",
-                      fontWeight: showAns && i === cur.ans ? 700 : 500,
-                    }}>{opt}</div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Reveal */}
-            <div style={{ marginTop: 20, paddingTop: 16, borderTop: "1px solid #dcfce7" }}>
-              {!showAns ? (
-                <button onClick={() => setShowAns(true)} style={{ width: "100%", padding: "12px", background: "#15803d", color: "#fff", border: "none", borderRadius: 10, cursor: "pointer", fontWeight: 700, fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, boxShadow: "0 4px 12px rgba(22,163,74,0.25)" }}>
-                  <Eye size={16} /> Reveal Answer & Explanation
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search by filename or category..."
+                style={{
+                  width: "100%",
+                  padding: "10px 12px 10px 38px",
+                  borderRadius: "10px",
+                  border: "1px solid #cbd5e1",
+                  fontSize: "13px",
+                  outline: "none",
+                  transition: "border-color 0.2s ease, box-shadow 0.2s ease",
+                }}
+                onFocus={(e) => {
+                  e.target.style.borderColor = "#22c55e";
+                  e.target.style.boxShadow = "0 0 0 3px rgba(34, 197, 94, 0.15)";
+                }}
+                onBlur={(e) => {
+                  e.target.style.borderColor = "#cbd5e1";
+                  e.target.style.boxShadow = "none";
+                }}
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: "#94a3b8", cursor: "pointer", display: "flex", alignItems: "center" }}
+                >
+                  <X size={14} />
                 </button>
-              ) : (
-                <div style={{ background: "#f0fdf4", border: "1px solid #86efac", borderRadius: 10, padding: 16 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8, fontWeight: 700, color: "#15803d", fontSize: 13, marginBottom: 8 }}>
-                    <CheckCircle2 size={16} /> Correct Answer: {String.fromCharCode(65 + cur.ans)}
-                  </div>
-                  <p style={{ fontSize: 13, color: "#166534", lineHeight: 1.7 }}>{showEn ? cur.expEn : cur.expBn}</p>
-                </div>
               )}
             </div>
+
           </div>
         </div>
 
+        {/* Grid Display */}
+        {filteredImages.length === 0 ? (
+          <div style={{ textAlign: "center", padding: "64px 20px", background: "#fff", border: "1px solid #e2e8f0", borderRadius: 16 }}>
+            <div style={{ width: 48, height: 48, borderRadius: "50%", background: "#f1f5f9", display: "inline-flex", alignItems: "center", justifyContent: "center", marginBottom: 12, color: "#64748b" }}>
+              <ImageIcon size={22} />
+            </div>
+            <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#1e293b", marginBottom: 4 }}>No images found</h3>
+            <p style={{ fontSize: "13px", color: "#64748b" }}>Try adjusting your search query or switching category filters.</p>
+          </div>
+        ) : (
+          <div style={{ display: "grid", gap: "20px", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))" }}>
+            {filteredImages.map((img, index) => {
+              const isHovered = hoveredIndex === index;
+              const catStyle = getCategoryStyles(img.group);
+              
+              return (
+                <div
+                  key={img.file}
+                  onClick={() => openLightbox(index)}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  style={{
+                    background: "#fff",
+                    border: isHovered ? "1px solid #86efac" : "1px solid #e2e8f0",
+                    borderRadius: "16px",
+                    overflow: "hidden",
+                    cursor: "pointer",
+                    boxShadow: isHovered ? "0 12px 24px -8px rgba(22,163,74,0.18)" : "0 4px 6px -1px rgba(0,0,0,0.03)",
+                    transform: isHovered ? "translateY(-4px)" : "translateY(0)",
+                    transition: "all 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
+                  }}
+                >
+                  {/* Image container */}
+                  <div style={{ height: "180px", overflow: "hidden", position: "relative", background: "#f8fafc" }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`/Dataset_images/${img.file}`}
+                      alt={img.file}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        transform: isHovered ? "scale(1.05)" : "scale(1)",
+                        transition: "transform 0.35s ease",
+                      }}
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                      }}
+                    />
+
+                    {/* Dark gradient overlay on hover */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        background: "rgba(20, 83, 45, 0.4)",
+                        opacity: isHovered ? 1 : 0,
+                        transition: "opacity 0.25s ease",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <div style={{ background: "#fff", color: "#15803d", width: "40px", height: "40px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 10px rgba(0,0,0,0.15)", transform: isHovered ? "scale(1)" : "scale(0.8)", transition: "transform 0.25s ease" }}>
+                        <Maximize2 size={18} />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Details section */}
+                  <div style={{ padding: "16px", display: "flex", flexDirection: "column", gap: "8px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{ padding: "3px 10px", borderRadius: 999, background: catStyle.bg, border: `1px solid ${catStyle.border}`, color: catStyle.color, fontSize: 10, fontWeight: 700 }}>
+                        {img.category}
+                      </span>
+                      <span style={{ fontSize: 10, color: "#94a3b8", fontWeight: 500 }}>
+                        {img.file.endsWith(".png") ? "PNG" : "JPG"}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        fontFamily: "monospace",
+                        fontSize: "12.5px",
+                        fontWeight: 700,
+                        color: isHovered ? "#15803d" : "#334155",
+                        wordBreak: "break-all",
+                        lineHeight: 1.4,
+                      }}
+                    >
+                      {img.file}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
         {/* Stats table */}
-        <div style={{ marginTop: 48, background: "#fff", border: "1px solid #bbf7d0", borderRadius: 16, overflow: "hidden", boxShadow: "0 2px 12px rgba(22,163,74,0.06)" }}>
+        <div style={{ marginTop: 56, background: "#fff", border: "1px solid #bbf7d0", borderRadius: 16, overflow: "hidden", boxShadow: "0 2px 12px rgba(22,163,74,0.03)" }}>
           <div style={{ background: "#f0fdf4", borderBottom: "1px solid #bbf7d0", padding: "16px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
             <div>
               <h3 style={{ fontSize: 16, fontWeight: 800, color: "#14532d", display: "flex", alignItems: "center", gap: 8 }}>
@@ -214,7 +312,205 @@ export default function DatasetExplorer() {
             </table>
           </div>
         </div>
+
       </div>
+
+      {/* Lightbox Modal */}
+      {lightboxIndex !== null && (
+        <div
+          onClick={() => setLightboxIndex(null)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 9999,
+            background: "rgba(15, 23, 42, 0.85)",
+            backdropFilter: "blur(6px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "24px",
+            animation: "fadeIn 0.2s ease-out",
+          }}
+        >
+          <style>{`
+            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes modalScale { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+            .lightbox-card { animation: modalScale 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); }
+          `}</style>
+          
+          {/* Lightbox container */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="lightbox-card"
+            style={{
+              background: "#fff",
+              borderRadius: "24px",
+              border: "1px solid #bbf7d0",
+              maxWidth: "960px",
+              width: "100%",
+              maxHeight: "90vh",
+              overflow: "hidden",
+              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.3)",
+              display: "grid",
+              gridTemplateColumns: "1fr",
+              position: "relative",
+            }}
+          >
+            {/* Responsive grid for large screens */}
+            <div className="lightbox-grid" style={{ display: "grid", gridTemplateColumns: "1fr" }}>
+              <style>{`
+                @media(min-width:768px){
+                  .lightbox-grid { grid-template-columns: 1.2fr 0.8fr !important; }
+                }
+              `}</style>
+
+              {/* Left pane: Image viewer */}
+              <div style={{ background: "#0f172a", position: "relative", height: "450px", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`/Dataset_images/${sampleImages[lightboxIndex].file}`}
+                  alt={sampleImages[lightboxIndex].file}
+                  style={{
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    objectFit: "contain",
+                    padding: "16px",
+                  }}
+                />
+
+                {/* Left/Right Floating navigation buttons inside image pane */}
+                <button
+                  onClick={() => navigateLightbox("prev")}
+                  style={{
+                    position: "absolute",
+                    left: "16px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    background: "rgba(255,255,255,0.15)",
+                    backdropFilter: "blur(4px)",
+                    border: "1.5px solid rgba(255,255,255,0.2)",
+                    color: "#fff",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    transition: "all 0.2s",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = "#22c55e"; e.currentTarget.style.borderColor = "#22c55e"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.15)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)"; }}
+                >
+                  <ChevronLeft size={20} />
+                </button>
+
+                <button
+                  onClick={() => navigateLightbox("next")}
+                  style={{
+                    position: "absolute",
+                    right: "16px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "50%",
+                    background: "rgba(255,255,255,0.15)",
+                    backdropFilter: "blur(4px)",
+                    border: "1.5px solid rgba(255,255,255,0.2)",
+                    color: "#fff",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    transition: "all 0.2s",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = "#22c55e"; e.currentTarget.style.borderColor = "#22c55e"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.15)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)"; }}
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </div>
+
+              {/* Right pane: Metadata & controls */}
+              <div style={{ padding: "32px", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "#fff" }}>
+                <div>
+                  {/* Close and category */}
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+                    <span style={{ padding: "4px 12px", borderRadius: 999, background: "#dcfce7", border: "1px solid #86efac", color: "#15803d", fontSize: 11, fontWeight: 700, textTransform: "uppercase" }}>
+                      {sampleImages[lightboxIndex].category}
+                    </span>
+                    <button
+                      onClick={() => setLightboxIndex(null)}
+                      style={{
+                        background: "#f1f5f9",
+                        border: "none",
+                        width: "36px",
+                        height: "36px",
+                        borderRadius: "50%",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "#475569",
+                        transition: "all 0.2s",
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = "#fee2e2"; e.currentTarget.style.color = "#ef4444"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.background = "#f1f5f9"; e.currentTarget.style.color = "#475569"; }}
+                    >
+                      <X size={18} />
+                    </button>
+                  </div>
+
+                  {/* Title / Filename */}
+                  <h3 style={{ fontSize: "20px", fontWeight: 800, color: "#0f172a", marginBottom: "8px", fontFamily: "monospace", wordBreak: "break-all" }}>
+                    {sampleImages[lightboxIndex].file}
+                  </h3>
+                  <div style={{ fontSize: "12px", color: "#94a3b8", fontWeight: 500, marginBottom: "20px" }}>
+                    Path: <span style={{ fontFamily: "monospace" }}>/Dataset_images/{sampleImages[lightboxIndex].file}</span>
+                  </div>
+
+                  {/* Description */}
+                  <div style={{ borderTop: "1px solid #f1f5f9", paddingTop: "16px", marginBottom: "24px" }}>
+                    <h4 style={{ fontSize: "12px", fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "8px" }}>
+                      Visual Cue Description
+                    </h4>
+                    <p style={{ fontSize: "14px", color: "#475569", lineHeight: 1.6 }}>
+                      {sampleImages[lightboxIndex].desc}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Bottom actions: download */}
+                <div style={{ display: "flex", gap: "12px" }}>
+                  <a
+                    href={`/Dataset_images/${sampleImages[lightboxIndex].file}`}
+                    download={sampleImages[lightboxIndex].file}
+                    style={{
+                      flex: 1,
+                      padding: "12px",
+                      background: "#15803d",
+                      color: "#fff",
+                      borderRadius: "10px",
+                      fontWeight: 700,
+                      fontSize: "14px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "8px",
+                      textDecoration: "none",
+                      boxShadow: "0 4px 12px rgba(22,163,74,0.2)",
+                      transition: "all 0.2s",
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.background = "#166534"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.background = "#15803d"; }}
+                  >
+                    <Download size={16} /> Download Image
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
+
