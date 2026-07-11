@@ -91,7 +91,7 @@ export default function Navbar() {
         </nav>
 
         <div style={{ display: "flex", gap: 10 }} className="hidden md:flex">
-          <a href="https://github.com" style={ghBtn}><GH /><span>Code</span></a>
+          <a href="https://github.com/rasel1510/BanglarMukh" style={ghBtn}><GH /><span>Code</span></a>
           <a href="#" style={paperBtn}><FileText style={{ width: 14, height: 14 }} /><span>Paper</span></a>
         </div>
 
@@ -108,7 +108,7 @@ export default function Navbar() {
               style={{ display: "block", padding: "10px 0", borderBottom: "1px solid #f0fdf4", fontSize: 15, fontWeight: 600, color: "#1e293b", textDecoration: "none" }}>{l.label}</a>
           ))}
           <div style={{ display: "flex", gap: 12, marginTop: 16 }}>
-            <a href="https://github.com" style={{ ...ghBtn, flex: 1, justifyContent: "center" }}><GH /><span>GitHub</span></a>
+            <a href="https://github.com/rasel1510/BanglarMukh" style={{ ...ghBtn, flex: 1, justifyContent: "center" }}><GH /><span>GitHub</span></a>
             <a href="#" style={{ ...paperBtn, flex: 1, justifyContent: "center" }}><FileText style={{ width: 14, height: 14 }} /><span>Paper</span></a>
           </div>
         </div>

@@ -2,12 +2,11 @@
 import React, { useState } from "react";
 import { BookOpen, ZoomIn, X } from "lucide-react";
 
-const abstractText = [
-  <>Bangla culture and tradition is distinctly utilizing local dialects, heritage, tradition, and regular visual practices, yet it is greatly absent from multimodal assessment. We introduce <strong style={{ color: "#15803d" }}>BanglarMukh</strong>, a culturally and traditionally rooted benchmark for evaluating Large Vision Language Models (LVLMs) on Bangladeshi tradition and culture over linguistic diversity.</>,
-  <>BanglarMukh encompasses <strong style={{ color: "#0f172a" }}>1,448 expert annotated images</strong> traversing <strong style={{ color: "#0f172a" }}>15 domains</strong> and reinforces both captioning and Visual Question Answering (VQA). Each category is expanded into <strong style={{ color: "#15803d" }}>six standard languages and six native dialects</strong>, generating <strong style={{ color: "#15803d" }}>66,608 evaluation artifacts</strong>.</>,
-  <>Experiments over various physics aware LVLMs exhibit that assessment on base Bangla alone considerably inflates real world result, accuracy and reasoning quality reduce clearly over dialect alters, with the superior reduction in free form captioning. Languages such as Hindi, Urdu, Chinese conserve some traditional cues but remain weaker in framed reasoning.</>,
-  <>We release the dataset, prompts, and resulting scripts to ensure reproducible, culturally conscious benchmarking.</>,
-];
+const abstractText = (
+  <>
+    Bangla culture and tradition is distinctly utilizing local dialects, heritage, tradition, and regular visual practices, yet it is greatly absent from multimodal assessment. We introduce <strong style={{ color: "#15803d" }}>BanglarMukh</strong>, a culturally and traditionally rooted benchmark for evaluating Large Vision Language Models (LVLMs) on Bangladeshi tradition and culture over linguistic diversity. BanglarMukh encompasses <strong style={{ color: "#0f172a" }}>1,448 expert annotated images</strong> traversing <strong style={{ color: "#0f172a" }}>15 domains</strong> and reinforces both captioning and Visual Question Answering (VQA). Each category is expanded into <strong style={{ color: "#15803d" }}>six standard languages and six native dialects</strong>, generating <strong style={{ color: "#15803d" }}>66,608 evaluation artifacts</strong>. Experiments over various physics-aware LVLMs exhibit that assessment on base Bangla alone considerably inflates real-world result, accuracy and reasoning quality reduce clearly over dialect alters, with the superior reduction in free-form captioning. Languages such as Hindi, Urdu, Chinese conserve some traditional cues but remain weaker in framed reasoning. We release the dataset, prompts, and resulting scripts to ensure reproducible, culturally conscious benchmarking.
+  </>
+);
 
 export default function Abstract() {
   const [zoom, setZoom] = useState(false);
@@ -35,10 +34,10 @@ export default function Abstract() {
           </div>
           <h2 style={{ fontSize: 32, fontWeight: 800, color: "#14532d", marginBottom: 24, lineHeight: 1.2 }}>Overview</h2>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-            {abstractText.map((p, i) => (
-              <p key={i} style={{ fontSize: 15, color: "#334155", lineHeight: 1.85, textAlign: "justify" }}>{p}</p>
-            ))}
+          <div>
+            <p style={{ fontSize: 15, color: "#334155", lineHeight: 1.85, textAlign: "justify" }}>
+              {abstractText}
+            </p>
           </div>
 
           {/* Stats */}

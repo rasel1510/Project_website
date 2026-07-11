@@ -31,11 +31,7 @@ export default function Hero() {
     <section style={{ background: "linear-gradient(160deg,#f0fdf4 0%,#ffffff 55%)", paddingTop: 100, paddingBottom: 72 }}>
       <div style={{ maxWidth: 860, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
 
-        {/* Conference pill */}
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 18px", borderRadius: 999, background: "#dcfce7", border: "1px solid #86efac", color: "#15803d", fontSize: 12, fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 28 }}>
-          <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#22c55e", display: "inline-block" }} />
-          AAAI 2027 — A* Conference Submission
-        </div>
+
 
         {/* Title */}
         <h1 style={{ fontSize: "clamp(24px, 4vw, 44px)", fontWeight: 900, lineHeight: 1.25, letterSpacing: "-0.03em", color: "#14532d", marginBottom: 40, maxWidth: 900, marginLeft: "auto", marginRight: "auto" }}>
@@ -84,7 +80,7 @@ export default function Hero() {
         <div style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
           {[
             { icon: <FileText size={16} />, label: "Download Paper", bg: "linear-gradient(135deg,#15803d,#22c55e)", color: "#fff", shadow: "0 4px 14px rgba(22,163,74,0.3)", href: "#" },
-            { icon: <GH />, label: "GitHub Code", bg: "#fff", color: "#1e293b", border: "1px solid #e2e8f0", shadow: "0 1px 4px rgba(0,0,0,0.06)", href: "https://github.com" },
+            { icon: <GH />, label: "GitHub Code", bg: "#fff", color: "#1e293b", border: "1px solid #e2e8f0", shadow: "0 1px 4px rgba(0,0,0,0.06)", href: "https://github.com/rasel1510/BanglarMukh" },
             { icon: <Database size={16} />, label: "Dataset (HF)", bg: "#fff", color: "#1e293b", border: "1px solid #e2e8f0", shadow: "0 1px 4px rgba(0,0,0,0.06)", href: "#" },
             { icon: <Play size={15} />, label: "Live Demo", bg: "#f0fdf4", color: "#15803d", border: "1px solid #bbf7d0", shadow: "0 1px 4px rgba(22,163,74,0.08)", href: "#dataset" },
           ].map((b, i) => (

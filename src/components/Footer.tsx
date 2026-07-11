@@ -34,7 +34,7 @@ export default function Footer() {
               <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#15803d", marginBottom: 12 }}>Resources</div>
               {[
                 { label: "Paper (PDF)", href: "#" },
-                { label: "GitHub Code", href: "#" },
+                { label: "GitHub Code", href: "https://github.com/rasel1510/BanglarMukh" },
                 { label: "Dataset (HuggingFace)", href: "#" },
                 { label: "Leaderboard", href: "#leaderboard" },
               ].map(l => (
@@ -51,7 +51,7 @@ export default function Footer() {
               <a href="mailto:contact@banglarmukh.org" style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, color: "#334155", textDecoration: "none", fontWeight: 500, marginBottom: 8 }}>
                 <Mail size={13} /> contact@banglarmukh.org
               </a>
-              <a href="https://github.com" style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, color: "#334155", textDecoration: "none", fontWeight: 500 }}>
+              <a href="https://github.com/rasel1510/BanglarMukh" style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, color: "#334155", textDecoration: "none", fontWeight: 500 }}>
                 <GH /> GitHub Repository
               </a>
             </div>
