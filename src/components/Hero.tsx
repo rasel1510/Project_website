@@ -10,17 +10,11 @@ const GH = () => (
 );
 
 const authors = [
-  { name: "Mohammad Rasel Ahmed", affil: "Elite Research Lab, NYC USA" },
-  { name: "Dip Kumar Saha", affil: "Elite Research Lab & Stamford University Bangladesh" },
-  { name: "Kishor Morol", affil: "Elite Research Lab & Cornell University USA" },
+  { name: "Mohammad Rasel Ahmed", affils: ["Elite Research Lab", "NYC USA"] },
+  { name: "Dip Kumar Saha", affils: ["Elite Research Lab", "Stamford University Bangladesh"] },
+  { name: "Kishor Morol", affils: ["Elite Research Lab", "Cornell University USA"] },
 ];
 
-const stats = [
-  { val: "1,448", label: "Expert Images" },
-  { val: "15", label: "Domains" },
-  { val: "6+6", label: "Dialects & Languages" },
-  { val: "66,608", label: "Evaluation Artifacts" },
-];
 
 export default function Hero() {
   return (
@@ -37,21 +31,15 @@ export default function Hero() {
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "20px 40px", marginBottom: 36 }}>
           {authors.map((auth, i) => (
             <div key={i} style={{ textAlign: "center", minWidth: 220 }}>
-              <div style={{ fontSize: 16, fontWeight: 700, color: "#0f172a" }}>{auth.name}</div>
-              <div style={{ fontSize: 12, color: "#16a34a", fontWeight: 600, marginTop: 4, maxWidth: 280, marginLeft: "auto", marginRight: "auto", lineHeight: 1.4 }}>{auth.affil}</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: "#0f172a", marginBottom: 4 }}>{auth.name}</div>
+              {auth.affils.map((aff, idx) => (
+                <div key={idx} style={{ fontSize: 12, color: "#16a34a", fontWeight: 600, maxWidth: 280, marginLeft: "auto", marginRight: "auto", lineHeight: 1.4 }}>{aff}</div>
+              ))}
             </div>
           ))}
         </div>
 
-        {/* Stats row */}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center", marginBottom: 44 }}>
-          {stats.map(s => (
-            <div key={s.label} style={{ background: "#ffffff", border: "1px solid #bbf7d0", borderRadius: 12, padding: "14px 24px", minWidth: 120, boxShadow: "0 2px 8px rgba(22,163,74,0.06)" }}>
-              <div style={{ fontSize: 24, fontWeight: 900, color: "#15803d", lineHeight: 1 }}>{s.val}</div>
-              <div style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 4 }}>{s.label}</div>
-            </div>
-          ))}
-        </div>
+
 
 
 
