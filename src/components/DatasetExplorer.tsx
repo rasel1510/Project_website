@@ -386,6 +386,32 @@ export default function DatasetExplorer() {
           <p style={{ fontSize: 15, color: "#475569", lineHeight: 1.7 }}>
             Browse sample visual cues traversing 15 culturally grounded domains. These expert-annotated images form the core visual benchmark for testing physics awareness and cultural reasoning in LVLMs.
           </p>
+          <div style={{ marginTop: 20 }}>
+            <a
+              href="https://huggingface.co/datasets/Rasel2091/BanglarMukh/tree/main"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                padding: "10px 24px", borderRadius: 10,
+                background: "linear-gradient(135deg,#ff9d00,#ffcc00)",
+                color: "#1a1a1a", fontWeight: 700, fontSize: 14,
+                textDecoration: "none", boxShadow: "0 2px 10px rgba(255,157,0,0.3)",
+                transition: "transform 0.15s, box-shadow 0.15s",
+              }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 6px 18px rgba(255,157,0,0.4)"; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 2px 10px rgba(255,157,0,0.3)"; }}
+            >
+              {/* HuggingFace icon */}
+              <svg width="18" height="18" viewBox="0 0 95 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M47.5 0C21.267 0 0 19.701 0 44c0 24.3 21.267 44 47.5 44S95 68.3 95 44C95 19.701 73.733 0 47.5 0Z" fill="#FFD21E"/>
+                <path d="M30 34c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="#1a1a1a" strokeWidth="4" strokeLinecap="round"/>
+                <path d="M49 34c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="#1a1a1a" strokeWidth="4" strokeLinecap="round"/>
+                <path d="M24 52c4.5 10 42.5 10 47 0" stroke="#1a1a1a" strokeWidth="4" strokeLinecap="round"/>
+              </svg>
+              View Full Dataset on HuggingFace
+            </a>
+          </div>
         </div>
 
         {/* Search and Filters panel */}

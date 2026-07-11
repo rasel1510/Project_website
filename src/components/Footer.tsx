@@ -35,7 +35,7 @@ export default function Footer() {
               {[
                 { label: "Paper (PDF)", href: "#" },
                 { label: "GitHub Code", href: "https://github.com/rasel1510/BanglarMukh" },
-                { label: "Dataset (HuggingFace)", href: "#" },
+                { label: "Dataset (HuggingFace)", href: "https://huggingface.co/datasets/Rasel2091/BanglarMukh/tree/main" },
                 { label: "Leaderboard", href: "#leaderboard" },
               ].map(l => (
                 <a key={l.label} href={l.href} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, color: "#334155", textDecoration: "none", marginBottom: 8, fontWeight: 500 }}

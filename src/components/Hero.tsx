@@ -48,7 +48,7 @@ export default function Hero() {
           {[
             { icon: <FileText size={16} />, label: "Paper", bg: "#fff", color: "#1e293b", border: "1px solid #e2e8f0", shadow: "0 1px 4px rgba(0,0,0,0.06)", href: "https://github.com/rasel1510/BanglarMukh" },
             { icon: <GH />, label: "GitHub Code", bg: "#fff", color: "#1e293b", border: "1px solid #e2e8f0", shadow: "0 1px 4px rgba(0,0,0,0.06)", href: "https://github.com/rasel1510/BanglarMukh" },
-            { icon: <Database size={16} />, label: "Dataset (HF)", bg: "#fff", color: "#1e293b", border: "1px solid #e2e8f0", shadow: "0 1px 4px rgba(0,0,0,0.06)", href: "#" },
+            { icon: <Database size={16} />, label: "Dataset (HF)", bg: "#fff", color: "#1e293b", border: "1px solid #e2e8f0", shadow: "0 1px 4px rgba(0,0,0,0.06)", href: "https://huggingface.co/datasets/Rasel2091/BanglarMukh/tree/main" },
           ].map((b, i) => (
             <a key={i} href={b.href} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "12px 22px", borderRadius: 10, background: b.bg, color: b.color, fontWeight: 700, fontSize: 14, border: b.border ?? "none", boxShadow: b.shadow, textDecoration: "none", transition: "transform 0.15s", cursor: "pointer", minWidth: 160 }}
               onMouseEnter={e => (e.currentTarget.style.transform = "translateY(-2px)")}
