@@ -22,6 +22,299 @@ const sampleImages = [
   { file: "wildlife_087.jpg", category: "Wildlife", group: "Nature & Wildlife", desc: "Local fauna and wildlife species native to the Sundarbans and tropical forests of Bangladesh." }
 ];
 
+const languagesList = [
+  "English",
+  "Pure Bangla",
+  "Hindi",
+  "French",
+  "Chinese",
+  "Chittagong dialects",
+  "Rajshahi",
+  "Barisal",
+  "Noakhali",
+  "Rangpur",
+  "Sylhet"
+];
+
+const imageDetails: Record<string, {
+  eng: { caption: string; q: string; a: string };
+  bng: { caption: string; q: string; a: string };
+}> = {
+  "achievements_102.png": {
+    eng: { caption: "National monument highlighting historic achievements of Bangladesh.", q: "What is the historical significance of this monument?", a: "It commemorates the sacrifice of martyrs in the struggle for independence." },
+    bng: { caption: "বাংলাদেশের ঐতিহাসিক অর্জনসমূহ নির্দেশকারী জাতীয় স্মৃতিসৌধ।", q: "এই স্মৃতিসৌধটির ঐতিহাসিক তাৎপর্য কী?", a: "এটি স্বাধীনতা সংগ্রামে শহীদদের আত্মত্যাগের স্মরণে নির্মিত।" }
+  },
+  "attire_002.jpg": {
+    eng: { caption: "Traditional Bengali woman wearing a finely draped cotton saree.", q: "Which forces stabilize the folds of the draped saree?", a: "Friction between fabric layers and gravitational pull." },
+    bng: { caption: "ঐতিহ্যবাহী সুতি শাড়ি পরিহিত বাঙালি নারী।", q: "শাড়ির কুঁচি ও ভাঁজ কোন বলের কারণে স্থির থাকে?", a: "কাপড়ের স্তরের মধ্যকার ঘর্ষণ বল এবং অভিকর্ষ বলের কারণে।" }
+  },
+  "crafts_115.png": {
+    eng: { caption: "Artisans crafting porous clay pottery using a traditional potter wheel.", q: "Why does hot food cool faster on clay plates?", a: "Evaporative cooling through micro-pores of clay." },
+    bng: { caption: "ঐতিহ্যবাহী মৃৎশিল্পের চাকার সাহায্যে মাটির পাত্র তৈরি করছেন কারিগরেরা।", q: "মাটির পাত্রে গরম খাবার দ্রুত ঠান্ডা হয় কেন?", a: "মাটির ক্ষুদ্র ছিদ্রে বাষ্পীভবন ও সুপ্ততাপ শোষণের কারণে।" }
+  },
+  "education_096.png": {
+    eng: { caption: "A rural school classroom displaying traditional blackboard learning.", q: "What visual elements indicate a traditional classroom?", a: "The chalk blackboard and physical textbooks used by students." },
+    bng: { caption: "গ্রামাঞ্চলের একটি বিদ্যালয়ের শ্রেণীকক্ষ যেখানে চক-বোর্ড ব্যবহৃত হচ্ছে।", q: "কোন দৃশ্যমান উপাদানটি ঐতিহ্যবাহী ক্লাসরুম নির্দেশ করে?", a: "চক-বোর্ড এবং শিক্ষার্থীদের ব্যবহৃত কাগজের পাঠ্যপুস্তক।" }
+  },
+  "festival_039.png": {
+    eng: { caption: "Vibrant Puja festival celebration with rising smoke from incense burners.", q: "Which scattering process makes light beams visible through smoke?", a: "Tyndall Effect & Rayleigh Scattering." },
+    bng: { caption: "পূজামণ্ডপে ধূপের ধোঁয়ার মধ্য দিয়ে আলোর রশ্মি ছড়িয়ে পড়ার দৃশ্য।", q: "ধোঁয়ার মধ্য দিয়ে আলোর রেখা দৃশ্যমান হওয়ার বৈজ্ঞানিক কারণ কী?", a: "ধূলিকণা দ্বারা আলোর বিচ্ছুরণ বা টিন্ডাল প্রভাব।" }
+  },
+  "fishes_031.jpg": {
+    eng: { caption: "Fresh Hilsha fish specimen displaying shining silvery scales.", q: "What phenomenon causes the silver highlight on fish scales?", a: "Specular reflection from thin multilayer structures in scales." },
+    bng: { caption: "রূপালি আঁশযুক্ত টাটকা ইলিশ মাছের নমুনা।", q: "মাছের আঁশের রূপালি চকমকে দেখানোর কারণ কী?", a: "আঁশের পাতলা বহুস্তরীয় গঠন দ্বারা আলোর নিয়মিত প্রতিফলন।" }
+  },
+  "food_105.png": {
+    eng: { caption: "A traditional Bengali plate filled with white rice and fish curry.", q: "What is the primary carbohydrate source in this traditional meal?", a: "Steam-boiled white rice (Bhaat)." },
+    bng: { caption: "সাদা ভাত ও তরকারি সহ একটি ঐতিহ্যবাহী বাঙালি খাবারের থালা।", q: "বাঙালিদের এই প্রধান খাবারের শর্করার মূল উৎস কী?", a: "বাষ্পে সেদ্ধ সাদা চালের ভাত।" }
+  },
+  "movements_050.png": {
+    eng: { caption: "Expressive hand mudras in a traditional Bengali folk dance performance.", q: "What do the hand gestures (mudras) represent in folk dance?", a: "They convey storytelling, emotions, and natural elements like rain or flowers." },
+    bng: { caption: "ঐতিহ্যবাহী বাঙালি লোকনৃত্যে হাতের মুদ্রা ও নান্দনিক ভঙ্গি।", q: "লোকনৃত্যে হাতের মুদ্রাগুলো কী প্রকাশ করে?", a: "বিভিন্ন গল্প, আবেগ এবং ফুল-বৃষ্টির মতো প্রাকৃতিক উপাদান।" }
+  },
+  "nature_072.png": {
+    eng: { caption: "Alluvial soil plains filled with lush green paddy cultivation.", q: "Why is the delta soil highly fertile for agriculture?", a: "Periodic silt deposition during monsoon river floods." },
+    bng: { caption: "সবুজ ধানক্ষেতে ঘেরা উর্বর পলি মাটির সমভূমি।", q: "গাঙ্গেয় বদ্বীপের মাটি কৃষির জন্য এত উর্বর কেন?", a: "বর্ষাকালে নদীর বন্যার সাথে পলিমাটি সঞ্চিত হওয়ার কারণে।" }
+  },
+  "personality_021.png": {
+    eng: { caption: "A portrait of a Baul singer holding a traditional Ektara string instrument.", q: "What is the primary instrument of a Baul mystic?", a: "Ektara, a single-stringed instrument made of gourd and bamboo." },
+    bng: { caption: "একতারা হাতে গান গাইতে প্রস্তুত একজন ঐতিহ্যবাহী বাউল সাধক।", q: "বাউলদের প্রধান ও আদি বাদ্যযন্ত্রটির নাম কী?", a: "একতারা, যা লাউ ও বাঁশ দিয়ে তৈরি এক তারের যন্ত্র।" }
+  },
+  "places_022.png": {
+    eng: { caption: "Mughal-era terracotta brick architecture of Lalbagh Fort in Dhaka.", q: "What architectural style is exhibited in Lalbagh Fort?", a: "Indo-Islamic Mughal brick and plaster architecture." },
+    bng: { caption: "ঢাকার লালবাগ কেল্লার মোঘল আমলের পোড়ামাটির ইট ও পাথরের কারুকাজ।", q: "লালবাগ কেল্লায় কোন স্থাপত্য শৈলী দেখতে পাওয়া যায়?", a: "ইন্দো-ইসলামিক মোঘল স্থাপত্য শৈলী।" }
+  },
+  "river_001.png": {
+    eng: { caption: "Wooden boat floating stably on the calm waters of the Padma river.", q: "What buoyancy principle governs the stable floating of the boat?", a: "Archimedes Buoyancy Principle." },
+    bng: { caption: "পদ্মা নদীর শান্ত জলে ভেসে থাকা একটি ঐতিহ্যবাহী কাঠের নৌকা।", q: "নৌকা পানিতে ভেসে থাকার পেছনে কোন বৈজ্ঞানিক নীতি কাজ করে?", a: "আর্কিমিডিসের প্লবতা নীতি।" }
+  },
+  "river_028.png": {
+    eng: { caption: "Fishermen casting wide triangular nets from wooden boats at dusk.", q: "What type of traditional net is used here for fishing?", a: "A cast net (Jhaki or Khepla Jal) designed to trap fish under it." },
+    bng: { caption: "নৌকা থেকে নদীতে জাল ফেলছেন জেলেরা।", q: "মাছ ধরার জন্য এখানে কোন ধরণের ঐতিহ্যবাহী জাল ব্যবহার করা হচ্ছে?", a: "ঝাঁকি বা ক্ষ্যাপলা জাল, যা পানিতে বৃত্তাকারে ছড়িয়ে পড়ে।" }
+  },
+  "sports_019.png": {
+    eng: { caption: "Youth playing Kabaddi in a dusty rural playground under daylight.", q: "What is the national sport of Bangladesh displayed here?", a: "Kabaddi (Hadudu), requiring breath control and tag team runs." },
+    bng: { caption: "গ্রামের ধূলিময় মাঠে কাবাডি বা হাডুডু খেলছে একদল তরুণ।", q: "ছবিতে প্রদর্শিত বাংলাদেশের জাতীয় খেলাটির নাম কী?", a: "কাবাডি (হাডুডু), যা দম ধরে রেখে খেলতে হয়।" }
+  },
+  "sweet_011.png": {
+    eng: { caption: "Traditional round syrupy sweets (Rosogolla) served in a clay pot.", q: "What is the primary dairy base used to prepare Bengali sweets?", a: "Chhena (fresh curdled milk solids) kneaded with sugar syrup." },
+    bng: { caption: "মাটির পাত্রে রসগোল্লা মিষ্টি সাজানো।", q: "বাঙালি মিষ্টি তৈরির মূল উপাদান কোনটি?", a: "দুধ ছানা ও চিনির সিরা।" }
+  },
+  "wildlife_087.jpg": {
+    eng: { caption: "Royal Bengal Tiger walking silently through Sundarbans mangroves.", q: "What unique ecosystem supports the Bengal Tiger in Bangladesh?", a: "The Sundarbans, the world's largest halophytic mangrove forest." },
+    bng: { caption: "সুন্দরবনের শ্বাসমূল বনের মধ্য দিয়ে হেঁটে যাচ্ছে রয়েল বেঙ্গল টাইগার।", q: "রয়েল বেঙ্গল টাইগারের প্রাকৃতিক বাসস্থল সুন্দরবন কোন ধরণের বন?", a: "বিশ্বের বৃহত্তম জোয়ার-ভাটার ম্যানগ্রোভ বন।" }
+  }
+};
+
+const dialectTranslations: Record<string, Record<string, { caption: string; q: string; a: string }>> = {
+  "achievements_102.png": {
+    "Hindi": { caption: "बांग्लादेश की ऐतिहासिक उपलब्धियों को दर्शाने वाला राष्ट्रीय स्मारक।", q: "इस स्मारक का ऐतिहासिक महत्व क्या है?", a: "यह स्वतंत्रता संग्राम के शहीदों की याद में बनाया गया है।" },
+    "French": { caption: "Monument national soulignant les réalisations historiques du Bangladesh.", q: "Quelle est la signification historique de ce monument?", a: "Il commémore le sacrifice des martyrs dans la lutte pour l'indépendance." },
+    "Chinese": { caption: "展示孟加拉国历史成就的国家纪念碑。", q: "这座纪念碑有什么历史意义？", a: "它是为了纪念在独立斗争中牺牲的烈士。" },
+    "Chittagong dialects": { caption: "বাংলাদেশর ঐতিহাসিক অর্জনসমূহর নিশানি অইলদে এই জাতীয় স্মৃতিসৌধ।", q: "স্মৃতিসৌধইবার ঐতিহাসিক গুরুত্ব কিয়ল্লা?", a: "ইবা স্বাধীনতা যূদ্ধত শহীদ অউয়্যা বীরর স্মরণত বানাইয়ে।" },
+    "Rajshahi": { caption: "বাংলাদেশ লিয়ার ঐতিহাসিক অর্জন দেখানোর জাতীয় স্মৃতিসৌধ লয়।", q: "স্মৃতিসৌধ লিয়ার ঐতিহাসিক গুরুত্ব কা?", a: "ইটা স্বাধীনতা লিয়াত শহীদ হওয়া মানুষের মনে রাখার ল্যাগা তৈরি করা হইচে।" },
+    "Barisal": { caption: "গোটা দেশের ঐতিহাসিক অর্জন দেহানের লাইগ্যা এই জাতীয় স্মৃতিসৌধ তৈরি করা অইচে।", q: "এই স্মৃতিসৌধটার ঐতিহাসিক কারণডা কী কন তো?", a: "স্বাধীনতা যুদ্ধে যারা শহীদ অইছে হ্যালার স্মরণে এই স্মৃতিসৌধ বানাইছে।" },
+    "Noakhali": { caption: "বাংলাদেশর ঐতিহাসিক অর্জন দেখানের ল্যায় এই জাতীয় স্মৃতিসৌধ জেনো খাড়া রইচে।", q: "এই স্মৃতিসৌধিয়ার ঐতিহাসিক গুরুত্ব কী হোলা?", a: "ইগ্যা স্বাধীনতা যুদ্ধে শহীদ অওনিয়াগো স্মরণে বানাইছে।" },
+    "Rangpur": { caption: "বাংলাদেশর ঐতিহাসিক অর্জনগুলা দেখপার জইন্য এই জাতীয় স্মৃতিসৌধ।", q: "এই স্মৃতিসৌধটার ঐতিহাসিক গুরুত্ব কী বাহে?", a: "ইলা স্বাধীনতা যুদ্ধে শহীদ হওনিয়া মাইনষের স্মরণে বানাইছে।" },
+    "Sylhet": { caption: "বাংলাদেশর ঐতিহাসিক অর্জন দেখাইবার লাগি অউ জাতীয় স্মৃতিসৌধ খাড়া করা ওইছে।", q: "স্মৃতিসৌধটার ঐতিহাসিক গুরুত্ব কিতা ওবা?", a: "ইতা স্বাধীনতা যুদ্ধত শহীদ অউয়াহাইনতোর স্মরণে বানাইল ওইছে।" }
+  },
+  "attire_002.jpg": {
+    "Hindi": { caption: "बारीक सूती साड़ी पहने पारंपरिक बंगाली महिला।", q: "साड़ी की सिलवटों को कौन से बल स्थिर रखते हैं?", a: "कपड़े की परतों के बीच घर्षण और गुरुत्वाकर्षण बल।" },
+    "French": { caption: "Femme bengalie traditionnelle portant un sari en coton finement drapé.", q: "Quelles forces stabilisent les plis du sari drapé?", a: "Le frottement entre les couches de tissu et la force gravitationnelle." },
+    "Chinese": { caption: "穿着精美棉纱丽的传统孟加拉女性。", q: "哪些力稳定了纱丽的折叠和褶皱？", a: "织物层之间的摩擦力和重力拉力。" },
+    "Chittagong dialects": { caption: "ঐতিহ্যবাহী সুতি শাড়ি পিন্দ্যা বাঙ্গালি মেয়া।", q: "শাড়ির কুঁচি আর ভাজ কোন্ বলের কারণে ঝুলে থাকে?", a: "কাপড়ের ভিতরের ঘর্ষণ বল আর অভিকর্ষ বলের কারণে।" },
+    "Rajshahi": { caption: "ঐতিহ্যবাহী সুতি শাড়ি পিন্ধা বঙ্গেলা বেটিছ্যালা।", q: "শাড়ির ভাঁজ আর কুঁচি কোন শক্তির লিগা টেকে?", a: "কাপড়ের ঘষাঘষি বল আর অভিকর্ষ বলের লিগা।" },
+    "Barisal": { caption: "ঐতিহ্যবাহী সুতি শাড়ি পিন্ধা একখান বাঙালি মাইয়া মানুষ।", q: "শাড়ির ভাজ আর কুঁচি কোন বলের কারণে স্থির থাকে গো?", a: "শাড়ির কাপড়ের ঘর্ষণ বল আর অভিকর্ষ বলের কারণে।" },
+    "Noakhali": { caption: "ঐতিহ্যবাহী সুতি হাড়ি পরিহিতা অনিন্দ্য বাঙালি মাইয়া।", q: "ঐ শাড়ির ভাঁজ আর কুঁচি কোন বলের কারণে ঝুলে থাকে?", a: "ঘর্ষণ বল এবং অভিকর্ষ বলের কারণে।" },
+    "Rangpur": { caption: "ঐতিহ্যবাহী suতি শাড়ি পিন্ধা বাঙালি বেটিছাওয়া।", q: "শাড়ির ভাঁজ আর কুঁচি কোন্ বলের জইন্য টেকে?", a: "কাপড়ের ঘর্ষণ বল আর অভিকর্ষ বলের জইন্য।" },
+    "Sylhet": { caption: "ঐতিহ্যবাহী সুতি শাড়ি পিন্ধা এক বাঙালি বেটি।", q: "শাড়ির ভাঁজ আর কুঁচি কুন বলের লাগি টিকি থাকে?", a: "কাপড়ের ঘর্ষণ বল আর অভিকর্ষ বলের লাগি।" }
+  },
+  "crafts_115.png": {
+    "Hindi": { caption: "मिट्टी के बर्तन बनाते हुए पारंपरिक बंगाली कारीगर।", q: "मिट्टी की थाली में खाना जल्दी ठंडा क्यों होता है?", a: "मिट्टी के सूक्ष्म छिद्रों से होने वाले वाष्पीकरण के कारण।" },
+    "French": { caption: "Artisans fabriquant des poteries en argile poreuse.", q: "Pourquoi les aliments chauds refroidissent-ils plus vite sur des plaques d'argile?", a: "Refroidissement par évaporation à travers les micro-pores de l'argile." },
+    "Chinese": { caption: "工匠们正在制作多孔的泥陶器。", q: "为什么热的食物在粘土盘子里冷得更快？", a: "通过粘土微孔的蒸发冷却作用。" },
+    "Chittagong dialects": { caption: "হাতে মাডির পাতিল বানাইর কারিগর অঁল।", q: "মাডির পাতিলত গরম ভাত তাড়াতাড়ি ঠান্ডা অয় কিয়ল্লা?", a: "মাডির গাত থাহে অতি সূক্ষ্ম ফুডু যেত্থন পানি ভাপ অয়।" },
+    "Rajshahi": { caption: "মাটির হাড়ি পাতিল বানাইচ্চে কারিগরেরা।", q: "মাটির পাতিলত গরম ভাত তাড়াতাড়ি ঠান্ডা হয় ক্যালা?", a: "মাটির অতি সূক্ষ্ম ফুটা দিয়া বাষ্পীভবন হওনের লাগা।" },
+    "Barisal": { caption: "মাটির পাতিল বানাইতাছে আমাগো দেশের কোমর কারিগররা।", q: "মাডির সানকিতে গরম ভাত বাড়লে তা তাড়াতাড়ি ঠান্ডা হয় ক্যালা?", a: "মাডির অতি সূক্ষ্ম ছিদ্র দিয়া বাষ্পীভবন অইলে ঠান্ডা তাড়াতাড়ি হয়।" },
+    "Noakhali": { caption: "মাটির কলসি বানাইতাছে কারিগরের দল।", q: "মাটির সানকিতে গরম ভাত বাড়লে তা তাড়াতাড়ি ঠান্ডা হয় ক্যালা?", a: "মাটির অতি সূক্ষ্ম ছিদ্র দিয়া বাষ্পীভবন হওনের কারণে।" },
+    "Rangpur": { caption: "মাটির হাড়ি বনাওচে গাঁয়ের কামার-কুমার ভাইয়েরা।", q: "মাটির সানকিতে গরম ভাত বাড়লে তা তাড়াতাড়ি ঠান্ডা হয় ক্যালা?", a: "মাটির অতি সূক্ষ্ম ছিদ্র দিয়া বাষ্পীভবন হওনের কারণে।" },
+    "Sylhet": { caption: "মাটির পাতিল বানাইতরা ঐতিহ্যবাহী কুমার কারিগর হকল।", q: "মাটির সানকিতে গরম ভাত বাড়লে তা তাড়াতাড়ি ঠান্ডা হয় ক্যালা?", a: "মাটির অতি সূক্ষ্ম ছিদ্র দিয়া বাষ্পীভবন ঘটায়।" }
+  },
+  "education_096.png": {
+    "Hindi": { caption: "ग्रामीण स्कूल का एक कक्षा जिसमें पारंपरिक ब्लैकबोर्ड शिक्षा दी जा रही है।", q: "पारंपरिक कक्षा के दृश्य संकेत क्या हैं?", a: "ब्लैकबोर्ड और छात्रों द्वारा उपयोग की जाने वाली पुस्तकें।" },
+    "French": { caption: "Une salle de classe rurale affichant un apprentissage traditionnel sur tableau noir.", q: "Quels éléments visuels indiquent une classe traditionnelle?", a: "Le tableau noir en craie et les manuels physiques." },
+    "Chinese": { caption: "展示传统黑板学习的农村学校教室。", q: "哪些视觉元素表明这是一个传统的教室？", a: "粉笔黑板和学生使用的纸质教科书。" },
+    "Chittagong dialects": { caption: "পাড়াগাঁর এক্কান ইস্কুলর ক্লাস রুম।", q: "ইস্কুলর ক্লাসরুম বুঝিবার উপায় কী?", a: "চক-বোর্ড আর পোয়া অঁলর হাতত থাহে বই।" },
+    "Rajshahi": { caption: "গ্রামের ইস্কুলের ঘরের মধ্যের পড়ালেখা করার রুম।", q: "ইস্কুলের রুম কেমনে চিনিবেন?", a: "চক আর বোর্ড আর ছাওয়ালদের বই দেখিয়া।" },
+    "Barisal": { caption: "গ্রামের ইস্কুলের একটা ক্লাসরুম যেখানে পোলাপান লেখাপড়া করতাছে।", q: "ঐ ক্লাসরুম দেহনের জন্য কোন জিনিসডা দরকার কন তো?", a: "চক-বোর্ড আর পোলাপানের মুখের পড়া আর হাতের বই।" },
+    "Noakhali": { caption: "গ্রামর স্কুলর ক্লাসরুম যেখানে মাস্টার সাব পড়াইতাছে।", q: "ঐ ক্লাসরুম বুইঝার হেই জিনিস কী?", a: "চক-বোর্ড আর হোলাগো হাতে থাহনিয়া বই।" },
+    "Rangpur": { caption: "গাঁয়ের স্কুলঘরের ক্লাসরুম যেখানে পড়ালেখা চলে।", q: "ঐ ক্লাসরুম বুঝার ভিজুয়াল জিনিস কী বাহে?", a: "চক-বোর্ড আর ছাওয়াগো হাতের কাগজের বই।" },
+    "Sylhet": { caption: "গ্রামর স্কুলর একটা ক্লাসরুম যেখান পড়ানি চলে।", q: "ইস্কুলর ক্লাসরুম চিনার ভিজুয়াল বিষয় কিতা?", a: "চক-বোর্ড আর ছাত্রহাইনতোর হাতের বই।" }
+  },
+  "festival_039.png": {
+    "Hindi": { caption: "धूप बर्नर से उठते धुएं के साथ जीवंत पूजा उत्सव।", q: "धुएं के माध्यम से प्रकाश किरणों को कौन सी बिखरने की प्रक्रिया दृश्यमान बनाती है?", a: "टिंडल प्रभाव और रेले बिखरना।" },
+    "French": { caption: "Célébration vibrante de la fête de la Puja avec de l'encens.", q: "Quel processus de diffusion rend les rayons lumineux visibles à travers la fumée?", a: "Effet Tyndall et diffusion de Rayleigh." },
+    "Chinese": { caption: "充满香炉烟雾的活力普贾节日庆祝活动。", q: "哪种散射过程使光束透过烟雾可见？", a: "廷德尔效应和瑞利散射。" },
+    "Chittagong dialects": { caption: "পূজোর মণ্ডপত ধূপের ধোঁয়ার মধ্য দি আলো আসার সুন্দর দৃশ্য।", q: "ধূপের ধোঁয়ার মধ্য দি সূর্যের আলো দেখা গেলে কোন বৈজ্ঞানিক বিচ্ছুরণ ঘটে?", a: "টিন্ডাল প্রভাব আর রেলে বিচ্ছুরণ।" },
+    "Rajshahi": { caption: "পূজামণ্ডপে ধূপের ধোঁয়ার মধ্য দিয়া সূর্যের আলো আসার দৃশ্য।", q: "ধূপের ধোঁয়ার মধ্য দিয়া সূর্যের আলো দেখা গেলে কোন বৈজ্ঞানিক বিচ্ছুরণ ঘটে?", a: "টিন্ডাল প্রভাব আর রেলে বিচ্ছুরণ।" },
+    "Barisal": { caption: "পূজামণ্ডপে ধূপের ধোঁয়ার মধ্য দিয়ে সূর্যের আলো দেখার চমৎকার দৃশ্য।", q: "পূজামণ্ডপে ধূপের ধোঁয়ার মধ্য দিয়ে সূর্যের আলো দেখা গেলে কোন বিচ্ছুরণ ঘটে?", a: "টিন্ডাল প্রভাব আর রেলে বিচ্ছুরণ।" },
+    "Noakhali": { caption: "পূজামণ্ডপে ধূপের ধোঁয়ার মধ্য দিয়ে সূর্যের আলো দেখার বৈজ্ঞানিক দৃশ্য।", q: "পূজামণ্ডপে ধূপের ধোঁয়ার মধ্য দিয়ে সূর্যের আলোর রেখা দেখা গেলে কোন বিচ্ছুরণ প্রক্রিয়া ঘটে?", a: "টিন্ডাল প্রভাব ও রেলে বিচ্ছুরণ।" },
+    "Rangpur": { caption: "পূজামণ্ডপত ধূপের ধোয়ার মধ্য দিয়া সূর্যের আলোর রেখা দেখা যাওয়ার দৃশ্য।", q: "পূজামণ্ডপত ধূপের ধোয়ার মধ্য দিয়া সূর্যের আলোর রেখা দেখা গেলে কোন বিচ্ছুরণ ঘটে?", a: "টিন্ডাল প্রভাব ও রেলে বিচ্ছুরণ।" },
+    "Sylhet": { caption: "পূজামণ্ডপত ধূপের ধোঁয়ার মধ্য দিয়া সূর্যের আলোর রেখা দেখানির দৃশ্য।", q: "পূজামণ্ডপত ধূপের ধোঁয়ার মধ্য দিয়া সূর্যের আলোর রেখা দেখা গেলে কুন বিচ্ছুরণ ঘটে?", a: "টিন্ডাল প্রভাব ও রেলে বিচ্ছুরণ।" }
+  },
+  "fishes_031.jpg": {
+    "Hindi": { caption: "चमकदार चांदी जैसे तराजू प्रदर्शित करने वाली ताज़ा हिल्सा मछली।", q: "मछली के तराजू पर चांदी की चमक किस घटना के कारण होती है?", a: "तराजू में पतली बहुपरत संरचनाओं से दर्पण जैसा प्रतिबिंब।" },
+    "French": { caption: "Spécimen de poisson Hilsha frais montrant des écailles argentées brillantes.", q: "Quel phénomène provoque l'éclat argenté sur les écailles?", a: "Réflexion spéculaire des structures multicouches minces." },
+    "Chinese": { caption: "展示闪亮银鳞的新鲜鲥鱼标本。", q: "什么现象导致鱼鳞上出现银色亮点？", a: "鱼鳞中薄多层结构的镜面反射。" },
+    "Chittagong dialects": { caption: "চকচইক্কা রূপালি আঁইশওলার টাটকা ইলিশ মাছ।", q: "ইলিশের আঁইশ চকচক কিয়ল্লা গরে?", a: "আলোর নিয়মিত প্রতিফলনের কারণে আঁইশ চকচক গরে।" },
+    "Rajshahi": { caption: "চককানি রূপালি আঁশওয়ালা টাটকা ইলিশ মাছের নমুনা।", q: "ইলিশের আঁশ চকচক করার বৈজ্ঞানিক কারণ কী?", a: "আলোর নিয়মিত প্রতিফলনের কারণে আঁশ চকচক করে।" },
+    "Barisal": { caption: "রূপালী চকচকে আঁশওয়ালা তাজা ইলিশ মাছ।", q: "ইলিশের গায়ের রূপালী আঁশ চকচক করার বৈজ্ঞানিক কারণডা কী?", a: "ইলিশের মসৃণ আঁশের উপরে আলোর নিয়মিত প্রতিফলন ঘটে।" },
+    "Noakhali": { caption: "রুপালি চোকচইক্কা আঁশওয়ালা তাজ্য ইলিশ মাছের নমুনা।", q: "ইলিশের আঁশ চোকচোক করার বৈজ্ঞানিক কারণ কী হোলা?", a: "আলোর নিয়মিত প্রতিফলনের কারণে আঁশ চোকচোক করে।" },
+    "Rangpur": { caption: "রূপালি চকচকা আঁশওয়ালা তাজা ইলিশ মাছ।", q: "ইলিশের আঁশ চকচকা করার বৈজ্ঞানিক কারণ কী বাহে?", a: "আলোর নিয়মিত প্রতিফলনের কারণে আঁশ চকচকা করে।" },
+    "Sylhet": { caption: "রুপালি চকচকে আঁশওয়ালা তাজা ইলিশ মাছের নমুনা।", q: "ইলিশের আঁশ চকচকে দেখানির বৈজ্ঞানিক কারণ কিতা?", a: "আলোর নিয়মিত প্রতিফলনের কারণে আঁশ চকচকে দেখায়।" }
+  },
+  "food_105.png": {
+    "Hindi": { caption: "सफेद चावल और मछली करी से भरी एक बंगाली थाली।", q: "इस भोजन में मुख्य रूप से क्या शामिल है?", a: "पारंपरिक सफेद उबला हुआ चावल (भात) और मछली।" },
+    "French": { caption: "Une assiette bengalie avec du riz blanc et du curry de poisson.", q: "Quelle est la base de ce repas traditionnel?", a: "Du riz blanc cuit à la vapeur avec du poisson d'eau douce." },
+    "Chinese": { caption: "装满白米饭和鱼咖喱的传统孟加拉餐盘。", q: "这顿传统膳食的主要碳水化合物来源是什么？", a: "蒸熟的白米饭（Bhaat）。" },
+    "Chittagong dialects": { caption: "সাদা ভাত আর মাছের সালন দেয়া এক্কান বাঙ্গালি খাওয়ারর থাল।", q: "বাঙালি খাওয়ারের প্রধান জিনিস কী?", a: "গরম ভাত আর নদী বা পুকুরের মাছের সালন।" },
+    "Rajshahi": { caption: "সাদা ভাত আর মাছের তরকারি দিয়া সাজানো একটা খাবারের থালা।", q: "বাঙালিদের প্রধান খাবার কী লয়?", a: "সেদ্ধ সাদা চালের ভাত আর তরকারি।" },
+    "Barisal": { caption: "সাদা গরম ভাত আর মাছের ঝোল দিয়া সাজানো বাঙালি থালা।", q: "বাঙালিদের সবচেয়ে পসন্দসই খাবারডা কী কন তো?", a: "মাছে-ভাতে বাঙালি, তাই ভাত আর মাছের ঝোল।" },
+    "Noakhali": { caption: "হোলা ভাত আর মাছের ঝোল দিয়া সাজানো এক্কান বঙ্গেলা থাল।", q: "বঙ্গের পোলাপাইনের প্রধান খাবার কী হোলা?", a: "ভাত আর মাছের ঝোল।" },
+    "Rangpur": { caption: "সাদা ভাত আর মাছের ঝোল দিয়া সাজানো বাঙালি থালা।", q: "বাঙালির সবচেয়ে প্রধান খাবার কী বাহে?", a: "ভাত আর মাছের তরকারি।" },
+    "Sylhet": { caption: "সাদা ভাত আর মাছের সালন দিয়া সাজাইল বাঙালি থালা।", q: "সিলেটি মাইনষের প্রধান খাবার কিতা ওবা?", a: "ভাত আর মাছের সালন।" }
+  },
+  "movements_050.png": {
+    "Hindi": { caption: "पारंपरिक बंगाली लोक नृत्य में हाथ की मुद्राएं।", q: "लोक नृत्य में हाथ की मुद्राएं क्या दर्शाती हैं?", a: "वे भावनाओं और प्राकृतिक तत्वों को व्यक्त करती हैं।" },
+    "French": { caption: "Moudras expressifs dans une danse folklorique bengalie.", q: "Que représentent les gestes de la main dans la danse?", a: "Ils expriment des histoires, des émotions et des éléments naturels." },
+    "Chinese": { caption: "孟加拉民间舞蹈表演中富有表现力的手印。", q: "手部动作（手印）在民间舞蹈中代表什么？", a: "它们传达故事、情感以及雨、花等自然元素。" },
+    "Chittagong dialects": { caption: "লোক নৃত্যের হাতর সুন্দর কায়দা আর মুদ্রা।", q: "নৃত্যের হাতর মুদ্রা দি কী বুঝায়?", a: "হাতের মুদ্রা দি মনের ভাব আর প্রকৃতির দৃশ্য বুঝায়।" },
+    "Rajshahi": { caption: "লোক নাচের হাতের সুন্দর মুদ্রা আর ভঙ্গি।", q: "নাচের হাতের মুদ্রা দি কী বুঝা যায়?", a: "হাতের মুদ্রা দি মনের ভাব আর প্রকৃতির দৃশ্য বুঝা যায়।" },
+    "Barisal": { caption: "লোকনৃত্যে হাতের নান্দনিক মুদ্রা ও অঙ্গভঙ্গি।", q: "নাচে হাতের মুদ্রা দিয়া কী বুঝায়?", a: "হাতের অঙ্গভঙ্গি দিয়া মনের ভাব আর বিভিন্ন গল্প বুঝায়।" },
+    "Noakhali": { caption: "লোক নৃত্যে হাতের সুন্দর অঙ্গভঙ্গি ও মুদ্রা।", q: "নাচে হাতের মুদ্রা দিয়া কী বুঝায় হোলা?", a: "হাতের অঙ্গভঙ্গি দিয়া মনের ভাব আর বিভিন্ন কাহিনী বুঝায়।" },
+    "Rangpur": { caption: "লোকনৃত্যে হাতের সুন্দর অঙ্গভঙ্গি ও মুদ্রা।", q: "নাচে হাতের মুদ্রা দিয়া কী বুঝায় বাহে?", a: "হাতের অঙ্গভঙ্গি দিয়া মনের ভাব আর বিভিন্ন কাহিনী বুঝায়।" },
+    "Sylhet": { caption: "লোকনৃত্যত হাতের সুন্দর অঙ্গভঙ্গি ও মুদ্রা।", q: "নাচত হাতের মুদ্রা দিয়া কিতা বুঝানি হয়?", a: "হাতের অঙ্গভঙ্গি দিয়া মনের ভাব আর বিভিন্ন কাহিনী বুঝানি হয়।" }
+  },
+  "nature_072.png": {
+    "Hindi": { caption: "हरी-भरी धान की खेती से युक्त जलोढ़ मिट्टी के मैदान।", q: "डेल्टा की मिट्टी कृषि के लिए अत्यधिक उपजाऊ क्यों है?", a: "मानसून की बाढ़ के दौरान गाद जमा होने के कारण।" },
+    "French": { caption: "Plaines fertiles avec culture de riz vert.", q: "Pourquoi le sol du delta est-il très fertile?", a: "Dépôt périodique de limon lors des crues fluviales." },
+    "Chinese": { caption: "种满绿色水稻的冲积土平原。", q: "为什么三角洲的土地非常适合农业耕作？", a: "在季风河水泛滥期间有定期的泥沙沉积。" },
+    "Chittagong dialects": { caption: "সবুজ ধানক্ষেত আর নদীমাতৃক বাংলার সুন্দর প্রাকৃতিক দৃশ্য।", q: "বাংলাদেশর মাটি এত উর্বর কিয়ল্লা?", a: "নদীতে বর্ষাকালে পলিমাটি জমার কারণে মাটি এত উর্বর হয়।" },
+    "Rajshahi": { caption: "সবুজ ধানক্ষেতে ভরা আমাদের বাংলার প্রাকৃতিক field।", q: "বাংলাদেশর মাটি এত উর্বর ক্যালা?", a: "বর্ষাকালে নদীর পলিমাটি জমার কারণে মাটি এত উর্বর হয়।" },
+    "Barisal": { caption: "সবুজ ধানক্ষেতে ঘেরা মোদের বরিশালের চরের পলিমাটির দৃশ্য।", q: "বাংলার চরের মাটি এত উর্বর ক্যালা কন তো?", a: "বর্ষাকালে নদীর বন্যার লগে পলিমাটি পড়ার কারণে।" },
+    "Noakhali": { caption: "সবুজ ধানক্ষেতে ঘেরা আমাদের নোয়াখালীর উর্বর পলি মাটির সমভূমি।", q: "আমাদের দেশের মাটি এত উর্বর ক্যালা হোলা?", a: "নদীতে পলিমাটি জমার কারণে।" },
+    "Rangpur": { caption: "সবুজ ধানক্ষেতে ঘেরা হামার উত্তরের উর্বর পলি মাটির সমভূমি।", q: "হামার দেশের মাটি এত উর্বর ক্যালা বাহে?", a: "নদীতে পলিমাটি জমার কারণে।" },
+    "Sylhet": { caption: "সবুজ ধানক্ষেতে ঘেরা আমরার সিলেটের উর্বর পলি মাটির সমভূমি।", q: " আমরার দেশের মাটি এত উর্বর কিতা লাগি ওবা?", a: "নদীতে পলিমাটি জমার কারণে।" }
+  },
+  "personality_021.png": {
+    "Hindi": { caption: "पारंपरिक एकतारा वाद्ययंत्र पकड़े हुए एक बाउल गायक।", q: "बाउल संगीतकार का मुख्य वाद्ययंत्र क्या है?", a: "एकतारा, जो लौकी और बांस से बनता है।" },
+    "French": { caption: "Un chanteur Baul tenant un instrument traditionnel Ektara.", q: "Quel est l'instrument principal d'un mystique Baul?", a: "L'Ektara, un instrument à une seule corde fait de gourde et de bambou." },
+    "Chinese": { caption: "手持传统单弦琴（Ektara）的宝尔（Baul）歌手肖像。", q: "宝尔密宗歌手的主要乐器是什么？", a: "单弦琴（Ektara），一种由葫芦和竹子制成的单弦乐器。" },
+    "Chittagong dialects": { caption: "হাতে একতারা লোয়া এক্কান বাউল সাধক।", q: "বাউল সাধকর মেইন বাদ্যযন্ত্রর নাম কী?", a: "একতারা, ইবা লাউ আর বাঁশ দি বানায়।" },
+    "Rajshahi": { caption: "হাতে একতারা লিয়া একজনা বাউল সাধক।", q: "বাউলদের প্রধান বাদ্যযন্ত্রের নাম কী লয়?", a: "একতারা, যা লাউ আর বাঁশ দিয়া তৈরি করা হয়।" },
+    "Barisal": { caption: "একতারা হাতে গান গাইতে খাড়াইছে মোদের বাউল সাধক।", q: "বাউল সাধকদের প্রধান বাদ্যযন্ত্র কী কন দেহি?", a: "একতারা, যা লাউ আর বাঁশ দিয়া তৈরি এক তারের যন্ত্র।" },
+    "Noakhali": { caption: "একতারা হাতে গান গাইবার ল্যায় প্রস্তুত বাউল সাধক।", q: "বাউলদের প্রধান বাদ্যযন্ত্রের নাম কী হোলা?", a: "একতারা, যা লাউ আর বাঁশ দিয়া তৈরি।" },
+    "Rangpur": { caption: "একতারা হাতে গান গাওয়ার জইন্য রেডি বাউল সাধক।", q: "বাউলের প্রধান বাদ্যযন্ত্র কী বাহে?", a: "একতারা, যা লাউ আর বাঁশ দিয়া তৈরি।" },
+    "Sylhet": { caption: "একতারা হাতে গান গাইবার লাগি রেডি বাউল সাধক।", q: "বাউল হকলের প্রধান বাদ্যযন্ত্র কিতা ওবা?", a: "একতারা, যা লাউ আর বাঁশ দিয়া বানাইল হয়।" }
+  },
+  "places_022.png": {
+    "Hindi": { caption: "ढाका में लालबाग किले की मुगल काल की वास्तुकला।", q: "लालबाग किले में किस स्थापत्य शैली का प्रदर्शन किया गया है?", a: "भारत-इस्लामी मुगल ईंट वास्तुकला।" },
+    "French": { caption: "Architecture en brique de l'ère moghole du fort de Lalbagh à Dhaka.", q: "Quel style architectural est exposé au fort de Lalbagh?", a: "Architecture moghole indo-islamique en brique et plâtre." },
+    "Chinese": { caption: "达卡拉尔巴格堡的莫卧儿时代红砖建筑。", q: "拉尔巴格堡展示了什么建筑风格？", a: "印度-伊斯兰莫卧儿砖石建筑风格。" },
+    "Chittagong dialects": { caption: "ঢাকা শহরের মইদ্ধে মোঘল আমলর লালবাগ কেল্লা।", q: "লালবাগ কেল্লা কোন্ আমলের স্থাপত্য?", a: "ইবা মোঘল আমলর লাল ইটের স্থাপত্য।" },
+    "Rajshahi": { caption: "ঢাকা শহরের মধ্যে মোঘল আমলের লালবাগ কেল্লা।", q: "লালবাগ কেল্লা কোন আমলের স্থাপত্য লয়?", a: "ইটা মোঘল আমলের লাল ইটের স্থাপত্য।" },
+    "Barisal": { caption: "ঢাকার মোঘল আমলের লালবাগ কেল্লার সুন্দর টেরাকোটা স্থাপত্য।", q: "লালবাগ কেল্লা কোন আমলের স্থাপত্য দেহান যায়?", a: "মোঘল আমলের লাল ইটের তৈরি বিখ্যাত স্থাপত্য।" },
+    "Noakhali": { caption: "ঢাকার লালবাগ কেল্লার মোঘল আমলের টেরাকোটা স্থাপত্য।", q: "লালবাগ কেল্লা কোন আমলের স্থাপত্য হোলা?", a: "মোঘল আমলের লাল ইটের স্থাপত্য।" },
+    "Rangpur": { caption: "ঢাকার লালবাগ কেল্লার মোঘল আমলের টেরাকোটা স্থাপত্য।", q: "লালবাগ কেল্লা কোন আমলের স্থাপত্য বাহে?", a: "মোঘল আমলের লাল ইটের স্থাপত্য।" },
+    "Sylhet": { caption: "ঢাকার লালবাগ কেল্লার মোঘল আমলের টেরাকোটা স্থাপত্য।", q: "লালবাগ কেল্লা কুন আমলের স্থাপত্য ওবা?", a: "মোঘল আমলের লাল ইটের স্থাপত্য।" }
+  },
+  "river_001.png": {
+    "Hindi": { caption: "पद्मा नदी के शांत पानी में तैरती पारंपरिक लकड़ी की नाव।", q: "नाव के तैरने को कौन सा सिद्धांत नियंत्रित करता है?", a: "आर्किमिडीज का उत्प्लावकता सिद्धांत।" },
+    "French": { caption: "Bateau en bois flottant sur les eaux calmes de la rivière Padma.", q: "Quel principe de flottabilité régit le bateau?", a: "Principe de flottabilité d'Archimède." },
+    "Chinese": { caption: "漂浮在巴德玛河平静水面上的传统木船。", q: "什么浮力原理支配着船的稳定漂浮？", a: "阿基米德浮力原理。" },
+    "Chittagong dialects": { caption: "গাঙের শান্ত পানিত ভাসি থাহা কাঠের নাও।", q: "নৌকা পানিত ভাইসা থাহে কিয়ল্লা?", a: "আর্কিমিডিসর প্লবতা সূত্র অনুযায়ী নৌকা পানিত ভাইসা থাহে।" },
+    "Rajshahi": { caption: "নদীর শান্ত পানিতে ভাইসা থাকা কাঠের নৌকা।", q: "নৌকা পানিতে ভাইসা থাকে ক্যালা?", a: "আর্কিমিডিসের প্লবতা সূত্র অনুযায়ী নৌকা পানিতে ভাইসা থাকে।" },
+    "Barisal": { caption: "গাঙের বুকে শান্তভাবে ভাইসা থাকা আমাগো কাঠের নৌকা।", q: "নৌকা গাঙ্গে ভাইসা থাহার বৈজ্ঞানিক কারণডা কন তো?", a: "আর্কিমিডিসের প্লবতা সূত্র অনুযায়ী নৌকা গাঙ্গের পানিতে ভাইসা থাহে।" },
+    "Noakhali": { caption: "নদীর শান্ত পানিত ভাইসা থাকা কাঠের নৌকা।", q: "নৌকা পানিত ভাইসা থাকে কিলাকা হোলা?", a: "আর্কিমিডিসের প্লবতা সূত্র অনুযায়ী নৌকা পানিত ভাইসা থাকে।" },
+    "Rangpur": { caption: "নদীর শান্ত পানিত ভাইসা থাকা কাঠের নৌকা।", q: "নৌকা পানিত ভাইসা থাকে ক্যালা বাহে?", a: "আর্কিমিডিসের প্লবতা সূত্র অনুযায়ী নৌকা পানিত ভাইসা থাকে।" },
+    "Sylhet": { caption: "নদীর শান্ত পানিত ভাইসা থাকা কাঠের নৌকা।", q: "নৌকা পানিত ভাইসা থাকে কিলাকা ওবা?", a: "আর্কিমিডিসের প্লবতা সূত্র অনুযায়ী নৌকা পানিত ভাইসা থাকে।" }
+  },
+  "river_028.png": {
+    "Hindi": { caption: "शाम को लकड़ी की नावों से जाल फेंकते मछुआरे।", q: "मछली पकड़ने के लिए यहाँ किस प्रकार के पारंपरिक जाल का उपयोग किया जाता है?", a: "कास्त नेट (झाकी जाल), जो पानी में फैल जाता है।" },
+    "French": { caption: "Pêcheurs lançant des filets depuis des bateaux en bois.", q: "Quel type de filet traditionnel est utilisé ici?", a: "Un épervier (filet de lancer) conçu pour attraper les poissons." },
+    "Chinese": { caption: "渔民在黄昏时分从木船上撒下宽阔的三角网。", q: "这里使用什么类型的传统渔网捕鱼？", a: "投网（Jhaki 或 Khepla Jal），旨在将鱼困在网下。" },
+    "Chittagong dialects": { caption: "নদীর পানিত ঝাঁকি জাল ফালানের সুন্দর দৃশ্য।", q: "মাছ ধরিবার লাইগ্যা কোন্ জাল ব্যবহার করা অর?", a: "ঝাঁকি জাল বা ক্ষ্যাপলা জাল, যা পানিত গোল অই ছড়িয়ে পড়ে।" },
+    "Rajshahi": { caption: "নদীর পানিতে ঝাঁকি জাল ফালানোর সুন্দর দৃশ্য।", q: "মাছ ধরার লাইগ্যা কোন্ জাল ব্যবহার করা হচ্ছে?", a: "ঝাঁকি জাল বা ক্ষ্যাপলা জাল, যা পানিতে ছিটকে পড়ে।" },
+    "Barisal": { caption: "নদীতে একখান ঝাঁকি জাল ফালানোর সুন্দর দৃশ্য দেহান যাইতেছে।", q: "মাছ ধরার লাইগ্যা কোন্ জাল ব্যবহার করা অয় কন দেহি?", a: "ঝাঁকি জাল বা ক্ষ্যাপলা জাল, যা নদীতে গোলাইয়া পইড়া মাছ আটকে রাখে।" },
+    "Noakhali": { caption: "নদীর পানিত ঝাঁকি জাল ফালানোর সুন্দর দৃশ্য।", q: "মাছ ধরার ল্যায় কোন্ জাল ব্যবহার করা হয় হোলা?", a: "ঝাঁকি জাল বা ক্ষ্যাপলা জাল, যা পানিত ছিটকে পড়ে।" },
+    "Rangpur": { caption: "নদীর পানিত ঝাঁকি জাল ফালানোর সুন্দর দৃশ্য।", q: "মাছ ধরার জইন্য কোন্ জাল ব্যবহার করা হয় বাহে?", a: "ঝাঁকি জাল বা ক্ষ্যাপলা জাল, যা পানিত ছিটকে পড়ে।" },
+    "Sylhet": { caption: "নদীর পানিত ঝাঁকি জাল ফালানির সুন্দর দৃশ্য।", q: "মাছ ধরার লাগি কুন জাল ব্যবহার করা হয় ওবা?", a: "ঝাঁকি জাল বা ক্ষ্যাপলা জাল, যা পানিত ছিটকে পড়ে।" }
+  },
+  "sports_019.png": {
+    "Hindi": { caption: "धूल भरे मैदान में कबड्डी खेलते ग्रामीण युवा।", q: "यहाँ प्रदर्शित बांग्लादेश का राष्ट्रीय खेल कौन सा है?", a: "कबड्डी (हाडुडु), जिसमें सांस नियंत्रण की आवश्यकता होती है।" },
+    "French": { caption: "Jeunes jouant au Kabaddi dans une cour rurale poussiéreuse.", q: "Quel est le sport national du Bangladesh affiché ici?", a: "Le Kabaddi (Hadudu), qui exige un contrôle de la respiration." },
+    "Chinese": { caption: "青年人在尘土飞扬的农村运动场上玩卡巴迪。", q: "这里展示的孟加拉国国技是什么？", a: "卡巴迪（Hadudu），需要控制呼吸和标签队跑动。" },
+    "Chittagong dialects": { caption: "গ্রামের সুন্দর মাঠের মইদ্ধে কাবাডি বা হাডুডু খেলার দৃশ্য।", q: "বাংলাদেশর জাতীয় খেলার নাম কী?", a: "কাবাডি বা হাডুডু খেলা, যে খেলাত দম ধরি রাখন পরে।" },
+    "Rajshahi": { caption: "গ্রামের মাঠের মধ্যে কাবাডি বা হাডুডু খেলার দৃশ্য।", q: "বাংলাদেশর জাতীয় খেলার নাম কী লয়?", a: "কাবাডি বা হাডুডু খেলা, যে খেলাত দম ধইরা থাকন লাগে।" },
+    "Barisal": { caption: "ধূলিময় মাঠে পোলাপান হাডুডু খেলতাছে।", q: "আমাগো দেশের জাতীয় খেলাডা কী কও তো?", a: "কাবাডি বা হাডুডু খেলা, যে খেলায় দম ধইরা রাখন লাগে।" },
+    "Noakhali": { caption: "গ্রামের মাঠে কাবাডি বা হাডুডু খেলার সুন্দর দৃশ্য।", q: "আমাদের দেশের জাতীয় খেলার নাম কী হোলা?", a: "কাবাডি বা হাডুডু খেলা, যে খেলাত দম ধরি রাখন লাগে।" },
+    "Rangpur": { caption: "গাঁয়ের মাঠে কাবাডি বা হাডুডু খেলার সুন্দর দৃশ্য।", q: "হামার দেশের জাতীয় খেলার নাম কী বাহে?", a: "কাবাডি বা হাডুডু খেলা, যে খেলাত দম ধরি রাখন লাগে।" },
+    "Sylhet": { caption: "গ্রামর মাঠে কাবাডি বা হাডুডু খেলার সুন্দর দৃশ্য।", q: "আমরার দেশের জাতীয় খেলার নাম কিতা ওবা?", a: "কাবাডি বা হাডুডু খেলা, যে খেলাত দম ধরি রাখন লাগে।" }
+  },
+  "sweet_011.png": {
+    "Hindi": { caption: "मिट्टी के बर्तन में परोसी गई गोल रसदार मिठाइयाँ (रसगुल्ला)।", q: "बंगाली मिठाई तैयार करने के लिए मुख्य डेयरी आधार क्या है?", a: "छेना (ताजा फटे दूध के ठोस पदार्थ) और चीनी की चाशनी।" },
+    "French": { caption: "Douceurs rondes au sirop (Rosogolla) servies dans un pot en argile.", q: "Quelle est la base laitière des douceurs bengalies?", a: "Le chhena (solides de lait caillé frais) pétri avec du sirop de sucre." },
+    "Chinese": { caption: "装在泥罐里的传统圆形糖浆甜点（Rosogolla）。", q: "制作孟加拉甜点的主要奶制品基底是什么？", a: "与糖浆混合捏合的奶渣（Chhena）。" },
+    "Chittagong dialects": { caption: "মাডির পাতিলত সুন্দর করি সাজানো রসগোল্লা মিষ্টি।", q: "বাঙ্গালি মিষ্টি বানাইবার আসল উপাদান কী?", a: "দুধের ছানা আর চিনির সিরা।" },
+    "Rajshahi": { caption: "মাটির পাতিলে সাজানো রসগোল্লা মিষ্টি লয়।", q: "মিষ্টি বানানোর প্রধান জিনিস কী?", a: "দুধের ছানা আর চিনির রস।" },
+    "Barisal": { caption: "মাডির পাত্রে রাখা গোল গোল রসের রসগোল্লা মিষ্টি।", q: "রসগোল্লা মিষ্টি বানাইতে প্রধান কোন জিনিসডা লাগে?", a: "দুধের তাজা ছানা আর কড়া চিনির সিরা।" },
+    "Noakhali": { caption: "মাটির পাত্রে সাজানো রসগোল্লা মিষ্টির হালি।", q: "বাঙালি মিষ্টি বানানোর প্রধান উপাদান কী হোলা?", a: "দুধের ছানা আর চিনির সিরা।" },
+    "Rangpur": { caption: "মাটির পাত্রে সাজানো রসগোল্লা মিষ্টি।", q: "বাঙালি মিষ্টি বানানোর প্রধান উপাদান কী বাহে?", a: "দুধের ছানা আর চিনির সিরা।" },
+    "Sylhet": { caption: "মাটির পাত্রে সাজাইল রসগোল্লা মিষ্টি।", q: "বাঙালি মিষ্টি বানানির প্রধান উপাদান কিতা ওবা?", a: "দুধের ছানা আর চিনির সিরা।" }
+  },
+  "wildlife_087.jpg": {
+    "Hindi": { caption: "सुंदरबन के मैंग्रोव में शांति से चलता रॉयल बंगाल टाइगर।", q: "बांग्लादेश में रॉयल बंगाल टाइगर का प्राकृतिक आवास कौन सा है?", a: "सुंदरबन, दुनिया का सबसे बड़ा ज्वारीय मैंग्रोव वन।" },
+    "French": { caption: "Tigre du Bengale marchant silencieusement dans les mangroves.", q: "Quel est l'habitat naturel du tigre du Bengale?", a: "Les Sundarbans, la plus grande forêt de mangroves du monde." },
+    "Chinese": { caption: "在红树林中静静行走的孟加拉虎。", q: "什么独特的生态系统支持着孟加拉虎？", a: "苏达班（Sundarbans），世界上最大的潮汐红树林系统。" },
+    "Chittagong dialects": { caption: "সুন্দরবনের শ্বাসমূল বনের ভিতর দি হেঁটে যাতি দেখি রয়েল বেঙ্গল টাইগার।", q: "রয়েল বেঙ্গল টাইগারের প্রাকৃতিক বাসস্থল সুন্দরবন কোন্ ধরণের বন?", a: "বিশ্বের বৃহত্তম লবণাক্ত ম্যানগ্রোভ বন।" },
+    "Rajshahi": { caption: "সুন্দরবনের বনের ভেতর দিয়া হেঁটে যাওয়া রয়েল বেঙ্গল টাইগার।", q: "রয়েল বেঙ্গল টাইগারের বাসস্থল সুন্দরবন কেমন বন লয়?", a: "বিশ্বের সবচাইতে বড় ম্যানগ্রোভ লবণাক্ত বন।" },
+    "Barisal": { caption: "সুন্দরবনের শ্বাসমূলের বনের মধ্য দিয়া হাইট্টা যায় আমাগো বাঘ রয়েল বেঙ্গল টাইগার।", q: "রয়েল বেঙ্গল টাইগার যে বনে থাকে হেই সুন্দরবন কীসের বন কন দেহি?", a: "বিশ্বের সবচেয়ে বড় লবণাক্ত জোয়ার-ভাটার ম্যানগ্রোভ বন।" },
+    "Noakhali": { caption: "সুন্দরবনের শ্বাসমূল বনের মধ্য দিয়ে হেঁটে যাইতাছে রয়েল বেঙ্গল টাইগার।", q: "রয়েল বেঙ্গল টাইগারের প্রাকৃতিক বাসস্থল সুন্দরবন কোন ধরণের বন হোলা?", a: "বিশ্বের বৃহত্তম জোয়ার-ভাটার লবণাক্ত ম্যানগ্রোভ বন।" },
+    "Rangpur": { caption: "সুন্দরবনের শ্বাসমূল বনের মধ্য দিয়া হাঁটি যায় রয়েল বেঙ্গল টাইগার।", q: "রয়েল বেঙ্গল টাইগারের প্রাকৃতিক বাসস্থল সুন্দরবন কোন ধরণের বন বাহে?", a: "বিশ্বের বৃহত্তম জোয়ার-ভাটার ম্যানগ্রোভ বন।" },
+    "Sylhet": { caption: "সুন্দরবনের শ্বাসমূল বনের মধ্য দিয়া হাঁতিয়া যায় রয়েল বেঙ্গল টাইগার।", q: "রয়েল বেঙ্গল টাইগারের প্রাকৃতিক বাসস্থল সুন্দরবন কুন ধরণের বন ওবা?", a: "বিশ্বের বৃহত্তম জোয়ার-ভাটার ম্যানগ্রোভ বন।" }
+  }
+};
+
+const getSampleAnnotation = (filename: string, category: string, lang: string) => {
+  const details = imageDetails[filename];
+  if (!details) {
+    return {
+      caption: `Sample caption in ${lang} for ${filename}.`,
+      vqa: `Q: Sample question in ${lang}?\nA: Sample answer in ${lang}.`
+    };
+  }
+
+  let raw = { caption: "", q: "", a: "" };
+
+  if (lang === "English") {
+    raw = details.eng;
+  } else if (lang === "Pure Bangla") {
+    raw = details.bng;
+  } else {
+    const transMap = dialectTranslations[filename];
+    if (transMap && transMap[lang]) {
+      raw = transMap[lang];
+    } else {
+      raw = details.eng;
+    }
+  }
+
+  return {
+    caption: raw.caption,
+    vqa: `Q: ${raw.q}\nA: ${raw.a}`
+  };
+};
+
 const filterGroups = ["All", "Culture & Heritage", "Nature & Wildlife", "Food & Sweets"];
 
 const statsRows = [
@@ -349,10 +642,10 @@ export default function DatasetExplorer() {
               maxWidth: "960px",
               width: "100%",
               maxHeight: "90vh",
-              overflow: "hidden",
+              overflowY: "auto",
               boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.3)",
-              display: "grid",
-              gridTemplateColumns: "1fr",
+              display: "flex",
+              flexDirection: "column",
               position: "relative",
             }}
           >
@@ -507,6 +800,41 @@ export default function DatasetExplorer() {
               </div>
 
             </div>
+
+            {/* Multilingual Grounding Data Table */}
+            <div style={{ borderTop: "1px solid #e2e8f0", background: "#f8fafc", padding: "24px 32px 32px 32px" }}>
+              <h4 style={{ fontSize: "15px", fontWeight: 800, color: "#1e293b", marginBottom: "4px" }}>
+                Multilingual Grounding Data
+              </h4>
+              <p style={{ fontSize: "12px", color: "#64748b", marginBottom: "16px" }}>
+                Evaluation text assets across standard languages and regional dialects for the selected sample image.
+              </p>
+              
+              <div style={{ overflowX: "auto", background: "#fff", borderRadius: "12px", border: "1px solid #cbd5e1" }}>
+                <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px", textAlign: "left" }}>
+                  <thead>
+                    <tr style={{ background: "#f1f5f9", borderBottom: "1px solid #cbd5e1" }}>
+                      <th style={{ padding: "12px 16px", fontWeight: 700, color: "#334155", width: "18%" }}>Language</th>
+                      <th style={{ padding: "12px 16px", fontWeight: 700, color: "#334155", width: "41%" }}>Caption</th>
+                      <th style={{ padding: "12px 16px", fontWeight: 700, color: "#334155", width: "41%" }}>VQA</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {languagesList.map((lang, index) => {
+                      const annot = getSampleAnnotation(sampleImages[lightboxIndex].file, sampleImages[lightboxIndex].category, lang);
+                      return (
+                        <tr key={lang} style={{ borderBottom: index === languagesList.length - 1 ? "none" : "1px solid #e2e8f0" }}>
+                          <td style={{ padding: "12px 16px", fontWeight: 600, color: "#0f172a" }}>{lang}</td>
+                          <td style={{ padding: "12px 16px", color: "#475569", lineHeight: 1.5 }}>{annot.caption}</td>
+                          <td style={{ padding: "12px 16px", color: "#475569", lineHeight: 1.5, whiteSpace: "pre-line" }}>{annot.vqa}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
           </div>
         </div>
       )}
