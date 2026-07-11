@@ -1,143 +1,282 @@
 "use client";
-import React, { useState, useMemo } from "react";
-import { Award, Search, ArrowUpDown, Info } from "lucide-react";
+import React, { useState } from "react";
+import { Award, Info, ZoomIn, X, Globe, MessageSquare } from "lucide-react";
 
-const models = [
-  { name: "Human Baseline", org: "Native Speakers", size: "—", overall: 94.8, cultural: 96.2, physics: 93.4, dialect: 94.8, human: true },
-  { name: "GPT-4o (2024-05)", org: "OpenAI", size: "Proprietary", overall: 76.5, cultural: 79.2, physics: 73.8, dialect: 62.4 },
-  { name: "Claude 3.5 Sonnet", org: "Anthropic", size: "Proprietary", overall: 75.2, cultural: 78.4, physics: 72.0, dialect: 58.5 },
-  { name: "Gemini 1.5 Pro", org: "Google", size: "Proprietary", overall: 74.8, cultural: 77.0, physics: 72.6, dialect: 60.1 },
-  { name: "Qwen2-VL-72B", org: "Alibaba", size: "72B", overall: 71.0, cultural: 73.5, physics: 68.5, dialect: 52.8 },
-  { name: "LLaVA-NeXT-72B", org: "LLaVA-Team", size: "72B", overall: 66.4, cultural: 69.0, physics: 63.8, dialect: 44.2 },
-  { name: "Qwen2-VL-7B", org: "Alibaba", size: "7B", overall: 59.8, cultural: 62.1, physics: 57.5, dialect: 38.6 },
-  { name: "LLaVA-NeXT-13B", org: "LLaVA-Team", size: "13B", overall: 54.1, cultural: 56.4, physics: 51.8, dialect: 32.1 },
-  { name: "InstructBLIP-13B", org: "Salesforce", size: "13B", overall: 38.5, cultural: 40.2, physics: 36.8, dialect: 18.4 },
-  { name: "BLIP-2 (Flan-T5-XXL)", org: "Salesforce", size: "12.1B", overall: 32.1, cultural: 33.5, physics: 30.7, dialect: 12.5 },
-];
+interface TableInfo {
+  id: string;
+  label: string;
+  path: string;
+  caption: string;
+}
 
-type SortKey = "overall" | "cultural" | "physics" | "dialect" | "name" | "org";
+const categories = {
+  languages: [
+    {
+      id: "bangla",
+      label: "Bangla",
+      path: "/Images/Bangla Language Result.png",
+      caption: "Zero-shot evaluation results on standard Bangla language queries for all baseline models."
+    },
+    {
+      id: "english",
+      label: "English",
+      path: "/Images/English Language Result.png",
+      caption: "Zero-shot evaluation results on standard English queries to measure linguistic alignment."
+    },
+    {
+      id: "chinese",
+      label: "Chinese",
+      path: "/Images/Chinese Language result.png",
+      caption: "Evaluation results on standard Chinese queries evaluating multilinguality."
+    },
+    {
+      id: "french",
+      label: "French",
+      path: "/Images/French Language Result.png",
+      caption: "Evaluation results on standard French queries."
+    },
+  ] as TableInfo[],
+  dialects: [
+    {
+      id: "chittagong",
+      label: "Chittagong",
+      path: "/Images/Chittagong Dialects Language results.png",
+      caption: "Evaluation results on Chittagong regional dialect, showing distinct local dialect patterns."
+    },
+    {
+      id: "noakhali",
+      label: "Noakhali",
+      path: "/Images/Noakhali Dialect Language result.png",
+      caption: "Evaluation results on Noakhali regional dialect, showing dialectal variations and challenges."
+    },
+    {
+      id: "rajshahi",
+      label: "Rajshahi",
+      path: "/Images/Rajshahi dialect language result.png",
+      caption: "Evaluation results on Rajshahi dialect."
+    },
+    {
+      id: "sylhet",
+      label: "Sylhet",
+      path: "/Images/Sylhet Dialect Language Result.png",
+      caption: "Evaluation results on Sylhet dialect."
+    },
+  ] as TableInfo[],
+};
 
 export default function Leaderboard() {
-  const [query, setQuery] = useState("");
-  const [sortKey, setSortKey] = useState<SortKey>("overall");
-  const [asc, setAsc] = useState(false);
+  const [activeCategory, setActiveCategory] = useState<"languages" | "dialects">("languages");
+  const [activeTableId, setActiveTableId] = useState("bangla");
+  const [zoom, setZoom] = useState(false);
 
-  const sorted = useMemo(() => {
-    const filtered = models.filter(m =>
-      m.name.toLowerCase().includes(query.toLowerCase()) ||
-      m.org.toLowerCase().includes(query.toLowerCase())
-    );
-    return filtered.sort((a, b) => {
-      if (a.human) return -1;
-      if (b.human) return 1;
-      const av = a[sortKey] as string | number;
-      const bv = b[sortKey] as string | number;
-      if (typeof av === "number" && typeof bv === "number") return asc ? av - bv : bv - av;
-      return asc ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
-    }).map((m, i, arr) => ({ ...m, rank: m.human ? undefined : arr.filter(x => !x.human).indexOf(m) + 1 }));
-  }, [query, sortKey, asc]);
+  const currentTables = categories[activeCategory];
+  const activeTable = currentTables.find(t => t.id === activeTableId) || currentTables[0];
 
-  const toggleSort = (k: SortKey) => { if (sortKey === k) setAsc(!asc); else { setSortKey(k); setAsc(false); } };
-
-  const TH = ({ label, k, right = false }: { label: string; k: SortKey; right?: boolean }) => (
-    <th onClick={() => toggleSort(k)} style={{ padding: "12px 16px", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: sortKey === k ? "#15803d" : "#334155", cursor: "pointer", textAlign: right ? "right" : "left", background: "#f0fdf4", borderBottom: "2px solid #bbf7d0", whiteSpace: "nowrap" }}>
-      <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
-        {label} <ArrowUpDown size={11} />
-      </span>
-    </th>
-  );
-
-  const rankBadge = (rank?: number, human?: boolean) => {
-    if (human) return <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 28, height: 28, borderRadius: "50%", background: "#dcfce7", border: "1.5px solid #22c55e", color: "#15803d", fontSize: 11, fontWeight: 800 }}>H</span>;
-    if (rank === 1) return <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 28, height: 28, borderRadius: "50%", background: "#fef9c3", border: "1.5px solid #fbbf24", color: "#92400e", fontSize: 11, fontWeight: 800 }}>1</span>;
-    if (rank === 2) return <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 28, height: 28, borderRadius: "50%", background: "#f1f5f9", border: "1.5px solid #94a3b8", color: "#475569", fontSize: 11, fontWeight: 800 }}>2</span>;
-    if (rank === 3) return <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 28, height: 28, borderRadius: "50%", background: "#fff7ed", border: "1.5px solid #f97316", color: "#7c2d12", fontSize: 11, fontWeight: 800 }}>3</span>;
-    return <span style={{ fontSize: 12, fontWeight: 600, color: "#94a3b8" }}>{rank}</span>;
+  const handleCategoryChange = (cat: "languages" | "dialects") => {
+    setActiveCategory(cat);
+    setActiveTableId(categories[cat][0].id);
   };
 
   return (
     <section id="leaderboard" style={{ background: "#f0fdf4", borderTop: "1px solid #dcfce7", padding: "80px 0" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
 
-        <div style={{ textAlign: "center", maxWidth: 600, margin: "0 auto 48px" }}>
+        {/* Header */}
+        <div style={{ textAlign: "center", maxWidth: 600, margin: "0 auto 20px" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 16px", borderRadius: 999, background: "#dcfce7", border: "1px solid #86efac", color: "#15803d", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 16 }}>
             <Award size={12} /> Evaluation Results
           </div>
-          <h2 style={{ fontSize: 32, fontWeight: 800, color: "#14532d", marginBottom: 12 }}>Result Section</h2>
+          <h2 style={{ fontSize: 32, fontWeight: 800, color: "#14532d" }}>Result Section</h2>
+
         </div>
 
-        {/* Controls */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12, marginBottom: 20 }}>
-          <div style={{ position: "relative", maxWidth: 280, width: "100%" }}>
-            <Search size={15} style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#94a3b8" }} />
-            <input type="text" placeholder="Search models..." value={query} onChange={e => setQuery(e.target.value)}
-              style={{ width: "100%", paddingLeft: 36, paddingRight: 14, paddingTop: 10, paddingBottom: 10, border: "1.5px solid #bbf7d0", borderRadius: 10, fontSize: 13, color: "#0f172a", outline: "none", fontFamily: "inherit", background: "#fff" }} />
-          </div>
-          <div style={{ display: "flex", gap: 16, fontSize: 12, color: "#64748b", fontWeight: 600 }}>
-            <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <span style={{ width: 12, height: 12, background: "#dcfce7", border: "1.5px solid #22c55e", borderRadius: "50%", display: "inline-block" }} /> Human Baseline
-            </span>
-            <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <span style={{ width: 12, height: 12, background: "#fef9c3", border: "1.5px solid #fbbf24", borderRadius: "50%", display: "inline-block" }} /> Top Rank
-            </span>
-          </div>
+        {/* Category Selector */}
+        <div style={{ display: "flex", justifyContent: "center", gap: 16, marginBottom: 24 }}>
+          <button
+            onClick={() => handleCategoryChange("languages")}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              padding: "12px 24px",
+              borderRadius: 12,
+              border: activeCategory === "languages" ? "2px solid #15803d" : "2px solid #e2e8f0",
+              background: activeCategory === "languages" ? "#15803d" : "#fff",
+              color: activeCategory === "languages" ? "#fff" : "#475569",
+              fontWeight: 700,
+              fontSize: 14,
+              cursor: "pointer",
+              transition: "all 0.2s ease",
+              boxShadow: activeCategory === "languages" ? "0 4px 12px rgba(21,128,61,0.15)" : "none"
+            }}
+          >
+            <Globe size={16} />
+            Standard Languages
+          </button>
+          <button
+            onClick={() => handleCategoryChange("dialects")}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              padding: "12px 24px",
+              borderRadius: 12,
+              border: activeCategory === "dialects" ? "2px solid #15803d" : "2px solid #e2e8f0",
+              background: activeCategory === "dialects" ? "#15803d" : "#fff",
+              color: activeCategory === "dialects" ? "#fff" : "#475569",
+              fontWeight: 700,
+              fontSize: 14,
+              cursor: "pointer",
+              transition: "all 0.2s ease",
+              boxShadow: activeCategory === "dialects" ? "0 4px 12px rgba(21,128,61,0.15)" : "none"
+            }}
+          >
+            <MessageSquare size={16} />
+            Regional Dialects
+          </button>
         </div>
 
-        {/* Table */}
+        {/* Sub-tabs / Language pills */}
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 10, marginBottom: 32 }}>
+          {currentTables.map(t => (
+            <button
+              key={t.id}
+              onClick={() => setActiveTableId(t.id)}
+              style={{
+                padding: "8px 18px",
+                borderRadius: 999,
+                border: "1px solid",
+                borderColor: activeTableId === t.id ? "#15803d" : "#bbf7d0",
+                background: activeTableId === t.id ? "#dcfce7" : "#fff",
+                color: activeTableId === t.id ? "#14532d" : "#475569",
+                fontWeight: 700,
+                fontSize: 13,
+                cursor: "pointer",
+                transition: "all 0.15s ease",
+              }}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Table Display Frame */}
         <div style={{ background: "#fff", border: "1px solid #bbf7d0", borderRadius: 16, overflow: "hidden", boxShadow: "0 4px 20px rgba(22,163,74,0.08)" }}>
-          <div style={{ overflowX: "auto" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-              <thead>
-                <tr>
-                  <th style={{ padding: "12px 16px", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: "#334155", textAlign: "center", background: "#f0fdf4", borderBottom: "2px solid #bbf7d0", width: 64 }}>Rank</th>
-                  <TH label="Model" k="name" />
-                  <TH label="Creator" k="org" />
-                  <th style={{ padding: "12px 16px", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: "#334155", textAlign: "center", background: "#f0fdf4", borderBottom: "2px solid #bbf7d0" }}>Size</th>
-                  <TH label="Overall %" k="overall" right />
-                  <TH label="Cultural %" k="cultural" right />
-                  <TH label="Physics %" k="physics" right />
-                  <TH label="Dialects %" k="dialect" right />
-                </tr>
-              </thead>
-              <tbody>
-                {sorted.map((m, i) => (
-                  <tr key={i} style={{ borderBottom: "1px solid #f0fdf4", background: m.human ? "#f0fdf4" : "#fff" }}
-                    onMouseEnter={e => !m.human && (e.currentTarget.style.background = "#fafff8")}
-                    onMouseLeave={e => !m.human && (e.currentTarget.style.background = "#fff")}
-                  >
-                    <td style={{ padding: "14px 16px", textAlign: "center" }}>{rankBadge(m.rank, m.human)}</td>
-                    <td style={{ padding: "14px 16px", fontWeight: 700, color: m.human ? "#14532d" : "#0f172a" }}>
-                      <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                        {m.name}
-                        {m.human && <span style={{ fontSize: 10, fontWeight: 700, padding: "2px 8px", borderRadius: 999, background: "#dcfce7", border: "1px solid #86efac", color: "#15803d", textTransform: "uppercase", letterSpacing: "0.05em" }}>Baseline</span>}
-                      </span>
-                    </td>
-                    <td style={{ padding: "14px 16px", color: "#475569", fontWeight: 500 }}>{m.org}</td>
-                    <td style={{ padding: "14px 16px", textAlign: "center", fontFamily: "monospace", fontWeight: 700, color: "#64748b" }}>{m.size}</td>
-                    <td style={{ padding: "14px 16px", textAlign: "right", fontFamily: "monospace", fontWeight: 800, color: m.human ? "#15803d" : "#0f172a", fontSize: 14 }}>{m.overall.toFixed(1)}%</td>
-                    <td style={{ padding: "14px 16px", textAlign: "right", fontFamily: "monospace", fontWeight: 700, color: "#334155" }}>{m.cultural.toFixed(1)}%</td>
-                    <td style={{ padding: "14px 16px", textAlign: "right", fontFamily: "monospace", fontWeight: 700, color: "#334155" }}>{m.physics.toFixed(1)}%</td>
-                    <td style={{ padding: "14px 16px", textAlign: "right", fontFamily: "monospace", fontWeight: 700, color: "#334155" }}>{m.dialect.toFixed(1)}%</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          {/* Header toolbar */}
+          <div style={{ background: "#dcfce7", borderBottom: "1px solid #bbf7d0", padding: "14px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
+            <span style={{ fontSize: 14, fontWeight: 700, color: "#14532d" }}>
+              Evaluation Table — {activeTable.label} {activeCategory === "languages" ? "Language" : "Dialect"}
+            </span>
+            <button
+              onClick={() => setZoom(true)}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                padding: "8px 16px",
+                background: "#fff",
+                border: "1px solid #86efac",
+                borderRadius: 8,
+                cursor: "pointer",
+                fontSize: 13,
+                fontWeight: 700,
+                color: "#15803d",
+                transition: "all 0.2s"
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = "#f0fdf4"}
+              onMouseLeave={e => e.currentTarget.style.background = "#fff"}
+            >
+              <ZoomIn size={14} /> Expand Table
+            </button>
           </div>
-        </div>
 
-        {/* Finding note */}
-        <div style={{ marginTop: 24, background: "#fff", border: "1px solid #bbf7d0", borderRadius: 12, padding: "18px 20px", display: "flex", gap: 14, alignItems: "flex-start", boxShadow: "0 2px 8px rgba(22,163,74,0.05)" }}>
-          <div style={{ width: 36, height: 36, minWidth: 36, borderRadius: 8, background: "#dcfce7", border: "1px solid #86efac", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Info size={16} color="#15803d" />
+          {/* Image Container */}
+          <div
+            onClick={() => setZoom(true)}
+            style={{
+              cursor: "zoom-in",
+              padding: "24px 16px",
+              minHeight: 380,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              background: "#fafafa"
+            }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={activeTable.path}
+              alt={`${activeTable.label} Results Table`}
+              style={{
+                maxWidth: "100%",
+                maxHeight: 520,
+                objectFit: "contain",
+                borderRadius: 8,
+                boxShadow: "0 2px 10px rgba(0,0,0,0.05)"
+              }}
+            />
           </div>
-          <div>
-            <div style={{ fontWeight: 700, color: "#14532d", fontSize: 14, marginBottom: 4 }}>Key Research Finding</div>
-            <p style={{ fontSize: 13, color: "#334155", lineHeight: 1.7 }}>
-              Proprietary models like GPT-4o degrade significantly in dialect accuracy (↓62.4%) on Noakhailla and Chatgaya queries. Performance on physics-correctness audits also drops sharply, revealing that current VLMs struggle to simultaneously ground vision, dialect grammar, and physical constraints.
+
+          {/* Footer Caption */}
+          <div style={{ padding: "16px 20px", borderTop: "1px solid #bbf7d0", background: "#f0fdf4" }}>
+            <p style={{ fontSize: 13, color: "#16a34a", fontWeight: 600, lineHeight: 1.6, margin: 0 }}>
+              {activeTable.caption}
             </p>
           </div>
         </div>
+
+
+
       </div>
+
+      {/* Lightbox / Zoom Modal */}
+      {zoom && (
+        <div
+          onClick={() => setZoom(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 9999,
+            background: "rgba(15,23,42,0.92)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 32
+          }}
+        >
+          <button
+            style={{
+              position: "absolute",
+              top: 20,
+              right: 20,
+              background: "#fff",
+              border: "none",
+              borderRadius: "50%",
+              width: 40,
+              height: 40,
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.15)"
+            }}
+          >
+            <X size={20} color="#0f172a" />
+          </button>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={activeTable.path}
+            alt={`${activeTable.label} Results Table Zoomed`}
+            style={{
+              maxWidth: "95vw",
+              maxHeight: "90vh",
+              objectFit: "contain",
+              borderRadius: 12,
+              boxShadow: "0 25px 60px rgba(0,0,0,0.5)"
+            }}
+          />
+        </div>
+      )}
     </section>
   );
 }

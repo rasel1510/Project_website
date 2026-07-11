@@ -13,7 +13,7 @@ const links = [
   { label: "Abstract", href: "#abstract" },
   { label: "Highlights", href: "#highlights" },
   { label: "Dataset", href: "#dataset" },
-  { label: "Leaderboard", href: "#leaderboard" },
+  { label: "Result", href: "#leaderboard" },
   { label: "Citation", href: "#citation" },
 ];
 
