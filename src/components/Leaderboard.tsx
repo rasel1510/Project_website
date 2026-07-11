@@ -63,8 +63,7 @@ export default function Leaderboard() {
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 16px", borderRadius: 999, background: "#dcfce7", border: "1px solid #86efac", color: "#15803d", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 16 }}>
             <Award size={12} /> Evaluation Results
           </div>
-          <h2 style={{ fontSize: 32, fontWeight: 800, color: "#14532d", marginBottom: 12 }}>Model Leaderboard</h2>
-          <p style={{ fontSize: 15, color: "#475569", lineHeight: 1.7 }}>Benchmarking closed and open-source VLMs on BanglarMukh. Ranked by Overall Accuracy (%).</p>
+          <h2 style={{ fontSize: 32, fontWeight: 800, color: "#14532d", marginBottom: 12 }}>Result Section</h2>
         </div>
 
         {/* Controls */}

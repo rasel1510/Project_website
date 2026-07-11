@@ -46,12 +46,11 @@ export default function Hero() {
         {/* Action buttons */}
         <div style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
           {[
-            { icon: <FileText size={16} />, label: "Download Paper", bg: "linear-gradient(135deg,#15803d,#22c55e)", color: "#fff", shadow: "0 4px 14px rgba(22,163,74,0.3)", href: "#" },
+            { icon: <FileText size={16} />, label: "Paper", bg: "#fff", color: "#1e293b", border: "1px solid #e2e8f0", shadow: "0 1px 4px rgba(0,0,0,0.06)", href: "https://github.com/rasel1510/BanglarMukh" },
             { icon: <GH />, label: "GitHub Code", bg: "#fff", color: "#1e293b", border: "1px solid #e2e8f0", shadow: "0 1px 4px rgba(0,0,0,0.06)", href: "https://github.com/rasel1510/BanglarMukh" },
             { icon: <Database size={16} />, label: "Dataset (HF)", bg: "#fff", color: "#1e293b", border: "1px solid #e2e8f0", shadow: "0 1px 4px rgba(0,0,0,0.06)", href: "#" },
-            { icon: <Play size={15} />, label: "Live Demo", bg: "#f0fdf4", color: "#15803d", border: "1px solid #bbf7d0", shadow: "0 1px 4px rgba(22,163,74,0.08)", href: "#dataset" },
           ].map((b, i) => (
-            <a key={i} href={b.href} style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "12px 22px", borderRadius: 10, background: b.bg, color: b.color, fontWeight: 700, fontSize: 14, border: b.border ?? "none", boxShadow: b.shadow, textDecoration: "none", transition: "transform 0.15s", cursor: "pointer" }}
+            <a key={i} href={b.href} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "12px 22px", borderRadius: 10, background: b.bg, color: b.color, fontWeight: 700, fontSize: 14, border: b.border ?? "none", boxShadow: b.shadow, textDecoration: "none", transition: "transform 0.15s", cursor: "pointer", minWidth: 160 }}
               onMouseEnter={e => (e.currentTarget.style.transform = "translateY(-2px)")}
               onMouseLeave={e => (e.currentTarget.style.transform = "translateY(0)")}
             >{b.icon}{b.label}</a>
