@@ -14,7 +14,7 @@ export default function Abstract() {
   const section: React.CSSProperties = {
     background: "#fff",
     borderTop: "1px solid #dcfce7",
-    padding: "80px 0",
+    padding: "48px 0",
   };
   const inner: React.CSSProperties = {
     maxWidth: 1200, margin: "0 auto", padding: "0 24px",

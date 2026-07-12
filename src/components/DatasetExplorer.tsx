@@ -317,21 +317,114 @@ const getSampleAnnotation = (filename: string, category: string, lang: string) =
 
 const filterGroups = ["All", "Culture & Heritage", "Nature & Wildlife", "Food & Sweets"];
 
-const statsRows = [
-  { name: "Standard Bengali (Rarh)", type: "Native Dialect", artifacts: "5,550" },
-  { name: "Chittagong (Chatgaya)", type: "Native Dialect", artifacts: "5,550" },
-  { name: "Noakhali (Noakhailla)", type: "Native Dialect", artifacts: "5,550" },
-  { name: "Rajshahi (Varendra)", type: "Native Dialect", artifacts: "5,550" },
-  { name: "Sylheti (Sylhety)", type: "Native Dialect", artifacts: "5,550" },
-  { name: "Barishal (Barisaliya)", type: "Native Dialect", artifacts: "5,550" },
-  { name: "6 Intl. Languages (EN,BN,HI,UR,ZH,FR)", type: "Standard Languages", artifacts: "33,308" },
-];
+const domainStats = {
+  headers: [
+    { key: "type", label: "Type", fullName: "Data Type", group: "All" },
+    { key: "att", label: "Att.", fullName: "Attires", group: "Culture & Heritage" },
+    { key: "craf", label: "Craf.", fullName: "Crafts", group: "Culture & Heritage" },
+    { key: "edu", label: "Edu.", fullName: "Educational Institutions", group: "Culture & Heritage" },
+    { key: "fest", label: "Fest.", fullName: "Festivals", group: "Culture & Heritage" },
+    { key: "fish", label: "Fish.", fullName: "Fishes", group: "Nature & Wildlife" },
+    { key: "food", label: "Food", fullName: "Food", group: "Food & Sweets" },
+    { key: "hist", label: "Hist.", fullName: "Historical Places", group: "Culture & Heritage" },
+    { key: "mov", label: "Mov.", fullName: "Movements", group: "Culture & Heritage" },
+    { key: "achv", label: "Achv.", fullName: "National Achievements", group: "Culture & Heritage" },
+    { key: "natb", label: "Nat.B", fullName: "Natural Beauty", group: "Nature & Wildlife" },
+    { key: "pers", label: "Pers.", fullName: "Personalities", group: "Culture & Heritage" },
+    { key: "riv", label: "Riv.", fullName: "Rivers", group: "Nature & Wildlife" },
+    { key: "spo", label: "Spo.", fullName: "Sports", group: "Culture & Heritage" },
+    { key: "swe", label: "Swe.", fullName: "Sweets", group: "Food & Sweets" },
+    { key: "wild", label: "Wild.", fullName: "Wildlife", group: "Nature & Wildlife" },
+    { key: "total", label: "Total", fullName: "Total Sum", group: "All" }
+  ],
+  rows: [
+    {
+      type: "Images",
+      att: { val: "50", formula: "50" },
+      craf: { val: "105", formula: "105" },
+      edu: { val: "100", formula: "100" },
+      fest: { val: "99", formula: "99" },
+      fish: { val: "94", formula: "94" },
+      food: { val: "150", formula: "150" },
+      hist: { val: "92", formula: "92" },
+      mov: { val: "50", formula: "50" },
+      achv: { val: "102", formula: "102" },
+      natb: { val: "128", formula: "128" },
+      pers: { val: "115", formula: "115" },
+      riv: { val: "78", formula: "78" },
+      spo: { val: "66", formula: "66" },
+      swe: { val: "120", formula: "120" },
+      wild: { val: "99", formula: "99" },
+      total: { val: "1,448", formula: "1,448" }
+    },
+    {
+      type: "Captions",
+      att: { val: "750", formula: "15 × 50" },
+      craf: { val: "1,575", formula: "15 × 105" },
+      edu: { val: "1,500", formula: "15 × 100" },
+      fest: { val: "1,485", formula: "15 × 99" },
+      fish: { val: "1,410", formula: "15 × 94" },
+      food: { val: "2,250", formula: "15 × 150" },
+      hist: { val: "1,380", formula: "15 × 92" },
+      mov: { val: "750", formula: "15 × 50" },
+      achv: { val: "1,530", formula: "15 × 102" },
+      natb: { val: "1,920", formula: "15 × 128" },
+      pers: { val: "1,725", formula: "15 × 115" },
+      riv: { val: "1,170", formula: "15 × 78" },
+      spo: { val: "990", formula: "15 × 66" },
+      swe: { val: "1,800", formula: "15 × 120" },
+      wild: { val: "1,485", formula: "15 × 99" },
+      total: { val: "21,720", formula: "21,720" }
+    },
+    {
+      type: "VQA",
+      att: { val: "1,500", formula: "15 × 100" },
+      craf: { val: "3,150", formula: "15 × 210" },
+      edu: { val: "3,000", formula: "15 × 200" },
+      fest: { val: "2,970", formula: "15 × 198" },
+      fish: { val: "2,820", formula: "15 × 188" },
+      food: { val: "4,500", formula: "15 × 300" },
+      hist: { val: "2,760", formula: "15 × 184" },
+      mov: { val: "1,500", formula: "15 × 100" },
+      achv: { val: "3,060", formula: "15 × 204" },
+      natb: { val: "3,840", formula: "15 × 256" },
+      pers: { val: "3,450", formula: "15 × 230" },
+      riv: { val: "2,340", formula: "15 × 156" },
+      spo: { val: "1,980", formula: "15 × 132" },
+      swe: { val: "3,600", formula: "15 × 240" },
+      wild: { val: "2,970", formula: "15 × 198" },
+      total: { val: "43,440", formula: "43,440" }
+    },
+    {
+      type: "Total",
+      att: { val: "2,300", formula: "2,300" },
+      craf: { val: "4,830", formula: "4,830" },
+      edu: { val: "4,600", formula: "4,600" },
+      fest: { val: "4,554", formula: "4,554" },
+      fish: { val: "4,324", formula: "4,324" },
+      food: { val: "6,900", formula: "6,900" },
+      hist: { val: "4,232", formula: "4,232" },
+      mov: { val: "2,300", formula: "2,300" },
+      achv: { val: "4,692", formula: "4,692" },
+      natb: { val: "5,888", formula: "5,888" },
+      pers: { val: "5,290", formula: "5,290" },
+      riv: { val: "3,588", formula: "3,588" },
+      spo: { val: "3,036", formula: "3,036" },
+      swe: { val: "5,520", formula: "5,520" },
+      wild: { val: "4,554", formula: "4,554" },
+      total: { val: "66,608", formula: "66,608" }
+    }
+  ]
+};
 
 export default function DatasetExplorer() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("All");
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [showFormulas, setShowFormulas] = useState(false);
+  const [hoveredCol, setHoveredCol] = useState<string | null>(null);
+  const [hoveredRow, setHoveredRow] = useState<string | null>(null);
 
   // Filtered list based on Search and Tabs
   const filteredImages = sampleImages.filter((img) => {
@@ -374,18 +467,16 @@ export default function DatasetExplorer() {
   };
 
   return (
-    <section id="dataset" style={{ background: "#f8fafc", borderTop: "1px solid #dcfce7", padding: "80px 0" }}>
+    <section id="dataset" style={{ background: "#f8fafc", borderTop: "1px solid #dcfce7", padding: "48px 0" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
 
         {/* Header */}
-        <div style={{ textAlign: "center", maxWidth: 700, margin: "0 auto 48px" }}>
+        <div style={{ textAlign: "center", maxWidth: 700, margin: "0 auto 36px" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 16px", borderRadius: 999, background: "#dcfce7", border: "1px solid #86efac", color: "#15803d", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 16 }}>
             Dataset Samples
           </div>
           <h2 style={{ fontSize: 32, fontWeight: 800, color: "#14532d", marginBottom: 12 }}>Explore BanglarMukh Images</h2>
-          <p style={{ fontSize: 15, color: "#475569", lineHeight: 1.7 }}>
-            Browse sample visual cues traversing 15 culturally grounded domains. These expert-annotated images form the core visual benchmark for testing physics awareness and cultural reasoning in LVLMs.
-          </p>
+
           <div style={{ marginTop: 20 }}>
             <a
               href="https://huggingface.co/datasets/Rasel2091/BanglarMukh/tree/main"
@@ -404,10 +495,10 @@ export default function DatasetExplorer() {
             >
               {/* HuggingFace icon */}
               <svg width="18" height="18" viewBox="0 0 95 88" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M47.5 0C21.267 0 0 19.701 0 44c0 24.3 21.267 44 47.5 44S95 68.3 95 44C95 19.701 73.733 0 47.5 0Z" fill="#FFD21E"/>
-                <path d="M30 34c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="#1a1a1a" strokeWidth="4" strokeLinecap="round"/>
-                <path d="M49 34c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="#1a1a1a" strokeWidth="4" strokeLinecap="round"/>
-                <path d="M24 52c4.5 10 42.5 10 47 0" stroke="#1a1a1a" strokeWidth="4" strokeLinecap="round"/>
+                <path d="M47.5 0C21.267 0 0 19.701 0 44c0 24.3 21.267 44 47.5 44S95 68.3 95 44C95 19.701 73.733 0 47.5 0Z" fill="#FFD21E" />
+                <path d="M30 34c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="#1a1a1a" strokeWidth="4" strokeLinecap="round" />
+                <path d="M49 34c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="#1a1a1a" strokeWidth="4" strokeLinecap="round" />
+                <path d="M24 52c4.5 10 42.5 10 47 0" stroke="#1a1a1a" strokeWidth="4" strokeLinecap="round" />
               </svg>
               View Full Dataset on HuggingFace
             </a>
@@ -547,53 +638,215 @@ export default function DatasetExplorer() {
           </div>
         )}
 
-        {/* Stats table */}
-        <div style={{ marginTop: 56, background: "#fff", border: "1px solid #bbf7d0", borderRadius: 16, overflow: "hidden", boxShadow: "0 2px 12px rgba(22,163,74,0.03)" }}>
-          <div style={{ background: "#f0fdf4", borderBottom: "1px solid #bbf7d0", padding: "16px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-            <div>
-              <h3 style={{ fontSize: 16, fontWeight: 800, color: "#14532d", display: "flex", alignItems: "center", gap: 8 }}>
-                <BarChart2 size={18} color="#15803d" /> Dataset Statistics
-              </h3>
-              <p style={{ fontSize: 12, color: "#16a34a", marginTop: 2 }}>66,608 total artifacts · 1,448 expert images · 15 domains</p>
+        {/* Stats section — premium conference design */}
+        <div style={{ marginTop: 72 }}>
+
+          {/* ── SECTION HEADER ── */}
+          <div style={{ textAlign: "center", marginBottom: 40 }}>
+            <div style={{
+              display: "inline-flex", alignItems: "center", gap: 6,
+              fontSize: 11, fontWeight: 700, letterSpacing: "0.1em",
+              textTransform: "uppercase", color: "#15803d",
+              background: "#f0fdf4", border: "1px solid #bbf7d0",
+              borderRadius: 999, padding: "4px 14px", marginBottom: 12
+            }}>
+              Corpus Overview
             </div>
-            <div style={{ display: "flex", gap: 10 }}>
-              {[["66,608", "Artifacts"], ["1,448", "Images"], ["15", "Domains"]].map(([v, l]) => (
-                <div key={l} style={{ background: "#fff", border: "1px solid #bbf7d0", borderRadius: 10, padding: "10px 16px", textAlign: "center" }}>
-                  <div style={{ fontSize: 18, fontWeight: 900, color: "#15803d" }}>{v}</div>
-                  <div style={{ fontSize: 10, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.05em" }}>{l}</div>
-                </div>
-              ))}
-            </div>
+            <h2 style={{ fontSize: 28, fontWeight: 800, color: "#0f172a", margin: 0 }}>
+              Dataset Partition Statistics
+            </h2>
+            <p style={{ fontSize: 14, color: "#64748b", marginTop: 8, lineHeight: 1.6 }}>
+              15 fine-grained cultural domains · 6 standard languages · 6 native dialects · 4 data types
+            </p>
           </div>
-          <div style={{ overflowX: "auto" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-              <thead>
-                <tr style={{ background: "#f8fffe", borderBottom: "1px solid #dcfce7" }}>
-                  {["Language / Dialect", "Type", "Images", "Artifacts", "Focus"].map(h => (
-                    <th key={h} style={{ padding: "12px 16px", fontWeight: 700, fontSize: 11, textTransform: "uppercase", letterSpacing: "0.06em", color: "#334155", textAlign: h === "Images" || h === "Artifacts" ? "right" : "left" }}>{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {statsRows.map((r, i) => (
-                  <tr key={i} style={{ borderBottom: "1px solid #f0fdf4" }}
-                    onMouseEnter={e => (e.currentTarget.style.background = "#f0fdf4")}
-                    onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-                  >
-                    <td style={{ padding: "12px 16px", fontWeight: 700, color: "#0f172a" }}>{r.name}</td>
-                    <td style={{ padding: "12px 16px" }}>
-                      <span style={{ padding: "3px 10px", borderRadius: 999, background: r.type === "Standard Languages" ? "#f0fdf4" : "#dcfce7", border: `1px solid ${r.type === "Standard Languages" ? "#bbf7d0" : "#86efac"}`, color: "#15803d", fontSize: 11, fontWeight: 700 }}>{r.type}</span>
-                    </td>
-                    <td style={{ padding: "12px 16px", textAlign: "right", fontFamily: "monospace", fontWeight: 700, color: "#334155" }}>1,448</td>
-                    <td style={{ padding: "12px 16px", textAlign: "right", fontFamily: "monospace", fontWeight: 800, color: "#15803d" }}>{r.artifacts}</td>
-                    <td style={{ padding: "12px 16px", color: "#64748b", fontSize: 12 }}>
-                      {r.type === "Native Dialect" ? "Regional phonology, morphology & syntax" : "Global VLM comparison across languages"}
-                    </td>
+
+          {/* ── KPI STRIP ── */}
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))",
+            gap: 16,
+            marginBottom: 36
+          }}>
+            {[
+              { value: "1,448", label: "Expert Images", icon: "🖼️", color: "#6366f1", bg: "#f5f3ff", border: "#e0e7ff" },
+              { value: "21,720", label: "Captions", icon: "💬", color: "#0ea5e9", bg: "#f0f9ff", border: "#bae6fd" },
+              { value: "43,440", label: "VQA Pairs", icon: "❓", color: "#10b981", bg: "#ecfdf5", border: "#a7f3d0" },
+              { value: "66,608", label: "Total Artifacts", icon: "📦", color: "#f59e0b", bg: "#fffbeb", border: "#fde68a" },
+              { value: "15", label: "Domains", icon: "🗂️", color: "#ef4444", bg: "#fef2f2", border: "#fecaca" },
+              { value: "15×", label: "Lang. Expansion", icon: "🌐", color: "#8b5cf6", bg: "#faf5ff", border: "#ddd6fe" },
+            ].map(k => (
+              <div
+                key={k.label}
+                style={{
+                  background: k.bg,
+                  border: `1px solid ${k.border}`,
+                  borderRadius: 14,
+                  padding: "18px 20px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 4
+                }}
+              >
+                <span style={{ fontSize: 22 }}>{k.icon}</span>
+                <span style={{ fontSize: 22, fontWeight: 800, color: k.color, lineHeight: 1.1 }}>{k.value}</span>
+                <span style={{ fontSize: 11, fontWeight: 600, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.05em" }}>{k.label}</span>
+              </div>
+            ))}
+          </div>
+
+
+          {/* ── FULL DATA TABLE ── */}
+          <div style={{
+            background: "#fff",
+            border: "1px solid #e2e8f0",
+            borderRadius: 14,
+            overflow: "hidden",
+            boxShadow: "0 1px 4px rgba(0,0,0,0.04)"
+          }}>
+            {/* Table header bar */}
+            <div style={{
+              padding: "16px 24px",
+              borderBottom: "1px solid #e2e8f0",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: 10
+            }}>
+              <span style={{ fontSize: 13, fontWeight: 700, color: "#0f172a" }}>
+                Complete Partition Breakdown
+              </span>
+              <label style={{ display: "flex", alignItems: "center", gap: 6, cursor: "pointer", fontSize: 12, fontWeight: 500, color: "#64748b" }}>
+                <input
+                  type="checkbox"
+                  checked={showFormulas}
+                  onChange={() => setShowFormulas(!showFormulas)}
+                  style={{ width: 14, height: 14, accentColor: "#16a34a", cursor: "pointer" }}
+                />
+                Show 15× expansion formulas
+              </label>
+            </div>
+
+            <div style={{ overflowX: "auto" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12.5, minWidth: 1020 }}>
+                <thead>
+                  <tr style={{ background: "#f8fafc" }}>
+                    {domainStats.headers.map((h, i) => {
+                      const isTotalCol = h.key === "total";
+                      let thColor = "#6366f1";
+                      if (h.group === "Nature & Wildlife") thColor = "#10b981";
+                      if (h.group === "Food & Sweets") thColor = "#f59e0b";
+
+                      return (
+                        <th
+                          key={h.key}
+                          title={h.fullName}
+                          style={{
+                            padding: i === 0 ? "11px 20px" : "11px 8px",
+                            fontWeight: 700,
+                            fontSize: i === 0 ? 11 : 11,
+                            color: i === 0 ? "#64748b" : (isTotalCol ? "#0f172a" : thColor),
+                            textAlign: i === 0 ? "left" : "center",
+                            letterSpacing: i === 0 ? "0.06em" : "normal",
+                            textTransform: i === 0 ? "uppercase" : "none",
+                            borderBottom: `2px solid ${isTotalCol ? "#0f172a" : "#e2e8f0"}`,
+                            borderLeft: isTotalCol ? "2px solid #e2e8f0" : "none",
+                            background: isTotalCol ? "#f1f5f9" : "transparent",
+                            whiteSpace: "nowrap"
+                          }}
+                        >
+                          {h.label}
+                        </th>
+                      );
+                    })}
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {domainStats.rows.map((row) => {
+                    const isTotalRow = row.type === "Total";
+
+                    const rowConfig: Record<string, { pill: string; pillBg: string; pillColor: string; icon: string }> = {
+                      Images: { pill: "Images", pillBg: "#eff6ff", pillColor: "#3b82f6", icon: "🖼️" },
+                      Captions: { pill: "Captions", pillBg: "#f5f3ff", pillColor: "#8b5cf6", icon: "💬" },
+                      VQA: { pill: "VQA", pillBg: "#ecfdf5", pillColor: "#10b981", icon: "❓" },
+                      Total: { pill: "Total", pillBg: "#fef3c7", pillColor: "#d97706", icon: "📦" },
+                    };
+                    const cfg = rowConfig[row.type] || rowConfig.Images;
+
+                    return (
+                      <tr
+                        key={row.type}
+                        style={{
+                          borderBottom: isTotalRow ? "none" : "1px solid #f1f5f9",
+                          borderTop: isTotalRow ? "2px solid #e2e8f0" : "none",
+                          background: isTotalRow ? "#fafafa" : "transparent",
+                          transition: "background 0.15s"
+                        }}
+                        onMouseEnter={e => { if (!isTotalRow) e.currentTarget.style.background = "#f8fafc"; }}
+                        onMouseLeave={e => { if (!isTotalRow) e.currentTarget.style.background = "transparent"; }}
+                      >
+                        {domainStats.headers.map((h, cIdx) => {
+                          const cellData = row[h.key as keyof typeof row];
+                          const displayVal = h.key === "type"
+                            ? row.type
+                            : (showFormulas
+                              ? (cellData as { formula: string }).formula
+                              : (cellData as { val: string }).val);
+                          const isTotalCol = h.key === "total";
+
+                          if (cIdx === 0) {
+                            return (
+                              <td key={h.key} style={{ padding: "11px 20px", whiteSpace: "nowrap" }}>
+                                <span style={{
+                                  display: "inline-flex", alignItems: "center", gap: 5,
+                                  fontSize: 11.5, fontWeight: 700,
+                                  color: cfg.pillColor,
+                                  background: cfg.pillBg,
+                                  borderRadius: 999,
+                                  padding: "3px 10px 3px 6px",
+                                }}>
+                                  <span style={{ fontSize: 13 }}>{cfg.icon}</span>
+                                  {cfg.pill}
+                                </span>
+                              </td>
+                            );
+                          }
+
+                          return (
+                            <td
+                              key={h.key}
+                              style={{
+                                padding: "11px 8px",
+                                textAlign: "center",
+                                fontFamily: "monospace",
+                                fontWeight: isTotalRow || isTotalCol ? 700 : 400,
+                                color: isTotalCol ? "#0f172a" : (isTotalRow ? "#374151" : "#64748b"),
+                                fontSize: 12,
+                                borderLeft: isTotalCol ? "2px solid #e2e8f0" : "none",
+                                background: isTotalCol ? "#f9fafb" : "transparent",
+                              }}
+                            >
+                              {displayVal}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Footer note */}
+            <div style={{ padding: "14px 24px", borderTop: "1px solid #f1f5f9", background: "#f8fafc" }}>
+              <p style={{ fontSize: 11.5, color: "#94a3b8", margin: 0, lineHeight: 1.6 }}>
+                <strong style={{ color: "#64748b" }}>Note:</strong> The 15× notation indicates expansion across 15 language/dialect classes per base image.
+                {" "}<strong style={{ color: "#64748b" }}>Abbrev.:</strong> Att.=Attires, Craf.=Crafts, Edu.=Educational Inst., Fest.=Festivals, Fish.=Fishes,
+                Hist.=Historical Places, Mov.=Movements, Achv.=Nat. Achievements, Nat.B=Natural Beauty, Pers.=Personalities, Riv.=Rivers, Spo.=Sports, Swe.=Sweets, Wild.=Wildlife.
+              </p>
+            </div>
           </div>
+
         </div>
 
       </div>

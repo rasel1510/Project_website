@@ -61,7 +61,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div style={{ marginTop: 36, paddingTop: 20, borderTop: "1px solid #bbf7d0", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
           <p style={{ fontSize: 12, color: "#64748b", fontWeight: 500 }}>
-            © {new Date().getFullYear()} BanglarMukh · AAAI 2027 Submission · All rights reserved.
+            © {new Date().getFullYear()} BanglarMukh · All rights reserved.
           </p>
           <p style={{ fontSize: 12, color: "#94a3b8", fontWeight: 500 }}>
             CC BY-NC 4.0 License

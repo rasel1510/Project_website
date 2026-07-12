@@ -2,17 +2,15 @@
 import React, { useState } from "react";
 import { Clipboard, Check, Quote } from "lucide-react";
 
-const bib = `@inproceedings{rahman2027banglarmukh,
-  title     = {BanglarMukh: A Physics-Aware Multilingual Multimodal
-               Vision Language Benchmark for Evaluating Cultural
-               and Traditional Grounding},
-  author    = {Rahman, Tasnim and Islam, Md. Rafiqul and
-               Siddiqua, Ayesha and Chowdhury, Animesh and
-               Hasan, Tanvir},
-  booktitle = {Proceedings of the AAAI Conference on
-               Artificial Intelligence (AAAI)},
-  year      = {2027},
-  pages     = {1--15}
+const bib = `@article{rahman2027banglarmukh,
+  title   = {BanglarMukh: A Physics-Aware Multilingual Multimodal
+             Vision Language Benchmark for Evaluating Cultural
+             and Traditional Grounding},
+  author  = {Rahman, Tasnim and Islam, Md. Rafiqul and
+             Siddiqua, Ayesha and Chowdhury, Animesh and
+             Hasan, Tanvir},
+  journal = {arXiv preprint},
+  year    = {2027}
 }`;
 
 export default function BibTeX() {
@@ -25,7 +23,7 @@ export default function BibTeX() {
   };
 
   return (
-    <section id="citation" style={{ background: "#fff", borderTop: "1px solid #dcfce7", padding: "80px 0" }}>
+    <section id="citation" style={{ background: "#fff", borderTop: "1px solid #dcfce7", padding: "48px 0" }}>
       <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
         <div style={{ textAlign: "center", marginBottom: 36 }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 16px", borderRadius: 999, background: "#dcfce7", border: "1px solid #86efac", color: "#15803d", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 16 }}>

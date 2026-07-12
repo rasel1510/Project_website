@@ -5,9 +5,9 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "BanglarMukh – Physics-Aware Multilingual Multimodal VL Benchmark | AAAI 2027",
+  title: "BanglarMukh – Physics-Aware Multilingual Multimodal VL Benchmark",
   description:
-    "BanglarMukh: A culturally and traditionally rooted benchmark for evaluating Large Vision Language Models on Bangladeshi tradition, dialects, and physics-aware reasoning. AAAI 2027.",
+    "BanglarMukh: A culturally and traditionally rooted benchmark for evaluating Large Vision Language Models on Bangladeshi tradition, dialects, and physics-aware reasoning.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
