@@ -29,10 +29,9 @@ export default function Abstract() {
 
         {/* Left – Text */}
         <div>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#15803d", marginBottom: 12 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 18, fontWeight: 700, letterSpacing: "0.08em", color: "#15803d", marginBottom: 12 }}>
             <BookOpen size={14} /> Abstract
           </div>
-          <h2 style={{ fontSize: 32, fontWeight: 800, color: "#14532d", marginBottom: 24, lineHeight: 1.2 }}>Overview</h2>
 
           <div>
             <p style={{ fontSize: 15, color: "#334155", lineHeight: 1.85, textAlign: "justify" }}>
@@ -41,13 +40,13 @@ export default function Abstract() {
           </div>
 
           {/* Stats */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 28 }}>
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 10, marginTop: 28 }}>
             {[
-              { v: "1,448", l: "Images", c: "#15803d" },
+              { v: "66,608", l: "Artifacts", c: "#15803d" },
               { v: "15", l: "Domains", c: "#15803d" },
               { v: "6", l: "Languages", c: "#15803d" },
               { v: "6", l: "Dialects", c: "#15803d" },
-              { v: "66,608", l: "Artifacts", c: "#15803d" },
+
             ].map(s => (
               <div key={s.l} style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 10, padding: "12px 18px", minWidth: 80, textAlign: "center" }}>
                 <div style={{ fontSize: 20, fontWeight: 900, color: s.c, lineHeight: 1 }}>{s.v}</div>
@@ -61,7 +60,7 @@ export default function Abstract() {
         <div>
           <div style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 16, overflow: "hidden" }}>
             <div style={{ background: "#dcfce7", borderBottom: "1px solid #bbf7d0", padding: "12px 18px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span style={{ fontSize: 13, fontWeight: 700, color: "#14532d" }}>Figure 1 — Methodology Overview</span>
+              <span style={{ fontSize: 18, fontWeight: 700, color: "#14532d" }}> Methodology Overview</span>
               <button onClick={() => setZoom(true)} style={{ display: "flex", alignItems: "center", gap: 6, padding: "6px 12px", background: "#fff", border: "1px solid #86efac", borderRadius: 8, cursor: "pointer", fontSize: 12, fontWeight: 600, color: "#15803d" }}>
                 <ZoomIn size={13} /> Expand
               </button>
@@ -72,11 +71,7 @@ export default function Abstract() {
                 onError={e => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
               />
             </div>
-            <div style={{ padding: "12px 18px", borderTop: "1px solid #bbf7d0", background: "#f0fdf4" }}>
-              <p style={{ fontSize: 12, color: "#16a34a", fontWeight: 500, lineHeight: 1.6 }}>
-                Pipeline: Image ingestion → Physics validation → Native dialect annotation → VQA generation → Cross-dialect translation verification.
-              </p>
-            </div>
+
           </div>
         </div>
       </div>
