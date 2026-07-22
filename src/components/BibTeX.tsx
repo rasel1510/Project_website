@@ -2,13 +2,13 @@
 import React, { useState } from "react";
 import { Clipboard, Check, Quote } from "lucide-react";
 
-const bib = `@article{rahman2027banglarmukh,
+const bib = `@article{ahmed2027banglarmukh,
   title   = {BanglarMukh: A Physics-Aware Multilingual Multimodal
              Vision Language Benchmark for Evaluating Cultural
              and Traditional Grounding},
-  author  = {Rahman, Tasnim and Islam, Md. Rafiqul and
-             Siddiqua, Ayesha and Chowdhury, Animesh and
-             Hasan, Tanvir},
+  author  = {Ahmed, Mohammad Rasel and Saha, Dip Kumar and
+             Morol, Md. Kishor and Hosain, Md Tanzib and
+             Fahad, Nafiz},
   journal = {arXiv preprint},
   year    = {2027}
 }`;

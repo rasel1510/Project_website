@@ -10,9 +10,11 @@ const GH = () => (
 );
 
 const authors = [
-  { name: "Mohammad Rasel Ahmed", affils: ["Elite Research Lab", "NYC USA"] },
-  { name: "Dip Kumar Saha", affils: ["Elite Research Lab", "Stamford University Bangladesh"] },
-  { name: "Md. Kishor Morol", affils: ["Elite Research Lab", "Cornell University USA"] },
+  { name: "Mohammad Rasel Ahmed", affils: ["Elite Research Lab, NY, USA", "Stamford University Bangladesh"], corresponding: false },
+  { name: "Dip Kumar Saha", affils: ["Elite Research Lab, NY, USA", "Stamford University Bangladesh"], corresponding: true },
+  { name: "Md. Kishor Morol", affils: ["Elite Research Lab, NY, USA", "Cornell University, NY, USA"], corresponding: true },
+  { name: "Md Tanzib Hosain", affils: ["Elite Research Lab, NY, USA", "American International University-Bangladesh"], corresponding: true },
+  { name: "Nafiz Fahad", affils: ["Elite Research Lab, NY, USA", "Multimedia University, Melaka, Malaysia"], corresponding: true },
 ];
 
 
@@ -31,7 +33,7 @@ export default function Hero() {
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "18px 52px", marginBottom: 40 }}>
           {authors.map((auth, i) => (
             <div key={i} style={{ textAlign: "center", minWidth: 200 }}>
-              <div style={{ fontSize: 16, fontWeight: 700, color: "#0f172a", marginBottom: 4 }}>{auth.name}</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: "#0f172a", marginBottom: 4 }}>{auth.name}{auth.corresponding && <span style={{ color: "#16a34a" }}>*</span>}</div>
               {auth.affils.map((aff, idx) => (
                 <div key={idx} style={{ fontSize: 13, color: "#16a34a", fontWeight: 600, maxWidth: 280, marginLeft: "auto", marginRight: "auto", lineHeight: 1.4 }}>{aff}</div>
               ))}

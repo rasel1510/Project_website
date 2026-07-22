@@ -5,7 +5,7 @@ import { Search, X, ChevronLeft, ChevronRight, Download, Maximize2, BarChart2, F
 // List of all 16 sample images with their categories and descriptions
 const sampleImages = [
   { file: "achievements_102.png", category: "Achievements", group: "Culture & Heritage", desc: "মিঠাপানির মৎস্য ও অভ্যন্তরীণ বদ্ধ জলাশয় চাষে বিশ্বে বাংলাদেশের শীর্ষস্থানীয় নেতৃত্বের গৌরব।" },
-  { file: "attire_002.jpg", category: "Attire", group: "Culture & Heritage", desc: "Traditional Bangladeshi attire detailing fine fabric textures and regional clothing styles." },
+  { file: "attire_002.jpg", category: "Attire", group: "Culture & Heritage", desc: "জমকালো কাজ করা একটি চমৎকার জামদানি শাড়ি, যা আভিজাত্যের প্রতীক।" },
   { file: "crafts_115.png", category: "Crafts", group: "Culture & Heritage", desc: "Intricate local craftsmanship, showing hand-made artifacts from rural parts of Bangladesh." },
   { file: "education_096.png", category: "Education", group: "Culture & Heritage", desc: "Visual cues capturing classroom settings, educational materials, and school life in Bangladesh." },
   { file: "festival_039.png", category: "Festival", group: "Culture & Heritage", desc: "Vibrant moments from traditional festivals, showing cultural celebrations and community gatherings." },
@@ -26,6 +26,7 @@ const languagesList = [
   "English",
   "Pure Bangla",
   "Hindi",
+  "Urdu",
   "French",
   "Chinese",
   "Chittagong dialects",
@@ -42,19 +43,27 @@ const imageDetails: Record<string, {
 }> = {
   "achievements_102.png": {
     eng: {
-      caption: "মিঠাপানির মৎস্য ও অভ্যন্তরীণ বদ্ধ জলাশয় চাষে বিশ্বে বাংলাদেশের শীর্ষস্থানীয় নেতৃত্বের গৌরব।",
-      q: "মিঠাপানির মুক্ত জলাশয় ও অভ্যন্তরীণ আবদ্ধ মৎস্য চাষে বাংলাদেশ বর্তমানে বিশ্বে কোন অনন্য সাফল্য অর্জন করেছে?\n- শততম স্থান\n- বিশ্বের অন্যতম শীর্ষস্থানীয় মাছ উৎপাদনকারী দেশের গৌরব\n- সম্পূর্ণরূপে মৎস্যশূন্যতা\n- শুধুমাত্র সামুদ্রিক মাছের ওপর নির্ভরতা",
-      a: "বিশ্বের অন্যতম শীর্ষস্থানীয় মাছ উৎপাদনকারী দেশের গৌরব"
+      caption: "Glory of Bangladesh's world-leading position in freshwater fisheries and inland closed-water aquaculture.",
+      q: "What unique achievement has Bangladesh currently attained globally in freshwater open waters and inland closed fish farming?\na. 100th position   b. Complete absence of fisheries   c. Reliance solely on marine fish   d. Glory of being one of the world's leading fish producing countries",
+      a: "Answer (d) Glory of being one of the world's leading fish producing countries"
     },
     bng: {
       caption: "মিঠাপানির মৎস্য ও অভ্যন্তরীণ বদ্ধ জলাশয় চাষে বিশ্বে বাংলাদেশের শীর্ষস্থানীয় নেতৃত্বের গৌরব।",
-      q: "মিঠাপানির মুক্ত জলাশয় ও অভ্যন্তরীণ আবদ্ধ মৎস্য চাষে বাংলাদেশ বর্তমানে বিশ্বে কোন অনন্য সাফল্য অর্জন করেছে?\n- শততম স্থান\n- বিশ্বের অন্যতম শীর্ষস্থানীয় মাছ উৎপাদনকারী দেশের গৌরব\n- সম্পূর্ণরূপে মৎস্যশূন্যতা\n- শুধুমাত্র সামুদ্রিক মাছের ওপর নির্ভরতা",
-      a: "বিশ্বের অন্যতম শীর্ষস্থানীয় মাছ উৎপাদনকারী দেশের গৌরব"
+      q: "মিঠাপানির মুক্ত জলাশয় ও অভ্যন্তরীণ আবদ্ধ মৎস্য চাষে বাংলাদেশ বর্তমানে বিশ্বে কোন অনন্য সাফল্য অর্জন করেছে?\na. শততম স্থান   b. সম্পূর্ণরূপে মৎস্যশূন্যতা   c. শুধুমাত্র সামুদ্রিক মাছের ওপর নির্ভরতা   d. বিশ্বের অন্যতম শীর্ষস্থানীয় মাছ উৎপাদনকারী দেশের গৌরব",
+      a: "Answer (d) বিশ্বের অন্যতম শীর্ষস্থানীয় মাছ উৎপাদনকারী দেশের গৌরব"
     }
   },
   "attire_002.jpg": {
-    eng: { caption: "Traditional Bengali woman wearing a finely draped cotton saree.", q: "Which forces stabilize the folds of the draped saree?", a: "Friction between fabric layers and gravitational pull." },
-    bng: { caption: "ঐতিহ্যবাহী সুতি শাড়ি পরিহিত বাঙালি নারী।", q: "শাড়ির কুঁচি ও ভাঁজ কোন বলের কারণে স্থির থাকে?", a: "কাপড়ের স্তরের মধ্যকার ঘর্ষণ বল এবং অভিকর্ষ বলের কারণে।" }
+    eng: {
+      caption: "A gorgeously crafted exquisite Jamdani saree, a symbol of aristocracy.",
+      q: "Which exquisite saree in the image is a symbol of aristocracy?\na. Tangail Saree   b. Jamdani Saree   c. Cotton Saree   d. Benarasi Saree",
+      a: "Answer (b) Jamdani Saree"
+    },
+    bng: {
+      caption: "জমকালো কাজ করা একটি চমৎকার জামদানি শাড়ি, যা আভিজাত্যের প্রতীক।",
+      q: "আভিজাত্যের প্রতীক হিসেবে ছবিতে কোন চমৎকার শাড়িটি রয়েছে?\na. টাঙ্গাইল শাড়ি   b. জামদানি শাড়ি   c. সুতির শাড়ি   d. বেনারসি শাড়ি",
+      a: "Answer (b) জামদানি শাড়ি"
+    }
   },
   "crafts_115.png": {
     eng: { caption: "Artisans crafting porous clay pottery using a traditional potter wheel.", q: "Why does hot food cool faster on clay plates?", a: "Evaporative cooling through micro-pores of clay." },
@@ -100,42 +109,44 @@ const imageDetails: Record<string, {
     eng: { caption: "Fishermen casting traditional nets from wooden boats at dusk.", q: "What type of traditional fishing net is used here?", a: "Cast net (Jhaki Jal)." },
     bng: { caption: "নদীর পানিতে ঐতিহ্যবাহী ঝাঁকি জাল ফেলছেন জেলেরা।", q: "মাছ ধরার জন্য কোন জাল ব্যবহার করা হচ্ছে?", a: "ঝাঁকি বা ক্ষ্যাপলা জাল।" }
   },
-    "sports_019.png": {
-      eng: { caption: "Youth playing Kabaddi in a dusty rural playground under daylight.", q: "What is the national sport of Bangladesh displayed here?", a: "Kabaddi (Hadudu), requiring breath control and tag team runs." },
-      bng: { caption: "গ্রামের ধূলিময় মাঠে কাবাডি বা হাডুডু খেলছে একদল তরুণ।", q: "ছবিতে প্রদর্শিত বাংলাদেশের জাতীয় খেলাটির নাম কী?", a: "কাবাডি (হাডুডু), যা দম ধরে রেখে খেলতে হয়।" }
-    },
-    "sweet_011.png": {
-      eng: { caption: "Traditional round syrupy sweets (Rosogolla) served in a clay pot.", q: "What is the primary dairy base used to prepare Bengali sweets?", a: "Chhena (fresh curdled milk solids) kneaded with sugar syrup." },
-      bng: { caption: "মাটির পাত্রে রসগোল্লা মিষ্টি সাজানো।", q: "বাঙালি মিষ্টি তৈরির মূল উপাদান কোনটি?", a: "দুধ ছানা ও চিনির সিরা।" }
-    },
-    "wildlife_087.jpg": {
-      eng: { caption: "Royal Bengal Tiger walking silently through Sundarbans mangroves.", q: "What unique ecosystem supports the Bengal Tiger in Bangladesh?", a: "The Sundarbans, the world's largest halophytic mangrove forest." },
-      bng: { caption: "সুন্দরবনের শ্বাসমূল বনের মধ্য দিয়ে হেঁটে যাচ্ছে রয়েল বেঙ্গল টাইগার।", q: "রয়েল বেঙ্গল টাইগারের প্রাকৃতিক বাসস্থল সুন্দরবন কোন ধরণের বন?", a: "বিশ্বের বৃহত্তম জোয়ার-ভাটার ম্যানগ্রোভ বন।" }
-    }
-  };
+  "sports_019.png": {
+    eng: { caption: "Youth playing Kabaddi in a dusty rural playground under daylight.", q: "What is the national sport of Bangladesh displayed here?", a: "Kabaddi (Hadudu), requiring breath control and tag team runs." },
+    bng: { caption: "গ্রামের ধূলিময় মাঠে কাবাডি বা হাডুডু খেলছে একদল তরুণ।", q: "ছবিতে প্রদর্শিত বাংলাদেশের জাতীয় খেলাটির নাম কী?", a: "কাবাডি (হাডুডু), যা দম ধরে রেখে খেলতে হয়।" }
+  },
+  "sweet_011.png": {
+    eng: { caption: "Traditional round syrupy sweets (Rosogolla) served in a clay pot.", q: "What is the primary dairy base used to prepare Bengali sweets?", a: "Chhena (fresh curdled milk solids) kneaded with sugar syrup." },
+    bng: { caption: "মাটির পাত্রে রসগোল্লা মিষ্টি সাজানো।", q: "বাঙালি মিষ্টি তৈরির মূল উপাদান কোনটি?", a: "দুধ ছানা ও চিনির সিরা।" }
+  },
+  "wildlife_087.jpg": {
+    eng: { caption: "Royal Bengal Tiger walking silently through Sundarbans mangroves.", q: "What unique ecosystem supports the Bengal Tiger in Bangladesh?", a: "The Sundarbans, the world's largest halophytic mangrove forest." },
+    bng: { caption: "সুন্দরবনের শ্বাসমূল বনের মধ্য দিয়ে হেঁটে যাচ্ছে রয়েল বেঙ্গল টাইগার।", q: "রয়েল বেঙ্গল টাইগারের প্রাকৃতিক বাসস্থল সুন্দরবন কোন ধরণের বন?", a: "বিশ্বের বৃহত্তম জোয়ার-ভাটার ম্যানগ্রোভ বন।" }
+  }
+};
 
-  const dialectTranslations: Record<string, Record< string, { caption: string; q: string; a: string }>> = {
+const dialectTranslations: Record<string, Record<string, { caption: string; q: string; a: string }>> = {
   "achievements_102.png": {
-    "Hindi": { caption: "बांग्लादेश की ऐतिहासिक उपलब्धियों को दर्शाने वाला राष्ट्रीय स्मारक।", q: "इस स्मारक का ऐतिहासिक महत्व क्या है?", a: "यह स्वतंत्रता संग्राम के शहीदों की याद में बनाया गया है।" },
-    "French": { caption: "Monument national soulignant les réalisations historiques du Bangladesh.", q: "Quelle est la signification historique de ce monument?", a: "Il commémore le sacrifice des martyrs dans la lutte pour l'indépendance." },
-    "Chinese": { caption: "展示孟加拉国历史成就的国家纪念碑。", q: "这座纪念碑有什么历史意义？", a: "它是为了纪念在独立斗争中牺牲的烈士。" },
-    "Chittagong dialects": { caption: "বাংলাদেশর ঐতিহাসিক অর্জনসমূহর নিশানি অইলদে এই জাতীয় স্মৃতিসৌধ।", q: "স্মৃতিসৌধইবার ঐতিহাসিক গুরুত্ব কিয়ল্লা?", a: "ইবা স্বাধীনতা যূদ্ধত শহীদ অউয়্যা বীরর স্মরণত বানাইয়ে।" },
-    "Rajshahi": { caption: "বাংলাদেশ লিয়ার ঐতিহাসিক অর্জন দেখানোর জাতীয় স্মৃতিসৌধ লয়।", q: "স্মৃতিসৌধ লিয়ার ঐতিহাসিক গুরুত্ব কা?", a: "ইটা স্বাধীনতা লিয়াত শহীদ হওয়া মানুষের মনে রাখার ল্যাগা তৈরি করা হইচে।" },
-    "Barisal": { caption: "গোটা দেশের ঐতিহাসিক অর্জন দেহানের লাইগ্যা এই জাতীয় স্মৃতিসৌধ তৈরি করা অইচে।", q: "এই স্মৃতিসৌধটার ঐতিহাসিক কারণডা কী কন তো?", a: "স্বাধীনতা যুদ্ধে যারা শহীদ অইছে হ্যালার স্মরণে এই স্মৃতিসৌধ বানাইছে।" },
-    "Noakhali": { caption: "বাংলাদেশর ঐতিহাসিক অর্জন দেখানের ল্যায় এই জাতীয় স্মৃতিসৌধ জেনো খাড়া রইচে।", q: "এই স্মৃতিসৌধিয়ার ঐতিহাসিক গুরুত্ব কী হোলা?", a: "ইগ্যা স্বাধীনতা যুদ্ধে শহীদ অওনিয়াগো স্মরণে বানাইছে।" },
-    "Rangpur": { caption: "বাংলাদেশর ঐতিহাসিক অর্জনগুলা দেখপার জইন্য এই জাতীয় স্মৃতিসৌধ।", q: "এই স্মৃতিসৌধটার ঐতিহাসিক গুরুত্ব কী বাহে?", a: "ইলা স্বাধীনতা যুদ্ধে শহীদ হওনিয়া মাইনষের স্মরণে বানাইছে।" },
-    "Sylhet": { caption: "বাংলাদেশর ঐতিহাসিক অর্জন দেখাইবার লাগি অউ জাতীয় স্মৃতিসৌধ খাড়া করা ওইছে।", q: "স্মৃতিসৌধটার ঐতিহাসিক গুরুত্ব কিতা ওবা?", a: "ইতা স্বাধীনতা যুদ্ধত শহীদ অউয়াহাইনতোর স্মরণে বানাইল ওইছে।" }
+    "Hindi": { caption: "मीठे पानी की मत्स्य पालन और आंतरिक बंद जल निकायों की खेती में विश्व में बांग्लादेश के शीर्ष नेतृत्व का गौरव।", q: "मीठे पानी के खुले जल निकायों और आंतरिक बंद मत्स्य पालन में बांग्लादेश ने वर्तमान में दुनिया में क्या अनूठी उपलब्धि हासिल की है?\na. 100वां स्थान   b. पूरी तरह से मछली की कमी   c. केवल समुद्री मछली पर निर्भरता   d. दुनिया के शीर्ष मछली उत्पादक देशों में से एक होने का गौरव", a: "Answer (d) दुनिया के शीर्ष मछली उत्पादक देशों में से एक होने का गौरव" },
+    "Urdu": { caption: "میٹھے پانی کی ماہی گیری اور اندرونی بند آبی ذخائر کی کاشت میں دنیا بھر میں بنگلہ دیش کی اولین قیادت کا فخر۔", q: "بنگلہ دیش نے حال ہی میں میٹھے پانی کی ماہی گیری اور اندرونی بند آبی ذخائر کی کاشت میں دنیا بھر میں کون سی منفرد کامیابی حاصل کی ہے؟\na. 100ویں پوزیشن   b. ماہی گیری کا مکمل خاتمہ   c. صرف سمندری مچھلیوں پر انحصار   d. دنیا کے سرفہرست مچھلی پیدا کرنے والے ممالک میں شامل ہونے کا فخر", a: "Answer (d) دنیا کے سرفہرست مچھلی پیدا کرنے والے ممالک میں شامل ہونے کا فخر" },
+    "French": { caption: "Fierté du leadership mondial du Bangladesh dans la pêche en eau douce et l'aquaculture intérieure en milieu fermé.", q: "Quelle réussite unique le Bangladesh a-t-il obtenue à l'échelle mondiale dans la pêche en eau douce et l'aquaculture fermée ?\na. 100ème position   b. Absence totale de ressources halieutiques   c. Dépendance exclusive au poisson marin   d. La fierté d'être l'un des principaux pays producteurs de poisson au monde", a: "Answer (d) La fierté d'être l'un des principaux pays producteurs de poisson au monde" },
+    "Chinese": { caption: "孟加拉国在淡水渔业和内陆封闭水域养殖方面展现出全球领先地位的自豪与荣光。", q: "孟加拉国目前在淡水开放水域和内陆封闭式水产养殖方面取得了全球什么独一无二的成就？\na. 第100位   b. 完全没有鱼类资源   c. 仅依赖海洋鱼类   d. 成为全球主要产鱼国之一的荣光", a: "Answer (d) 成为全球主要产鱼国之一的荣光" },
+    "Chittagong dialects": { caption: "মিঠাপানির মাছ আর ঘরের ভিতরের আবদ্ধ পুহুরত মাছ চাষত সারা দিয়াইত বাংলাদেশর পয়লা নম্বর নেতৃত্বের গৌরব।", q: "মিঠাপানির খোলা জলাশয় আর ভিতরের আবদ্ধ মাছ চাষত বাংলাদেশ বর্তমানত দুনিয়াত কোন অনন্য সাফল্য অর্জন গরগেই?\na. ১০০ নম্বর স্থান   b. একদম মাছ না থাকা   c. খালি সাগরের মাছর ওপর নির্ভরতা   d. সারা দুনিয়ার অন্যতম শীর্ষ মাছ উৎপাদনকারী দেশের গৌরব", a: "Answer (d) সারা দুনিয়ার অন্যতম শীর্ষ মাছ উৎপাদনকারী দেশের গৌরব" },
+    "Rajshahi": { caption: "মিঠাপানির মাছ আর ভিতরের আবদ্ধ জলাশয়ে মাছ চাষে দুনিয়াত বাংলাদেশের শীর্ষ নেতৃত্বের গৌরব।", q: "মিঠাপানির খোলা জলাশয় আর ভিতরের আবদ্ধ মাছ চাষে বাংলাদেশ বর্তমানে দুনিয়াত কোন অনন্য সাফল্য অর্জন করচে?\na. ১০০তম স্থান   b. একবারে মাছ না থাকা   c. খালি সাগরের মাছের ওপরে নির্ভরতা   d. দুনিয়ার অন্যতম প্রধান মাছ উৎপাদনকারী দেশের গৌরব", a: "Answer (d) দুনিয়ার অন্যতম প্রধান মাছ উৎপাদনকারী দেশের গৌরব" },
+    "Barisal": { caption: "মিঠাপানির মাছ আর ভিতরের আটকানো জলাশয়ে মাছ চাষে তামাম দুনিয়ায় বাংলাদেশের প্রথম সারির নেতৃত্বের গৌরব।", q: "মিঠাপানির খোলা জলাশয় আর ভিতরের আবদ্ধ মাছ চাষে বাংলাদেশ এহন দুনিয়ায় কোন অনন্য সাফল্য অর্জন হরছে?\na. ১০০ নম্বর স্থান   b. এক্কারে মাছ না থাকা   c. কেবল হাগরের মাছের উপর নির্ভরতা   d. গোটা দুনিয়ার অন্যতম প্রধান মাছ উৎপাদনকারী দেশের গৌরব", a: "Answer (d) গোটা দুনিয়ার অন্যতম প্রধান মাছ উৎপাদনকারী দেশের গৌরব" },
+    "Noakhali": { caption: "মিঠাপানির মাছ আর ভিতরের আবদ্ধ জলাশয়ে মাছ চাষে দুনিয়াত বাংলাদেশর একদম উপরে থাহনের গৌরব।", q: "মিঠাপানির খোলা জলায়শয় আর ভিতরের আবদ্ধ মাছ চাষে বাংলাদেশ বর্তমানে দুনিয়াত কোন অনন্য সাফল্য পাইছে?\na. ১০০ নম্বর স্থান   b. একবারে মাছ না থাহন   c. খালি হাগরের মাছের ওপর নির্ভরতা   d. সারা দুনিয়ার অন্যতম শীর্ষ মাছ উৎপাদনকারী দেশের গৌরব", a: "Answer (d) সারা দুনিয়ার অন্যতম শীর্ষ মাছ উৎপাদনকারী দেশের গৌরব" },
+    "Rangpur": { caption: "মিঠাপানির মাছ আর ভিতরের বদ্ধ জলাশয়ত মাছ চাষত সারা দুনিয়াত বাংলাদেশের উপরালা নেতৃত্বের গৌরব।", q: "মিঠাপানির খোলা জলাশয় আর ভিতরের আবদ্ধ মাছ চাষত বাংলাদেশ বর্তমানত দুনিয়াত কোন্ অনন্য সাফল্য অর্জন করচে বাহে?\na. ১০০তম স্থান   b. এলাবারে মাছ না থাকা   c. সউগ সমায় সাগরের মাছের ওপর নির্ভরতা   d. সারা দুনিয়ার অন্যতম উপরালা মাছ উৎপাদনকারী দেশের গৌরব", a: "Answer (d) সারা দুনিয়ার অন্যতম উপরালা মাছ উৎপাদনকারী দেশের গৌরব" },
+    "Sylhet": { caption: "মিঠাপানির মাছ আর ভিতরের বদ্ধ জলাশয়ত মাছ চাষাত সারা দুনিয়াত বাংলাদেশর পয়লা নম্বর নেতৃত্বের গৌরব।", q: "মিঠাপানির খোলা জলাশয় আর ভিতরের আবদ্ধ মাছ চাষাত বাংলাদেশ বর্তমানে দুনিয়াত কুন অনন্য সাফল্য অর্জন করসে ওবা?\na. ১০০ নম্বর স্থান   b. নিছক মাছ না থাকা   c. খালি সাগরের মাছর উপরে নির্ভরতা   d. সারা দুনিয়ার অন্যতম প্রধান মাছ উৎপাদনকারী দেশের গৌরব", a: "Answer (d) সারা দুনিয়ার অন্যতম প্রধান মাছ উৎপাদনকারী দেশের গৌরব" }
   },
   "attire_002.jpg": {
-    "Hindi": { caption: "बारीक सूती साड़ी पहने पारंपरिक बंगाली महिला।", q: "साड़ी की सिलवटों को कौन से बल स्थिर रखते हैं?", a: "कपड़े की परतों के बीच घर्षण और गुरुत्वाकर्षण बल।" },
-    "French": { caption: "Femme bengalie traditionnelle portant un sari en coton finement drapé.", q: "Quelles forces stabilisent les plis du sari drapé?", a: "Le frottement entre les couches de tissu et la force gravitationnelle." },
-    "Chinese": { caption: "穿着精美棉纱丽的传统孟加拉女性。", q: "哪些力稳定了纱丽的折叠和褶皱？", a: "织物层之间的摩擦力和重力拉力。" },
-    "Chittagong dialects": { caption: "ঐতিহ্যবাহী সুতি শাড়ি পিন্দ্যা বাঙ্গালি মেয়া।", q: "শাড়ির কুঁচি আর ভাজ কোন্ বলের কারণে ঝুলে থাকে?", a: "কাপড়ের ভিতরের ঘর্ষণ বল আর অভিকর্ষ বলের কারণে।" },
-    "Rajshahi": { caption: "ঐতিহ্যবাহী সুতি শাড়ি পিন্ধা বঙ্গেলা বেটিছ্যালা।", q: "শাড়ির ভাঁজ আর কুঁচি কোন শক্তির লিগা টেকে?", a: "কাপড়ের ঘষাঘষি বল আর অভিকর্ষ বলের লিগা।" },
-    "Barisal": { caption: "ঐতিহ্যবাহী সুতি শাড়ি পিন্ধা একখান বাঙালি মাইয়া মানুষ।", q: "শাড়ির ভাজ আর কুঁচি কোন বলের কারণে স্থির থাকে গো?", a: "শাড়ির কাপড়ের ঘর্ষণ বল আর অভিকর্ষ বলের কারণে।" },
-    "Noakhali": { caption: "ঐতিহ্যবাহী সুতি হাড়ি পরিহিতা অনিন্দ্য বাঙালি মাইয়া।", q: "ঐ শাড়ির ভাঁজ আর কুঁচি কোন বলের কারণে ঝুলে থাকে?", a: "ঘর্ষণ বল এবং অভিকর্ষ বলের কারণে।" },
-    "Rangpur": { caption: "ঐতিহ্যবাহী suতি শাড়ি পিন্ধা বাঙালি বেটিছাওয়া।", q: "শাড়ির ভাঁজ আর কুঁচি কোন্ বলের জইন্য টেকে?", a: "কাপড়ের ঘর্ষণ বল আর অভিকর্ষ বলের জইন্য।" },
-    "Sylhet": { caption: "ঐতিহ্যবাহী সুতি শাড়ি পিন্ধা এক বাঙালি বেটি।", q: "শাড়ির ভাঁজ আর কুঁচি কুন বলের লাগি টিকি থাকে?", a: "কাপড়ের ঘর্ষণ বল আর অভিকর্ষ বলের লাগি।" }
+    "Hindi": { caption: "शानदार ढंग से तैयार की गई एक उत्कृष्ट जामदानी साड़ी, जो अभिजात वर्ग का प्रतीक है।", q: "चित्र में कौन सी उत्कृष्ट साड़ी अभिजात वर्ग का प्रतीक है?\na. टांगैल साड़ी   b. जामदानी साड़ी   c. सूती साड़ी   d. बनारसी साड़ी", a: "Answer (b) जामदानी साड़ी" },
+    "Urdu": { caption: "نفیس طریقے سے تیار کی گئی ایک خوبصورت جمدانی ساڑی، جو شرافت اور امارت کی علامت ہے۔", q: "تصویر میں نظر آنے والی کون سی خوبصورت ساڑی شرافت اور امارت کی علامت ہے؟\na. تانگیل ساڑی   b. جمدانی ساڑی   c. سوتی ساڑی   d. بنارسی ساڑی", a: "Answer (b) جمدانی ساڑی" },
+    "French": { caption: "Un magnifique sari Jamdani finement travaillé, symbole d'aristocratie.", q: "Quel sari exquis dans l'image est un symbole d'aristocratie ?\na. Sari Tangail   b. Sari Jamdani   c. Sari en coton   d. Sari Benarasi", a: "Answer (b) Sari Jamdani" },
+    "Chinese": { caption: "一件工艺精湛的华丽吉姆达尼纱丽，是高贵与雅致的象征。", q: "图中哪件精美的纱丽是高贵与雅致的象征？\na. 坦盖尔纱丽   b. 吉姆达尼纱丽   c. 棉纱丽   d. 贝拿勒斯纱丽", a: "Answer (b) 吉姆达尼纱丽" },
+    "Chittagong dialects": { caption: "জমকালো কাম গরা এক্কান চমৎকার জামদানি শাড়ি, যেবা আভিজাত্যর প্রতীক।", q: "আভিজাত্যর প্রতীক হিসেবে ছবিদ্দে কোন্ চমৎকার হাড়িড্যা আছে?\na. টাঙ্গাইল শাড়ি   b. জামদানি শাড়ি   c. সুতির শাড়ি   d. বেনারসি শাড়ি", a: "Answer (b) জামদানি শাড়ি" },
+    "Rajshahi": { caption: "জমকালো কাম করা একটা খাসা জামদানি শাড়ি, যেটা আভিজাত্যের প্রতীক।", q: "আভিজাত্যের প্রতীক হিসেবে ছবিতে কোন চমৎকার শাড়িটা আছে?\na. টাঙ্গাইল শাড়ি   b. জামদানি শাড়ি   c. সুতির শাড়ি   d. বেনারসি শাড়ি", a: "Answer (b) জামদানি শাড়ি" },
+    "Barisal": { caption: "জমকালো কাম হরা একখান চমৎকার জামদানি শাড়ি, যা আভিজাত্যের প্রতীক।", q: "আভিজাত্যের প্রতীক হিসেবে ছবিতে কোন চমৎকার শাড়িডা আছে গো?\na. টাঙ্গাইল শাড়ি   b. জামদানি শাড়ি   c. সুতির শাড়ি   d. বেনারসি শাড়ি", a: "Answer (b) জামদানি শাড়ি" },
+    "Noakhali": { caption: "জমকালো কাম করা এক্কান চমৎকার জামদানি হাড়ি, যেটা আভিজাত্যর প্রতীক।", q: "আভিজাত্যের প্রতীক হিসেবে ছবিতে কোন চমৎকার হাড়িডি আছে?\na. টাঙ্গাইল হাড়ি   b. জামদানি হাড়ি   c. সুতির হাড়ি   d. বেনারসি হাড়ি", a: "Answer (b) জামদানি হাড়ি" },
+    "Rangpur": { caption: "জমকালো কাম করা একটা খাসা জামদানি শাড়ি, যা আভিজাত্যের প্রতীক।", q: "আভিজাত্যের প্রতীক থাকিয়া ছবিতে কোন খাসা শাড়িটা আছে বাহে?\na. টাঙ্গাইল শাড়ি   b. জামদানি শাড়ি   c. সুতির শাড়ি   d. বেনারসি শাড়ি", a: "Answer (b) জামদানি শাড়ি" },
+    "Sylhet": { caption: "জমকালো কাম করা একটা চমৎকার জামদানি শাড়ি, যেটা আভিজাত্যর প্রতীক।", q: "আভিজাত্যর প্রতীক হিসেবে ছবিতে কুন চমৎকার শাড়িটা আছে ওবা?\na. টাঙ্গাইল শাড়ি   b. জামদানি শাড়ি   c. সুতির শাড়ি   d. বেনারসি শাড়ি", a: "Answer (b) জামদানি শাড়ি" }
   },
   "crafts_115.png": {
     "Hindi": { caption: "मिट्टी के बर्तन बनाते हुए पारंपरिक बंगाली कारीगर।", q: "मिट्टी की थाली में खाना जल्दी ठंडा क्यों होता है?", a: "मिट्टी के सूक्ष्म छिद्रों से होने वाले वाष्पीकरण के कारण।" },
@@ -319,8 +330,125 @@ const getSampleAnnotation = (filename: string, category: string, lang: string) =
 
   return {
     caption: raw.caption,
-    vqa: `Q: ${raw.q}\nA: ${raw.a}`
+    vqa: raw.a.startsWith("Answer") ? `Q: ${raw.q}\n${raw.a}` : `Q: ${raw.q}\nA: ${raw.a}`
   };
+};
+
+const renderVqaCell = (vqaText: string) => {
+  if (!vqaText) return null;
+
+  const hasOptions = /a\.\s+.*b\.\s+.*c\.\s+.*d\.\s+/.test(vqaText);
+
+  if (hasOptions) {
+    const lines = vqaText.split("\n");
+    const qLine = lines[0] || "";
+    const optionsLine = lines[1] || "";
+    const answerLine = lines.slice(2).join("\n") || "";
+
+    const optAMatch = optionsLine.match(/a\.\s+([^]*?)(?=\s+b\.)/);
+    const optBMatch = optionsLine.match(/b\.\s+([^]*?)(?=\s+c\.)/);
+    const optCMatch = optionsLine.match(/c\.\s+([^]*?)(?=\s+d\.)/);
+    const optDMatch = optionsLine.match(/d\.\s+(.*)/);
+
+    const options = [
+      { key: "a", text: optAMatch ? optAMatch[1].trim() : "" },
+      { key: "b", text: optBMatch ? optBMatch[1].trim() : "" },
+      { key: "c", text: optCMatch ? optCMatch[1].trim() : "" },
+      { key: "d", text: optDMatch ? optDMatch[1].trim() : "" },
+    ];
+
+    const ansKeyMatch = answerLine.match(/\(([a-d])\)/i);
+    const correctKey = ansKeyMatch ? ansKeyMatch[1].toLowerCase() : "d";
+
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+        {/* Question */}
+        <div style={{ fontSize: "12.5px", fontWeight: 700, color: "#0f172a", lineHeight: 1.4 }}>
+          {qLine}
+        </div>
+
+        {/* Side by side options with uniform professional styling */}
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+          {options.map((opt) => {
+            return (
+              <div
+                key={opt.key}
+                style={{
+                  padding: "4px 10px",
+                  borderRadius: "6px",
+                  fontSize: "11.5px",
+                  fontWeight: 500,
+                  background: "#f1f5f9",
+                  border: "1px solid #cbd5e1",
+                  color: "#334155",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "5px",
+                }}
+              >
+                <span style={{
+                  fontWeight: 800,
+                  fontSize: "10.5px",
+                  padding: "1px 5px",
+                  borderRadius: "4px",
+                  background: "#cbd5e1",
+                  color: "#334155",
+                }}>
+                  {opt.key}.
+                </span>
+                <span>{opt.text}</span>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Answer line with green highlight */}
+        {answerLine && (
+          <div style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "6px",
+            padding: "5px 10px",
+            borderRadius: "6px",
+            background: "#f0fdf4",
+            border: "1px solid #86efac",
+            color: "#15803d",
+            fontSize: "12px",
+            fontWeight: 700,
+            marginTop: "2px"
+          }}>
+            <span>✅</span>
+            <span>{answerLine}</span>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ whiteSpace: "pre-line", color: "#475569", lineHeight: 1.5 }}>
+      {vqaText}
+    </div>
+  );
+};
+
+const renderCaptionCell = (captionText: string) => {
+  if (!captionText) return null;
+  return (
+    <div style={{
+      background: "#f8fafc",
+      border: "1px solid #e2e8f0",
+      borderRadius: "8px",
+      padding: "10px 14px",
+      color: "#334155",
+      fontSize: "12.5px",
+      fontWeight: 500,
+      lineHeight: 1.5,
+      borderLeft: "3px solid #10b981",
+    }}>
+      {captionText}
+    </div>
+  );
 };
 
 const filterGroups = ["All", "Culture & Heritage", "Nature & Wildlife", "Food & Sweets"];
@@ -1063,13 +1191,19 @@ export default function DatasetExplorer() {
                     </tr>
                   </thead>
                   <tbody>
-                    {languagesList.map((lang, index) => {
+                    {languagesList.filter(lang => {
+                      if (lang === "Urdu") {
+                        const currentFile = sampleImages[lightboxIndex].file;
+                        return currentFile === "achievements_102.png" || currentFile === "attire_002.jpg";
+                      }
+                      return true;
+                    }).map((lang, index, arr) => {
                       const annot = getSampleAnnotation(sampleImages[lightboxIndex].file, sampleImages[lightboxIndex].category, lang);
                       return (
-                        <tr key={lang} style={{ borderBottom: index === languagesList.length - 1 ? "none" : "1px solid #e2e8f0" }}>
+                        <tr key={lang} style={{ borderBottom: index === arr.length - 1 ? "none" : "1px solid #e2e8f0" }}>
                           <td style={{ padding: "12px 16px", fontWeight: 600, color: "#0f172a" }}>{lang}</td>
-                          <td style={{ padding: "12px 16px", color: "#475569", lineHeight: 1.5 }}>{annot.caption}</td>
-                          <td style={{ padding: "12px 16px", color: "#475569", lineHeight: 1.5, whiteSpace: "pre-line" }}>{annot.vqa}</td>
+                          <td style={{ padding: "12px 16px", color: "#475569" }}>{renderCaptionCell(annot.caption)}</td>
+                          <td style={{ padding: "12px 16px", color: "#475569" }}>{renderVqaCell(annot.vqa)}</td>
                         </tr>
                       );
                     })}
