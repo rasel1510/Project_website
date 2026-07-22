@@ -5,7 +5,7 @@ import { Database, Globe, Atom, BarChart2 } from "lucide-react";
 const cards = [
   {
     number: "01",
-    icon: <Database size={24} color="#6366f1" />,
+    icon: <Database size={22} color="#6366f1" />,
     iconBg: "#f5f3ff", iconBorder: "#e0e7ff",
     accentColor: "#6366f1",
     accentBg: "#f5f3ff",
@@ -16,7 +16,7 @@ const cards = [
   },
   {
     number: "02",
-    icon: <Globe size={24} color="#0ea5e9" />,
+    icon: <Globe size={22} color="#0ea5e9" />,
     iconBg: "#f0f9ff", iconBorder: "#bae6fd",
     accentColor: "#0ea5e9",
     accentBg: "#f0f9ff",
@@ -27,7 +27,7 @@ const cards = [
   },
   {
     number: "03",
-    icon: <Atom size={24} color="#10b981" />,
+    icon: <Atom size={22} color="#10b981" />,
     iconBg: "#ecfdf5", iconBorder: "#a7f3d0",
     accentColor: "#10b981",
     accentBg: "#ecfdf5",
@@ -38,7 +38,7 @@ const cards = [
   },
   {
     number: "04",
-    icon: <BarChart2 size={24} color="#f59e0b" />,
+    icon: <BarChart2 size={22} color="#f59e0b" />,
     iconBg: "#fffbeb", iconBorder: "#fde68a",
     accentColor: "#f59e0b",
     accentBg: "#fffbeb",
@@ -51,57 +51,72 @@ const cards = [
 
 export default function Highlights() {
   return (
-    <section id="highlights" style={{ background: "#f8fafc", borderTop: "1px solid #e2e8f0", padding: "48px 0" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+    <section id="highlights" style={{ background: "#f8fafc", borderTop: "1px solid #e2e8f0", padding: "44px 0" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
 
-        <div style={{ textAlign: "center", maxWidth: 680, margin: "0 auto 36px" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 16px", borderRadius: 999, background: "#f0fdf4", border: "1px solid #bbf7d0", color: "#15803d", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 16 }}>
+        <div style={{ textAlign: "center", maxWidth: 640, margin: "0 auto 30px" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "5px 15px", borderRadius: 999, background: "#f0fdf4", border: "1px solid #bbf7d0", color: "#15803d", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 14 }}>
             Core Contributions
           </div>
-          <h2 style={{ fontSize: 32, fontWeight: 800, color: "#0f172a", marginBottom: 12 }}>Key Highlights</h2>
-          <p style={{ fontSize: 15, color: "#64748b", lineHeight: 1.7 }}>
+          <h2 style={{ fontSize: 26, fontWeight: 800, color: "#0f172a", marginBottom: 10 }}>Key Highlights</h2>
+          <p style={{ fontSize: 14, color: "#64748b", lineHeight: 1.65 }}>
             BanglarMukh is the first benchmark evaluating cultural grounding, physics-aware reasoning, and regional linguistic diversity simultaneously in Vision-Language Models.
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20 }}>
+        {/* ── 4 cards in a row on desktop, 2 on tablet, 1 on mobile ── */}
+        <style>{`
+          .highlights-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+          }
+          @media (min-width: 640px) {
+            .highlights-grid { grid-template-columns: repeat(2, 1fr); }
+          }
+          @media (min-width: 1024px) {
+            .highlights-grid { grid-template-columns: repeat(4, 1fr); }
+          }
+        `}</style>
+
+        <div className="highlights-grid">
           {cards.map((c, i) => (
             <div
               key={i}
               style={{
                 background: "#fff",
                 border: "1px solid #e2e8f0",
-                borderRadius: 18,
-                padding: "28px 24px 24px",
-                boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
+                borderRadius: 14,
+                padding: "22px 20px 20px",
+                boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
                 position: "relative",
                 overflow: "hidden",
                 transition: "box-shadow 0.2s, transform 0.2s",
               }}
               onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(0,0,0,0.10)";
-                (e.currentTarget as HTMLElement).style.transform = "translateY(-3px)";
+                (e.currentTarget as HTMLElement).style.boxShadow = "0 6px 24px rgba(0,0,0,0.10)";
+                (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
               }}
               onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.boxShadow = "0 1px 4px rgba(0,0,0,0.04)";
+                (e.currentTarget as HTMLElement).style.boxShadow = "0 1px 3px rgba(0,0,0,0.04)";
                 (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
               }}
             >
               {/* Accent stripe */}
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: c.accentColor, borderRadius: "18px 18px 0 0" }} />
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: c.accentColor, borderRadius: "14px 14px 0 0" }} />
 
               {/* Number + icon row */}
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
                 <div style={{
-                  width: 44, height: 44, borderRadius: 12,
+                  width: 38, height: 38, borderRadius: 10,
                   background: c.iconBg, border: `1px solid ${c.iconBorder}`,
                   display: "flex", alignItems: "center", justifyContent: "center"
                 }}>
                   {c.icon}
                 </div>
                 <span style={{
-                  fontSize: 36, fontWeight: 900, color: "#f1f5f9",
-                  letterSpacing: "-2px", lineHeight: 1,
+                  fontSize: 30, fontWeight: 900, color: "#f1f5f9",
+                  letterSpacing: "-1.5px", lineHeight: 1,
                   userSelect: "none"
                 }}>
                   {c.number}
@@ -112,17 +127,17 @@ export default function Highlights() {
               <div style={{
                 display: "inline-block", fontSize: 10, fontWeight: 700,
                 textTransform: "uppercase", letterSpacing: "0.07em",
-                padding: "3px 10px", borderRadius: 999,
+                padding: "3px 9px", borderRadius: 999,
                 background: c.accentBg, border: `1px solid ${c.accentBorder}`,
-                color: c.accentColor, marginBottom: 12
+                color: c.accentColor, marginBottom: 10
               }}>
                 {c.tag}
               </div>
 
-              <h3 style={{ fontSize: 15.5, fontWeight: 800, color: "#0f172a", marginBottom: 10, lineHeight: 1.4 }}>
+              <h3 style={{ fontSize: 14.5, fontWeight: 800, color: "#0f172a", marginBottom: 8, lineHeight: 1.4 }}>
                 {c.title}
               </h3>
-              <p style={{ fontSize: 13.5, color: "#64748b", lineHeight: 1.75, margin: 0 }}>
+              <p style={{ fontSize: 13, color: "#64748b", lineHeight: 1.7, margin: 0 }}>
                 {c.desc}
               </p>
             </div>

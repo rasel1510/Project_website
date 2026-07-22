@@ -4,7 +4,7 @@ import { Search, X, ChevronLeft, ChevronRight, Download, Maximize2, BarChart2, F
 
 // List of all 16 sample images with their categories and descriptions
 const sampleImages = [
-  { file: "achievements_102.png", category: "Achievements", group: "Culture & Heritage", desc: "Showcasing milestones, honors, and notable achievements in Bangladeshi history and development." },
+  { file: "achievements_102.png", category: "Achievements", group: "Culture & Heritage", desc: "মিঠাপানির মৎস্য ও অভ্যন্তরীণ বদ্ধ জলাশয় চাষে বিশ্বে বাংলাদেশের শীর্ষস্থানীয় নেতৃত্বের গৌরব।" },
   { file: "attire_002.jpg", category: "Attire", group: "Culture & Heritage", desc: "Traditional Bangladeshi attire detailing fine fabric textures and regional clothing styles." },
   { file: "crafts_115.png", category: "Crafts", group: "Culture & Heritage", desc: "Intricate local craftsmanship, showing hand-made artifacts from rural parts of Bangladesh." },
   { file: "education_096.png", category: "Education", group: "Culture & Heritage", desc: "Visual cues capturing classroom settings, educational materials, and school life in Bangladesh." },
@@ -41,8 +41,16 @@ const imageDetails: Record<string, {
   bng: { caption: string; q: string; a: string };
 }> = {
   "achievements_102.png": {
-    eng: { caption: "National monument highlighting historic achievements of Bangladesh.", q: "What is the historical significance of this monument?", a: "It commemorates the sacrifice of martyrs in the struggle for independence." },
-    bng: { caption: "বাংলাদেশের ঐতিহাসিক অর্জনসমূহ নির্দেশকারী জাতীয় স্মৃতিসৌধ।", q: "এই স্মৃতিসৌধটির ঐতিহাসিক তাৎপর্য কী?", a: "এটি স্বাধীনতা সংগ্রামে শহীদদের আত্মত্যাগের স্মরণে নির্মিত।" }
+    eng: {
+      caption: "মিঠাপানির মৎস্য ও অভ্যন্তরীণ বদ্ধ জলাশয় চাষে বিশ্বে বাংলাদেশের শীর্ষস্থানীয় নেতৃত্বের গৌরব।",
+      q: "মিঠাপানির মুক্ত জলাশয় ও অভ্যন্তরীণ আবদ্ধ মৎস্য চাষে বাংলাদেশ বর্তমানে বিশ্বে কোন অনন্য সাফল্য অর্জন করেছে?\n- শততম স্থান\n- বিশ্বের অন্যতম শীর্ষস্থানীয় মাছ উৎপাদনকারী দেশের গৌরব\n- সম্পূর্ণরূপে মৎস্যশূন্যতা\n- শুধুমাত্র সামুদ্রিক মাছের ওপর নির্ভরতা",
+      a: "বিশ্বের অন্যতম শীর্ষস্থানীয় মাছ উৎপাদনকারী দেশের গৌরব"
+    },
+    bng: {
+      caption: "মিঠাপানির মৎস্য ও অভ্যন্তরীণ বদ্ধ জলাশয় চাষে বিশ্বে বাংলাদেশের শীর্ষস্থানীয় নেতৃত্বের গৌরব।",
+      q: "মিঠাপানির মুক্ত জলাশয় ও অভ্যন্তরীণ আবদ্ধ মৎস্য চাষে বাংলাদেশ বর্তমানে বিশ্বে কোন অনন্য সাফল্য অর্জন করেছে?\n- শততম স্থান\n- বিশ্বের অন্যতম শীর্ষস্থানীয় মাছ উৎপাদনকারী দেশের গৌরব\n- সম্পূর্ণরূপে মৎস্যশূন্যতা\n- শুধুমাত্র সামুদ্রিক মাছের ওপর নির্ভরতা",
+      a: "বিশ্বের অন্যতম শীর্ষস্থানীয় মাছ উৎপাদনকারী দেশের গৌরব"
+    }
   },
   "attire_002.jpg": {
     eng: { caption: "Traditional Bengali woman wearing a finely draped cotton saree.", q: "Which forces stabilize the folds of the draped saree?", a: "Friction between fabric layers and gravitational pull." },
@@ -81,32 +89,32 @@ const imageDetails: Record<string, {
     bng: { caption: "একতারা হাতে গান গাইতে প্রস্তুত একজন ঐতিহ্যবাহী বাউল সাধক।", q: "বাউলদের প্রধান ও আদি বাদ্যযন্ত্রটির নাম কী?", a: "একতারা, যা লাউ ও বাঁশ দিয়ে তৈরি এক তারের যন্ত্র।" }
   },
   "places_022.png": {
-    eng: { caption: "Mughal-era terracotta brick architecture of Lalbagh Fort in Dhaka.", q: "What architectural style is exhibited in Lalbagh Fort?", a: "Indo-Islamic Mughal brick and plaster architecture." },
-    bng: { caption: "ঢাকার লালবাগ কেল্লার মোঘল আমলের পোড়ামাটির ইট ও পাথরের কারুকাজ।", q: "লালবাগ কেল্লায় কোন স্থাপত্য শৈলী দেখতে পাওয়া যায়?", a: "ইন্দো-ইসলামিক মোঘল স্থাপত্য শৈলী।" }
+    eng: { caption: "Historic Lalbagh Fort displaying Mughal-era architecture in Dhaka.", q: "Which architectural style is displayed at Lalbagh Fort?", a: "Indo-Islamic Mughal brick architecture." },
+    bng: { caption: "ঢাকার মোঘল আমলের ঐতিহ্যবাহী লালবাগ কেল্লা।", q: "লালবাগ কেল্লা কোন আমলের স্থাপত্য?", a: "মোঘল আমলের লাল ইটের স্থাপত্য।" }
   },
   "river_001.png": {
-    eng: { caption: "Wooden boat floating stably on the calm waters of the Padma river.", q: "What buoyancy principle governs the stable floating of the boat?", a: "Archimedes Buoyancy Principle." },
-    bng: { caption: "পদ্মা নদীর শান্ত জলে ভেসে থাকা একটি ঐতিহ্যবাহী কাঠের নৌকা।", q: "নৌকা পানিতে ভেসে থাকার পেছনে কোন বৈজ্ঞানিক নীতি কাজ করে?", a: "আর্কিমিডিসের প্লবতা নীতি।" }
+    eng: { caption: "Traditional wooden boat floating smoothly on quiet river waters.", q: "What principle allows the wooden boat to float?", a: "Archimedes' Principle of buoyancy." },
+    bng: { caption: "নদীর শান্ত পানিতে ভেসে থাকা ঐতিহ্যবাহী কাঠের নৌকা।", q: "নৌকা পানিতে ভেসে থাকার কারণ কী?", a: "আর্কিমিডিসের প্লবতা নীতি।" }
   },
   "river_028.png": {
-    eng: { caption: "Fishermen casting wide triangular nets from wooden boats at dusk.", q: "What type of traditional net is used here for fishing?", a: "A cast net (Jhaki or Khepla Jal) designed to trap fish under it." },
-    bng: { caption: "নৌকা থেকে নদীতে জাল ফেলছেন জেলেরা।", q: "মাছ ধরার জন্য এখানে কোন ধরণের ঐতিহ্যবাহী জাল ব্যবহার করা হচ্ছে?", a: "ঝাঁকি বা ক্ষ্যাপলা জাল, যা পানিতে বৃত্তাকারে ছড়িয়ে পড়ে।" }
+    eng: { caption: "Fishermen casting traditional nets from wooden boats at dusk.", q: "What type of traditional fishing net is used here?", a: "Cast net (Jhaki Jal)." },
+    bng: { caption: "নদীর পানিতে ঐতিহ্যবাহী ঝাঁকি জাল ফেলছেন জেলেরা।", q: "মাছ ধরার জন্য কোন জাল ব্যবহার করা হচ্ছে?", a: "ঝাঁকি বা ক্ষ্যাপলা জাল।" }
   },
-  "sports_019.png": {
-    eng: { caption: "Youth playing Kabaddi in a dusty rural playground under daylight.", q: "What is the national sport of Bangladesh displayed here?", a: "Kabaddi (Hadudu), requiring breath control and tag team runs." },
-    bng: { caption: "গ্রামের ধূলিময় মাঠে কাবাডি বা হাডুডু খেলছে একদল তরুণ।", q: "ছবিতে প্রদর্শিত বাংলাদেশের জাতীয় খেলাটির নাম কী?", a: "কাবাডি (হাডুডু), যা দম ধরে রেখে খেলতে হয়।" }
-  },
-  "sweet_011.png": {
-    eng: { caption: "Traditional round syrupy sweets (Rosogolla) served in a clay pot.", q: "What is the primary dairy base used to prepare Bengali sweets?", a: "Chhena (fresh curdled milk solids) kneaded with sugar syrup." },
-    bng: { caption: "মাটির পাত্রে রসগোল্লা মিষ্টি সাজানো।", q: "বাঙালি মিষ্টি তৈরির মূল উপাদান কোনটি?", a: "দুধ ছানা ও চিনির সিরা।" }
-  },
-  "wildlife_087.jpg": {
-    eng: { caption: "Royal Bengal Tiger walking silently through Sundarbans mangroves.", q: "What unique ecosystem supports the Bengal Tiger in Bangladesh?", a: "The Sundarbans, the world's largest halophytic mangrove forest." },
-    bng: { caption: "সুন্দরবনের শ্বাসমূল বনের মধ্য দিয়ে হেঁটে যাচ্ছে রয়েল বেঙ্গল টাইগার।", q: "রয়েল বেঙ্গল টাইগারের প্রাকৃতিক বাসস্থল সুন্দরবন কোন ধরণের বন?", a: "বিশ্বের বৃহত্তম জোয়ার-ভাটার ম্যানগ্রোভ বন।" }
-  }
-};
+    "sports_019.png": {
+      eng: { caption: "Youth playing Kabaddi in a dusty rural playground under daylight.", q: "What is the national sport of Bangladesh displayed here?", a: "Kabaddi (Hadudu), requiring breath control and tag team runs." },
+      bng: { caption: "গ্রামের ধূলিময় মাঠে কাবাডি বা হাডুডু খেলছে একদল তরুণ।", q: "ছবিতে প্রদর্শিত বাংলাদেশের জাতীয় খেলাটির নাম কী?", a: "কাবাডি (হাডুডু), যা দম ধরে রেখে খেলতে হয়।" }
+    },
+    "sweet_011.png": {
+      eng: { caption: "Traditional round syrupy sweets (Rosogolla) served in a clay pot.", q: "What is the primary dairy base used to prepare Bengali sweets?", a: "Chhena (fresh curdled milk solids) kneaded with sugar syrup." },
+      bng: { caption: "মাটির পাত্রে রসগোল্লা মিষ্টি সাজানো।", q: "বাঙালি মিষ্টি তৈরির মূল উপাদান কোনটি?", a: "দুধ ছানা ও চিনির সিরা।" }
+    },
+    "wildlife_087.jpg": {
+      eng: { caption: "Royal Bengal Tiger walking silently through Sundarbans mangroves.", q: "What unique ecosystem supports the Bengal Tiger in Bangladesh?", a: "The Sundarbans, the world's largest halophytic mangrove forest." },
+      bng: { caption: "সুন্দরবনের শ্বাসমূল বনের মধ্য দিয়ে হেঁটে যাচ্ছে রয়েল বেঙ্গল টাইগার।", q: "রয়েল বেঙ্গল টাইগারের প্রাকৃতিক বাসস্থল সুন্দরবন কোন ধরণের বন?", a: "বিশ্বের বৃহত্তম জোয়ার-ভাটার ম্যানগ্রোভ বন।" }
+    }
+  };
 
-const dialectTranslations: Record<string, Record<string, { caption: string; q: string; a: string }>> = {
+  const dialectTranslations: Record<string, Record< string, { caption: string; q: string; a: string }>> = {
   "achievements_102.png": {
     "Hindi": { caption: "बांग्लादेश की ऐतिहासिक उपलब्धियों को दर्शाने वाला राष्ट्रीय स्मारक।", q: "इस स्मारक का ऐतिहासिक महत्व क्या है?", a: "यह स्वतंत्रता संग्राम के शहीदों की याद में बनाया गया है।" },
     "French": { caption: "Monument national soulignant les réalisations historiques du Bangladesh.", q: "Quelle est la signification historique de ce monument?", a: "Il commémore le sacrifice des martyrs dans la lutte pour l'indépendance." },
@@ -467,26 +475,26 @@ export default function DatasetExplorer() {
   };
 
   return (
-    <section id="dataset" style={{ background: "#f8fafc", borderTop: "1px solid #dcfce7", padding: "48px 0" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+    <section id="dataset" style={{ background: "#f8fafc", borderTop: "1px solid #dcfce7", padding: "40px 0" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
 
         {/* Header */}
-        <div style={{ textAlign: "center", maxWidth: 700, margin: "0 auto 36px" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 16px", borderRadius: 999, background: "#dcfce7", border: "1px solid #86efac", color: "#15803d", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 16 }}>
+        <div style={{ textAlign: "center", maxWidth: 660, margin: "0 auto 30px" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "5px 15px", borderRadius: 999, background: "#dcfce7", border: "1px solid #86efac", color: "#15803d", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 14 }}>
             Dataset Samples
           </div>
-          <h2 style={{ fontSize: 32, fontWeight: 800, color: "#14532d", marginBottom: 12 }}>Explore BanglarMukh Images</h2>
+          <h2 style={{ fontSize: 26, fontWeight: 800, color: "#14532d", marginBottom: 12 }}>Explore BanglarMukh Images</h2>
 
-          <div style={{ marginTop: 20 }}>
+          <div style={{ marginTop: 16 }}>
             <a
               href="https://huggingface.co/datasets/Rasel2091/BanglarMukh/tree/main"
               target="_blank"
               rel="noopener noreferrer"
               style={{
                 display: "inline-flex", alignItems: "center", gap: 8,
-                padding: "10px 24px", borderRadius: 10,
+                padding: "9px 20px", borderRadius: 9,
                 background: "linear-gradient(135deg,#ff9d00,#ffcc00)",
-                color: "#1a1a1a", fontWeight: 700, fontSize: 14,
+                color: "#1a1a1a", fontWeight: 700, fontSize: 13.5,
                 textDecoration: "none", boxShadow: "0 2px 10px rgba(255,157,0,0.3)",
                 transition: "transform 0.15s, box-shadow 0.15s",
               }}
@@ -506,7 +514,7 @@ export default function DatasetExplorer() {
         </div>
 
         {/* Search and Filters panel */}
-        <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 16, padding: "20px", marginBottom: 32, boxShadow: "0 4px 6px -1px rgba(0,0,0,0.02)" }}>
+        <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 14, padding: "16px", marginBottom: 24, boxShadow: "0 4px 6px -1px rgba(0,0,0,0.02)" }}>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "space-between", alignItems: "center" }}>
 
             {/* Filter Tabs */}

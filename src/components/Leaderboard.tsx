@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Award, Info, ZoomIn, X, Globe, MessageSquare } from "lucide-react";
+import { Award, ZoomIn, X, Globe, MessageSquare } from "lucide-react";
 
 interface TableInfo {
   id: string;
@@ -78,39 +78,38 @@ export default function Leaderboard() {
   };
 
   return (
-    <section id="leaderboard" style={{ background: "#f0fdf4", borderTop: "1px solid #dcfce7", padding: "48px 0" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+    <section id="leaderboard" style={{ background: "#f0fdf4", borderTop: "1px solid #dcfce7", padding: "44px 0" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
 
         {/* Header */}
         <div style={{ textAlign: "center", maxWidth: 600, margin: "0 auto 20px" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 16px", borderRadius: 999, background: "#dcfce7", border: "1px solid #86efac", color: "#15803d", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 16 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "5px 15px", borderRadius: 999, background: "#dcfce7", border: "1px solid #86efac", color: "#15803d", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 14 }}>
             <Award size={12} /> Evaluation Results
           </div>
-          <h2 style={{ fontSize: 32, fontWeight: 800, color: "#14532d" }}>Result Section</h2>
-
+          <h2 style={{ fontSize: 26, fontWeight: 800, color: "#14532d" }}>Result Section</h2>
         </div>
 
         {/* Category Selector */}
-        <div style={{ display: "flex", justifyContent: "center", gap: 16, marginBottom: 24 }}>
+        <div style={{ display: "flex", justifyContent: "center", gap: 14, marginBottom: 20 }}>
           <button
             onClick={() => handleCategoryChange("languages")}
             style={{
               display: "flex",
               alignItems: "center",
               gap: 8,
-              padding: "12px 24px",
-              borderRadius: 12,
+              padding: "10px 20px",
+              borderRadius: 10,
               border: activeCategory === "languages" ? "2px solid #15803d" : "2px solid #e2e8f0",
               background: activeCategory === "languages" ? "#15803d" : "#fff",
               color: activeCategory === "languages" ? "#fff" : "#475569",
               fontWeight: 700,
-              fontSize: 14,
+              fontSize: 13.5,
               cursor: "pointer",
               transition: "all 0.2s ease",
-              boxShadow: activeCategory === "languages" ? "0 4px 12px rgba(21,128,61,0.15)" : "none"
+              boxShadow: activeCategory === "languages" ? "0 3px 10px rgba(21,128,61,0.15)" : "none"
             }}
           >
-            <Globe size={16} />
+            <Globe size={15} />
             Standard Languages
           </button>
           <button
@@ -119,31 +118,31 @@ export default function Leaderboard() {
               display: "flex",
               alignItems: "center",
               gap: 8,
-              padding: "12px 24px",
-              borderRadius: 12,
+              padding: "10px 20px",
+              borderRadius: 10,
               border: activeCategory === "dialects" ? "2px solid #15803d" : "2px solid #e2e8f0",
               background: activeCategory === "dialects" ? "#15803d" : "#fff",
               color: activeCategory === "dialects" ? "#fff" : "#475569",
               fontWeight: 700,
-              fontSize: 14,
+              fontSize: 13.5,
               cursor: "pointer",
               transition: "all 0.2s ease",
-              boxShadow: activeCategory === "dialects" ? "0 4px 12px rgba(21,128,61,0.15)" : "none"
+              boxShadow: activeCategory === "dialects" ? "0 3px 10px rgba(21,128,61,0.15)" : "none"
             }}
           >
-            <MessageSquare size={16} />
+            <MessageSquare size={15} />
             Regional Dialects
           </button>
         </div>
 
         {/* Sub-tabs / Language pills */}
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 10, marginBottom: 32 }}>
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 10, marginBottom: 26 }}>
           {currentTables.map(t => (
             <button
               key={t.id}
               onClick={() => setActiveTableId(t.id)}
               style={{
-                padding: "8px 18px",
+                padding: "7px 16px",
                 borderRadius: 999,
                 border: "1px solid",
                 borderColor: activeTableId === t.id ? "#15803d" : "#bbf7d0",
@@ -161,9 +160,9 @@ export default function Leaderboard() {
         </div>
 
         {/* Table Display Frame */}
-        <div style={{ background: "#fff", border: "1px solid #bbf7d0", borderRadius: 16, overflow: "hidden", boxShadow: "0 4px 20px rgba(22,163,74,0.08)" }}>
+        <div style={{ background: "#fff", border: "1px solid #bbf7d0", borderRadius: 14, overflow: "hidden", boxShadow: "0 3px 16px rgba(22,163,74,0.08)" }}>
           {/* Header toolbar */}
-          <div style={{ background: "#dcfce7", borderBottom: "1px solid #bbf7d0", padding: "14px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
+          <div style={{ background: "#dcfce7", borderBottom: "1px solid #bbf7d0", padding: "12px 18px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 10 }}>
             <span style={{ fontSize: 14, fontWeight: 700, color: "#14532d" }}>
               Evaluation Table — {activeTable.label} {activeCategory === "languages" ? "Language" : "Dialect"}
             </span>
@@ -173,12 +172,12 @@ export default function Leaderboard() {
                 display: "flex",
                 alignItems: "center",
                 gap: 6,
-                padding: "8px 16px",
+                padding: "7px 14px",
                 background: "#fff",
                 border: "1px solid #86efac",
-                borderRadius: 8,
+                borderRadius: 7,
                 cursor: "pointer",
-                fontSize: 13,
+                fontSize: 12.5,
                 fontWeight: 700,
                 color: "#15803d",
                 transition: "all 0.2s"
@@ -195,8 +194,8 @@ export default function Leaderboard() {
             onClick={() => setZoom(true)}
             style={{
               cursor: "zoom-in",
-              padding: "24px 16px",
-              minHeight: 380,
+              padding: "20px 16px",
+              minHeight: 340,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -209,22 +208,21 @@ export default function Leaderboard() {
               alt={`${activeTable.label} Results Table`}
               style={{
                 maxWidth: "100%",
-                maxHeight: 520,
+                maxHeight: 480,
                 objectFit: "contain",
-                borderRadius: 8,
-                boxShadow: "0 2px 10px rgba(0,0,0,0.05)"
+                borderRadius: 6,
+                boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
               }}
             />
           </div>
 
           {/* Footer Caption */}
-          <div style={{ padding: "16px 20px", borderTop: "1px solid #bbf7d0", background: "#f0fdf4" }}>
-            <p style={{ fontSize: 13, color: "#16a34a", fontWeight: 600, lineHeight: 1.6, margin: 0 }}>
+          <div style={{ padding: "14px 18px", borderTop: "1px solid #bbf7d0", background: "#f0fdf4" }}>
+            <p style={{ fontSize: 13, color: "#16a34a", fontWeight: 600, lineHeight: 1.55, margin: 0 }}>
               {activeTable.caption}
             </p>
           </div>
         </div>
-
 
 
       </div>
@@ -241,19 +239,19 @@ export default function Leaderboard() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: 32
+            padding: 24
           }}
         >
           <button
             style={{
               position: "absolute",
-              top: 20,
-              right: 20,
+              top: 16,
+              right: 16,
               background: "#fff",
               border: "none",
               borderRadius: "50%",
-              width: 40,
-              height: 40,
+              width: 36,
+              height: 36,
               cursor: "pointer",
               display: "flex",
               alignItems: "center",
@@ -261,7 +259,7 @@ export default function Leaderboard() {
               boxShadow: "0 4px 12px rgba(0,0,0,0.15)"
             }}
           >
-            <X size={20} color="#0f172a" />
+            <X size={18} color="#0f172a" />
           </button>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img

@@ -14,11 +14,11 @@ export default function Abstract() {
   const section: React.CSSProperties = {
     background: "#fff",
     borderTop: "1px solid #dcfce7",
-    padding: "48px 0",
+    padding: "44px 0",
   };
   const inner: React.CSSProperties = {
-    maxWidth: 1200, margin: "0 auto", padding: "0 24px",
-    display: "grid", gap: 48, alignItems: "start",
+    maxWidth: 1280, margin: "0 auto", padding: "0 32px",
+    display: "grid", gap: 36, alignItems: "start",
     gridTemplateColumns: "1fr",
   };
 
@@ -29,18 +29,18 @@ export default function Abstract() {
 
         {/* Left – Text */}
         <div>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 18, fontWeight: 700, letterSpacing: "0.08em", color: "#15803d", marginBottom: 12 }}>
-            <BookOpen size={14} /> Abstract
+          <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 16, fontWeight: 700, letterSpacing: "0.08em", color: "#15803d", marginBottom: 12 }}>
+            <BookOpen size={15} /> Abstract
           </div>
 
           <div>
-            <p style={{ fontSize: 15, color: "#334155", lineHeight: 1.85, textAlign: "justify" }}>
+            <p style={{ fontSize: 14.5, color: "#334155", lineHeight: 1.8, textAlign: "justify" }}>
               {abstractText}
             </p>
           </div>
 
           {/* Stats */}
-          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 10, marginTop: 28 }}>
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 10, marginTop: 22 }}>
             {[
               { v: "66,608", l: "Artifacts", c: "#15803d" },
               { v: "15", l: "Domains", c: "#15803d" },
@@ -48,8 +48,8 @@ export default function Abstract() {
               { v: "6", l: "Dialects", c: "#15803d" },
 
             ].map(s => (
-              <div key={s.l} style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 10, padding: "12px 18px", minWidth: 80, textAlign: "center" }}>
-                <div style={{ fontSize: 20, fontWeight: 900, color: s.c, lineHeight: 1 }}>{s.v}</div>
+              <div key={s.l} style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 8, padding: "11px 16px", minWidth: 76, textAlign: "center" }}>
+                <div style={{ fontSize: 19, fontWeight: 900, color: s.c, lineHeight: 1 }}>{s.v}</div>
                 <div style={{ fontSize: 10, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 4 }}>{s.l}</div>
               </div>
             ))}
@@ -58,16 +58,16 @@ export default function Abstract() {
 
         {/* Right – Figure */}
         <div>
-          <div style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 16, overflow: "hidden" }}>
+          <div style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 14, overflow: "hidden" }}>
             <div style={{ background: "#dcfce7", borderBottom: "1px solid #bbf7d0", padding: "12px 18px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span style={{ fontSize: 18, fontWeight: 700, color: "#14532d" }}> Methodology Overview</span>
-              <button onClick={() => setZoom(true)} style={{ display: "flex", alignItems: "center", gap: 6, padding: "6px 12px", background: "#fff", border: "1px solid #86efac", borderRadius: 8, cursor: "pointer", fontSize: 12, fontWeight: 600, color: "#15803d" }}>
+              <span style={{ fontSize: 16, fontWeight: 700, color: "#14532d" }}>Methodology Overview</span>
+              <button onClick={() => setZoom(true)} style={{ display: "flex", alignItems: "center", gap: 5, padding: "6px 12px", background: "#fff", border: "1px solid #86efac", borderRadius: 7, cursor: "pointer", fontSize: 12, fontWeight: 600, color: "#15803d" }}>
                 <ZoomIn size={13} /> Expand
               </button>
             </div>
-            <div onClick={() => setZoom(true)} style={{ cursor: "zoom-in", padding: 20, minHeight: 280, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div onClick={() => setZoom(true)} style={{ cursor: "zoom-in", padding: 18, minHeight: 240, display: "flex", alignItems: "center", justifyContent: "center" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/Main Methodology.png" alt="BanglarMukh Methodology" style={{ maxWidth: "100%", maxHeight: 360, objectFit: "contain", borderRadius: 8 }}
+              <img src="/Main Methodology.png" alt="BanglarMukh Methodology" style={{ maxWidth: "100%", maxHeight: 340, objectFit: "contain", borderRadius: 8 }}
                 onError={e => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
               />
             </div>
@@ -78,9 +78,9 @@ export default function Abstract() {
 
       {/* Lightbox */}
       {zoom && (
-        <div onClick={() => setZoom(false)} style={{ position: "fixed", inset: 0, zIndex: 9999, background: "rgba(15,23,42,0.92)", display: "flex", alignItems: "center", justifyContent: "center", padding: 32 }}>
-          <button style={{ position: "absolute", top: 20, right: 20, background: "#fff", border: "none", borderRadius: "50%", width: 40, height: 40, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <X size={20} color="#0f172a" />
+        <div onClick={() => setZoom(false)} style={{ position: "fixed", inset: 0, zIndex: 9999, background: "rgba(15,23,42,0.92)", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+          <button style={{ position: "absolute", top: 16, right: 16, background: "#fff", border: "none", borderRadius: "50%", width: 36, height: 36, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <X size={18} color="#0f172a" />
           </button>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/Main Methodology.png" alt="Methodology" style={{ maxWidth: "90vw", maxHeight: "85vh", objectFit: "contain", borderRadius: 12, boxShadow: "0 25px 60px rgba(0,0,0,0.5)" }} />
