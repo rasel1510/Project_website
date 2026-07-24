@@ -6,7 +6,7 @@ import { Search, X, ChevronLeft, ChevronRight, Download, Maximize2, BarChart2, F
 const sampleImages = [
   { file: "achievements_102.png", category: "Achievements", group: "Culture & Heritage", desc: "মিঠাপানির মৎস্য ও অভ্যন্তরীণ বদ্ধ জলাশয় চাষে বিশ্বে বাংলাদেশের শীর্ষস্থানীয় নেতৃত্বের গৌরব।" },
   { file: "attire_002.jpg", category: "Attire", group: "Culture & Heritage", desc: "জমকালো কাজ করা একটি চমৎকার জামদানি শাড়ি, যা আভিজাত্যের প্রতীক।" },
-  { file: "crafts_115.png", category: "Crafts", group: "Culture & Heritage", desc: "Intricate local craftsmanship, showing hand-made artifacts from rural parts of Bangladesh." },
+  { file: "crafts_115.png", category: "Crafts", group: "Culture & Heritage", desc: "একজন কুমোর  চাকা ঘুড়িয়ে মাটির হাঁড়ি পাতিল তৈরী করছেন" },
   { file: "education_096.png", category: "Education", group: "Culture & Heritage", desc: "Visual cues capturing classroom settings, educational materials, and school life in Bangladesh." },
   { file: "festival_039.png", category: "Festival", group: "Culture & Heritage", desc: "Vibrant moments from traditional festivals, showing cultural celebrations and community gatherings." },
   { file: "fishes_031.jpg", category: "Fishes", group: "Nature & Wildlife", desc: "A specimen of local fish species, representative of the rich riverine ecosystem of Bangladesh." },
@@ -66,8 +66,16 @@ const imageDetails: Record<string, {
     }
   },
   "crafts_115.png": {
-    eng: { caption: "Artisans crafting porous clay pottery using a traditional potter wheel.", q: "Why does hot food cool faster on clay plates?", a: "Evaporative cooling through micro-pores of clay." },
-    bng: { caption: "ঐতিহ্যবাহী মৃৎশিল্পের চাকার সাহায্যে মাটির পাত্র তৈরি করছেন কারিগরেরা।", q: "মাটির পাত্রে গরম খাবার দ্রুত ঠান্ডা হয় কেন?", a: "মাটির ক্ষুদ্র ছিদ্রে বাষ্পীভবন ও সুপ্ততাপ শোষণের কারণে।" }
+    eng: {
+      caption: "A potter is making clay pots and cooking vessels by spinning the potter's wheel.",
+      q: "What is the potter doing in the image to make clay pots and cooking vessels?\na. Using a modern electric kiln   b. Spinning the potter's wheel by hand   c. Pouring liquid clay into a mold   d. Painting designs on finished pottery",
+      a: "Answer (b) Spinning the potter's wheel by hand"
+    },
+    bng: {
+      caption: "একজন কুমোর  চাকা ঘুড়িয়ে মাটির হাঁড়ি পাতিল তৈরী করছেন",
+      q: "ছবিতে কুমোর মাটির হাঁড়ি পাতিল তৈরী করতে কী ব্যবহার করছেন?\na. আধুনিক ইলেকট্রিক চুল্লি   b. হাতে চাকা ঘুড়িয়ে   c. ছাঁচে তরল মাটি ঢেলে   d. তৈরী পাত্রে নকশা এঁকে",
+      a: "Answer (b) হাতে চাকা ঘুড়িয়ে"
+    }
   },
   "education_096.png": {
     eng: { caption: "A rural school classroom displaying traditional blackboard learning.", q: "What visual elements indicate a traditional classroom?", a: "The chalk blackboard and physical textbooks used by students." },
@@ -149,15 +157,56 @@ const dialectTranslations: Record<string, Record<string, { caption: string; q: s
     "Sylhet": { caption: "জমকালো কাম করা একটা চমৎকার জামদানি শাড়ি, যেটা আভিজাত্যর প্রতীক।", q: "আভিজাত্যর প্রতীক হিসেবে ছবিতে কুন চমৎকার শাড়িটা আছে ওবা?\na. টাঙ্গাইল শাড়ি   b. জামদানি শাড়ি   c. সুতির শাড়ি   d. বেনারসি শাড়ি", a: "Answer (b) জামদানি শাড়ি" }
   },
   "crafts_115.png": {
-    "Hindi": { caption: "मिट्टी के बर्तन बनाते हुए पारंपरिक बंगाली कारीगर।", q: "मिट्टी की थाली में खाना जल्दी ठंडा क्यों होता है?", a: "मिट्टी के सूक्ष्म छिद्रों से होने वाले वाष्पीकरण के कारण।" },
-    "French": { caption: "Artisans fabriquant des poteries en argile poreuse.", q: "Pourquoi les aliments chauds refroidissent-ils plus vite sur des plaques d'argile?", a: "Refroidissement par évaporation à travers les micro-pores de l'argile." },
-    "Chinese": { caption: "工匠们正在制作多孔的泥陶器。", q: "为什么热的食物在粘土盘子里冷得更快？", a: "通过粘土微孔的蒸发冷却作用。" },
-    "Chittagong dialects": { caption: "হাতে মাডির পাতিল বানাইর কারিগর অঁল।", q: "মাডির পাতিলত গরম ভাত তাড়াতাড়ি ঠান্ডা অয় কিয়ল্লা?", a: "মাডির গাত থাহে অতি সূক্ষ্ম ফুডু যেত্থন পানি ভাপ অয়।" },
-    "Rajshahi": { caption: "মাটির হাড়ি পাতিল বানাইচ্চে কারিগরেরা।", q: "মাটির পাতিলত গরম ভাত তাড়াতাড়ি ঠান্ডা হয় ক্যালা?", a: "মাটির অতি সূক্ষ্ম ফুটা দিয়া বাষ্পীভবন হওনের লাগা।" },
-    "Barisal": { caption: "মাটির পাতিল বানাইতাছে আমাগো দেশের কোমর কারিগররা।", q: "মাডির সানকিতে গরম ভাত বাড়লে তা তাড়াতাড়ি ঠান্ডা হয় ক্যালা?", a: "মাডির অতি সূক্ষ্ম ছিদ্র দিয়া বাষ্পীভবন অইলে ঠান্ডা তাড়াতাড়ি হয়।" },
-    "Noakhali": { caption: "মাটির কলসি বানাইতাছে কারিগরের দল।", q: "মাটির সানকিতে গরম ভাত বাড়লে তা তাড়াতাড়ি ঠান্ডা হয় ক্যালা?", a: "মাটির অতি সূক্ষ্ম ছিদ্র দিয়া বাষ্পীভবন হওনের কারণে।" },
-    "Rangpur": { caption: "মাটির হাড়ি বনাওচে গাঁয়ের কামার-কুমার ভাইয়েরা।", q: "মাটির সানকিতে গরম ভাত বাড়লে তা তাড়াতাড়ি ঠান্ডা হয় ক্যালা?", a: "মাটির অতি সূক্ষ্ম ছিদ্র দিয়া বাষ্পীভবন হওনের কারণে।" },
-    "Sylhet": { caption: "মাটির পাতিল বানাইতরা ঐতিহ্যবাহী কুমার কারিগর হকল।", q: "মাটির সানকিতে গরম ভাত বাড়লে তা তাড়াতাড়ি ঠান্ডা হয় ক্যালা?", a: "মাটির অতি সূক্ষ্ম ছিদ্র দিয়া বাষ্পীভবন ঘটায়।" }
+    "Hindi": {
+      caption: "एक कुम्हार चाक घुमाकर मिट्टी की हांडी और पतीला बना रहे हैं।",
+      q: "चित्र में कुम्हार मिट्टी के बर्तन बनाने के लिए क्या उपयोग कर रहे हैं?\na. आधुनिक इलेक्ट्रिक भट्ठी   b. हाथ से चाक घुमाकर   c. साँचे में तरल मिट्टी डालकर   d. तैयार बर्तन पर चित्रकारी करके",
+      a: "Answer (b) हाथ से चाक घुमाकर"
+    },
+    "Urdu": {
+      caption: "ایک کمہار چاک گھما کر مٹی کی ہانڈی اور پتیلا بنا رہے ہیں۔",
+      q: "تصویر میں کمہار مٹی کے برتن بنانے کے لیے کیا استعمال کر رہے ہیں؟\na. جدید الیکٹرک بھٹی   b. ہاتھ سے چاک گھما کر   c. سانچے میں مائع مٹی ڈال کر   d. تیار برتن پر نقاشی کرکے",
+      a: "Answer (b) ہاتھ سے چاک گھما کر"
+    },
+    "French": {
+      caption: "Un potier fabrique des marmites et des casseroles en argile en tournant le tour de potier.",
+      q: "Que fait le potier dans l'image pour fabriquer des ustensiles en argile ?\na. Utiliser un four électrique moderne   b. Tourner le tour de potier à la main   c. Verser de l'argile liquide dans un moule   d. Peindre des motifs sur la poterie finie",
+      a: "Answer (b) Tourner le tour de potier à la main"
+    },
+    "Chinese": {
+      caption: "一位陶匠正在转动陶轮制作陶土锅和炊具。",
+      q: "图中陶匠用什么方法制作陶土锅具？\na. 使用现代电窑   b. 手动旋转陶轮   c. 将液态粘土倒入模具   d. 在成品陶器上绘画",
+      a: "Answer (b) 手动旋转陶轮"
+    },
+    "Chittagong dialects": {
+      caption: "এক্কজন কুমার চাক ঘুরাইয়্যা মাডির হাঁড়ি পাতিল বানাইত্তে আছে।",
+      q: "ছবিত কুমার মাডির হাঁড়ি পাতিল বানাইবার লাই কী ব্যবহার গরত্তে আছে?\na. আধুনিক ইলেক্ট্রিক চুল্লি   b. হাতে চাক ঘুরাইয়্যা   c. ছাঁচত তরল মাডি ঢালিয়্যা   d. তৈয়ার পাত্রত নকশা আঁইক্কা",
+      a: "Answer (b) হাতে চাক ঘুরাইয়্যা"
+    },
+    "Rajshahi": {
+      caption: "একজন কুমার চাক ঘুরাইয়া মাটির হাঁড়ি পাতিল বানাচ্চে।",
+      q: "ছবিতে কুমার মাটির হাঁড়ি পাতিল বানাইতে কী ব্যবহার করচে?\na. আধুনিক ইলেক্ট্রিক চুল্লি   b. হাতে চাক ঘুরাইয়া   c. ছাঁচে তরল মাটি ঢালিয়া   d. তৈয়ার পাত্রে নকশা আঁকিয়া",
+      a: "Answer (b) হাতে চাক ঘুরাইয়া"
+    },
+    "Barisal": {
+      caption: "একজন কুমার চাক ঘুরাইয়া মাটির হাঁড়ি পাতিল বানাইতাছে।",
+      q: "ছবিতে কুমার মাটির হাঁড়ি পাতিল বানাইতে কী ব্যবহার করতাছে?\na. আধুনিক ইলেক্ট্রিক চুল্লি   b. হাতে চাক ঘুরাইয়া   c. ছাঁচে তরল মাটি ঢালিয়া   d. তৈয়ার পাত্রে নকশা আঁকিয়া",
+      a: "Answer (b) হাতে চাক ঘুরাইয়া"
+    },
+    "Noakhali": {
+      caption: "একজন কুমার চাক ঘুরাইয়া মাডির হাঁড়ি পাতিল বানাইতাছে।",
+      q: "ছবিতে কুমার মাডির হাঁড়ি পাতিল বানাইতে কী ব্যবহার করতাছে?\na. আধুনিক ইলেক্ট্রিক চুল্লি   b. হাতে চাক ঘুরাইয়া   c. ছাঁচত তরল মাডি ঢালিয়া   d. তৈয়ার পাত্রে নকশা আঁইক্কা",
+      a: "Answer (b) হাতে চাক ঘুরাইয়া"
+    },
+    "Rangpur": {
+      caption: "একজন কুমার চাক ঘুরাইয়া মাটির হাঁড়ি পাতিল বনাওচে।",
+      q: "ছবিতে কুমার মাটির হাঁড়ি পাতিল বানাইতে কী ব্যবহার করচে বাহে?\na. আধুনিক ইলেক্ট্রিক চুল্লি   b. হাতে চাক ঘুরাইয়া   c. ছাঁচে তরল মাটি ঢালিয়া   d. তৈয়ার পাত্রে নকশা আঁকিয়া",
+      a: "Answer (b) হাতে চাক ঘুরাইয়া"
+    },
+    "Sylhet": {
+      caption: "একজন কুমার চাক ঘুরাইয়া মাটির হাঁড়ি পাতিল বানাইতাছে।",
+      q: "ছবিতে কুমার মাটির হাঁড়ি পাতিল বানাইতে কিতা ব্যবহার করতাছে ওবা?\na. আধুনিক ইলেক্ট্রিক চুল্লি   b. হাতে চাক ঘুরাইয়া   c. ছাঁচত তরল মাটি ঢালিয়া   d. তৈয়ার পাত্রে নকশা আঁইক্কা",
+      a: "Answer (b) হাতে চাক ঘুরাইয়া"
+    }
   },
   "education_096.png": {
     "Hindi": { caption: "ग्रामीण स्कूल का एक कक्षा जिसमें पारंपरिक ब्लैकबोर्ड शिक्षा दी जा रही है।", q: "पारंपरिक कक्षा के दृश्य संकेत क्या हैं?", a: "ब्लैकबोर्ड और छात्रों द्वारा उपयोग की जाने वाली पुस्तकें।" },
